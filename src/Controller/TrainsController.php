@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 
 /**
  * Trains Controller
@@ -68,6 +69,8 @@ class TrainsController extends AppController
 			$data['descent_duration'] = minToSec(intval($data['descent_duration']));
 			$data['ascent_time'] = minToSec(intval($data['ascent_time']));
 			$data['rendition_duration'] = minToSec(intval($data['rendition_duration']));
+			$data['landy_departure'] = Time::now();
+			$data['landy_arrival'] = Time::now();
 			
             $train = $this->Trains->patchEntity($train, $data);
 			

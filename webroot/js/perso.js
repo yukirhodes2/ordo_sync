@@ -1,8 +1,8 @@
 function emptyTime($arg){
 
-	$('[name="'+$arg+'[year]"').val('').hide();
-	$('[name="'+$arg+'[month]"').val('');
-	$('[name="'+$arg+'[day]"').val('');
+	//$('[name="'+$arg+'[year]"').val('');
+	//$('[name="'+$arg+'[month]"').val('');
+	//$('[name="'+$arg+'[day]"').val('');
 	$('[name="'+$arg+'[hour]"').val('');
 	$('[name="'+$arg+'[minute]"').val('');
 }

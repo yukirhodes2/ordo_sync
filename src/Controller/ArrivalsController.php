@@ -25,6 +25,7 @@ class ArrivalsController extends AppController
      */
     public function index()
     {
+
 		$id_role = $this->Auth->user("role_id");
 		
 		if ($id_role === 3) // RLP
@@ -32,7 +33,7 @@ class ArrivalsController extends AppController
 			
         $this->paginate = [
             'contain' => ['Ways', 'Trains', 'TrainSets', 'Lavages'],
-			'limit' => 10,
+			'limit' => 15,
 			'order' => ['landy_arrival' => 'desc']
         ];
 		
@@ -102,8 +103,8 @@ class ArrivalsController extends AppController
         $trains = $this->Arrivals->Trains->find('list', ['limit' => 200]);
         $trainSets = $this->Arrivals->TrainSets->find('list', ['limit' => 200]);
         $lavages = $this->Arrivals->Lavages->find('list', ['limit' => 200]);
-		$pushpool = $this->Arrivals->find('list', ['limit' => 200]);
-        $this->set(compact('arrival', 'ways', 'trains', 'trainSets', 'lavages', 'pushpool'));
+
+        $this->set(compact('arrival', 'ways', 'trains', 'trainSets', 'lavages'));
         $this->set('_serialize', ['arrival']);
     }
 
@@ -143,6 +144,7 @@ class ArrivalsController extends AppController
 			$trains = $this->Arrivals->Trains->find('list', ['limit' => 200]);
 			$trainSets = $this->Arrivals->TrainSets->find('list', ['limit' => 200]);
 			$lavages = $this->Arrivals->Lavages->find('list', ['limit' => 200]);
+			
 			$this->set(compact('arrival', 'ways', 'trains', 'trainSets', 'lavages'));
 			$this->set('_serialize', ['arrival']);
 		}

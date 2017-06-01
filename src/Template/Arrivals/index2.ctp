@@ -23,8 +23,8 @@
                 <th scope="col"><?= $this->Paginator->sort('train_set2_id', 'Rame 2') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('train_set3_id', 'Rame 3') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('landy_arrival', 'Arrivée Landy') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('protection_time', 'Protection') ?></th>
 				<th scope="col"><?= $this->Paginator->sort('announcement_time', 'Annoncé en place') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('protection_time', 'Heure de protection') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -37,8 +37,9 @@
                 <td><?= $arrival->train_set2_id != null ? $trainSets[($arrival->train_set2_id)-1]['numero'] : '' ?></td>
                 <td><?= $arrival->has('train_set') ? $arrival->train_set->numero : '' ?></td>
                 <td><?= $this->Time->format($arrival->landy_arrival, "HH:mm"); ?></td>
-                <?= $arrival->protection_time != null ? '<td class="green">OUI</td>' : '<td class="red">NON</td>' ?>
 				<td><?= $this->Time->format($arrival->announcement_time, "HH:mm"); ?></td>
+                <?= $arrival->protection_time != null ? '<td class="green">'.$this->Time->format($arrival->protection_time, "HH:mm").'</td>' : '<td class="red"></td>' ?>
+				
                 <td class="actions">
 					<?= $this->Html->link($this->Html->image('view.png', ['alt' => 'Voir', 'class' => 'icon']), ['action' => 'view', $arrival->id], ['escape' => false, 'title' => 'Plus de détails']) ?>
                     <?= $arrival->announcement_time!= null ? $this->Html->link($this->Html->image('edit.png', ['alt' => 'Editer', 'class' => 'icon']), ['action' => 'edit', $arrival->id], ['escape' => false, 'title' => 'Modifier']) : '' ?>
