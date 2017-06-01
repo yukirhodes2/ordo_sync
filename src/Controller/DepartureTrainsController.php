@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\ORM\TableRegistry;
 
 /**
  * DepartureTrains Controller
@@ -24,11 +23,11 @@ class DepartureTrainsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
+		$this->paginate = [
             'contain' => ['TheoricDepartures']
         ];
         $departureTrains = $this->paginate($this->DepartureTrains);
-		
+
         $this->set(compact('departureTrains'));
         $this->set('_serialize', ['departureTrains']);
     }
@@ -36,14 +35,14 @@ class DepartureTrainsController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Train id.
+     * @param string|null $id Departure Train id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
         $departureTrain = $this->DepartureTrains->get($id, [
-            'contain' => ['Arrivals' => ['Lavages'], 'Departures' => ['Brakes', 'Ways'], 'TheoricDepartures']
+            'contain' => ['TheoricDepartures']
         ]);
 
         $this->set('departureTrain', $departureTrain);
@@ -58,75 +57,55 @@ class DepartureTrainsController extends AppController
     public function add()
     {
         $departureTrain = $this->DepartureTrains->newEntity();
-		$theoricArrival = $this->DepartureTrains->TheoricDepartures->newEntity();
-		
         if ($this->request->is('post')) {
-			
 			$data = $this->request->getData();
+			if (empty($data['alerte1'])){
+				$data['alerte1'] = 0;
+			}
+			if (empty($data['alerte2'])){
+				$data['alerte2'] = 0;
+			}
             $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $data);
-			
-			$result = null;
-            if ($result = $this->DepartureTrains->save($departureTrain)) {
-				$data['train_id'] = $result->id; // on récupère l'id du nouveau arrival_train pour associer les théoriques
-				$data['ascent_time'] = minToSec(intval($data['ascent_time']));
-				$theoricArrival = $this->DepartureTrains->TheoricDepartures->patchEntity($theoricArrival, $data);
-				if ($this->DepartureTrains->TheoricDepartures->save($theoricArrival)){
-                $this->Flash->success(__('The arrival_train has been saved.'));
+            if ($this->DepartureTrains->save($departureTrain)) {
+                $this->Flash->success(__('The departure train has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
-				}
             }
-			
-            $this->Flash->error(__('Le train à l\'arrivée ne peut pas être ajouté. Veuillez réessayer.'));
+            $this->Flash->error(__('The departure train could not be saved. Please, try again.'));
         }
-        $this->set(compact('departureTrain', 'theoricDeparture', 'theoricArrival'));
+        $this->set(compact('departureTrain'));
         $this->set('_serialize', ['departureTrain']);
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Train id.
+     * @param string|null $id Departure Train id.
      * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
         $departureTrain = $this->DepartureTrains->get($id, [
-            'contain' => ['TheoricDepartures', 'TheoricDepartures']
+            'contain' => ['TheoricDepartures']
         ]);
-		$theoricArrival = $this->DepartureTrains->TheoricDepartures->get($arrival_train->theoric_arrivals['0']->id, [
-			'contain' => []
-		]);
-			
-		$theoricDeparture = $this->DepartureTrains->TheoricDepartures->get($arrival_train->theoric_departures['0']->id, [
-			'contain' => []
-		]);
-		
-			$theoricArrival['ascent_time'] = intval($theoricArrival['ascent_time'])/60;
-		
         if ($this->request->is(['patch', 'post', 'put'])) {
-			
-			$data = $this->request->getData();
-			$data['ascent_time'] = minToSec(intval($data['ascent_time']));
-            $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $data);
-			$theoricDeparture = $this->DepartureTrains->TheoricDepartures->patchEntity($theoricDeparture, $data);
-			$theoricArrival = $this->DepartureTrains->TheoricDepartures->patchEntity($theoricArrival, $data);
-			
-            if ($this->DepartureTrains->save($departureTrain) && $this->DepartureTrains->TheoricDepartures->save($theoricArrival) && $this->DepartureTrains->TheoricDepartures->save($theoricDeparture)) {
-                $this->Flash->success(__('The arrival_train has been saved.'));
+            $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $this->request->getData());
+            if ($this->DepartureTrains->save($departureTrain)) {
+                $this->Flash->success(__('The departure train has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The arrival_train could not be saved. Please, try again.'));
+            $this->Flash->error(__('The departure train could not be saved. Please, try again.'));
         }
-        $this->set(compact('departureTrain', 'theoricArrival', 'theoricDeparture'));
+        $this->set(compact('departureTrain'));
         $this->set('_serialize', ['departureTrain']);
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Train id.
+     * @param string|null $id Departure Train id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
@@ -135,9 +114,9 @@ class DepartureTrainsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $departureTrain = $this->DepartureTrains->get($id);
         if ($this->DepartureTrains->delete($departureTrain)) {
-            $this->Flash->success(__('The arrival_train has been deleted.'));
+            $this->Flash->success(__('The departure train has been deleted.'));
         } else {
-            $this->Flash->error(__('The arrival_train could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The departure train could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

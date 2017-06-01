@@ -9,9 +9,9 @@ use Cake\Validation\Validator;
 /**
  * ArrivalTrains Model
  *
- * @property \Cake\ORM\Association\HasMany $Arrivals
  * @property \Cake\ORM\Association\HasMany $Departures
- * @property \Cake\ORM\Association\HasMany $TheoricArrivals
+ * @property \Cake\ORM\Association\HasMany $Departures
+ * @property \Cake\ORM\Association\HasMany $TheoricDepartures
  * @property \Cake\ORM\Association\HasMany $TheoricDepartures
  *
  * @method \App\Model\Entity\Train get($primaryKey, $options = [])
@@ -22,7 +22,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Train[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Train findOrCreate($search, callable $callback = null, $options = [])
  */
-class ArrivalTrainsTable extends Table
+class DepartureTrainsTable extends Table
 {
 
     /**

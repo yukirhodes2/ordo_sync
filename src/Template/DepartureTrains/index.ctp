@@ -26,8 +26,8 @@
             <tr>
                 <td><?= $this->Number->format($departureTrain->id) ?></td>
                 <td><?= h($departureTrain->numero) ?></td>
-                <td><?= $this->Number->format($departureTrain->alerte1) ?></td>
-                <td><?= $this->Number->format($departureTrain->alerte2) ?></td>
+                <td><?= $this->Number->format($departureTrain->alerte1) == 0 ? 'Définie selon alerte globale' : $this->Number->format($departureTrain->alerte1) ?></td>
+                <td><?= $this->Number->format($departureTrain->alerte2) == 0 ? 'Définie selon alerte globale' : $this->Number->format($departureTrain->alerte2) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $departureTrain->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $departureTrain->id]) ?>
@@ -39,11 +39,11 @@
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('début')) ?>
+            <?= $this->Paginator->prev('< ' . __('précédent')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('suivant') . ' >') ?>
+            <?= $this->Paginator->last(__('dernier') . ' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>

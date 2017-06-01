@@ -12,7 +12,7 @@
 <div class="arrivalTrains form large-9 medium-8 columns content">
     <?= $this->Form->create($arrivalTrain) ?>
     <fieldset>
-        <legend><?= __('Ajouter un train à l\'arrivée') ?></legend>
+        <legend><?= __('Ajouter un train type arrivée') ?></legend>
         <?php
             echo $this->Form->control('numero', ['class' => 'even']);
 			echo '<span id="erreur-numero"> Le numéro doit être pair </span>';
