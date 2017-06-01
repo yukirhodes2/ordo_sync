@@ -1,0 +1,41 @@
+@charset "UTF-8";
+/*
+
+    == Helpers
+
+ * @contributors: SC5, Philippe Vayssi├¿re (Alsacr├®ations), Jennifer Noesser (Alsacr├®ations)
+ * @date-created: 2016-05-09
+ * @last-update: 2016-07-01
+
+*/
+/* hidden but not for an assistive technology like a screen reader, Yahoo! method
+      (former class is named like in Drupal 8 and WordPress, latter "screen reader only" like in Bootstrap) */
+.visually-hidden,
+.sr-only {
+  position: fixed !important;
+  left: -9999px;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important; }
+
+/* Clearfix */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+  border-collapse: collapse; }
+
+/* To hide content with JS */
+.js-hidden {
+  display: none; }
+
+/* Unstyling elements */
+/* fieldset */
+fieldset.unstyled {
+  border: none;
+  margin: 0;
+  padding: 0; }
+
+/*# sourceMappingURL=helpers.css.map */
