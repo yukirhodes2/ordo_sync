@@ -36,7 +36,7 @@ class TheoricDeparturesTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Trains', [
+        $this->belongsTo('DepartureTrains', [
             'foreignKey' => 'train_id',
             'joinType' => 'INNER'
         ]);
@@ -86,7 +86,7 @@ class TheoricDeparturesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['train_id'], 'Trains'));
+        $rules->add($rules->existsIn(['train_id'], 'DepartureTrains'));
 
         return $rules;
     }

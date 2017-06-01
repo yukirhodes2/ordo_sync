@@ -4,17 +4,15 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * TheoricArrival Entity
+ * ArrivalTrain Entity
  *
  * @property int $id
- * @property int $train_id
- * @property \Cake\I18n\Time $paris_nord_arrival
- * @property \Cake\I18n\Time $landy_arrival
- * @property int $ascent_time
+ * @property string $numero
  *
- * @property \App\Model\Entity\Train $train
+ * @property \App\Model\Entity\Arrival[] $arrivals
+ * @property \App\Model\Entity\TheoricArrival[] $theoric_arrivals
  */
-class TheoricArrival extends Entity
+class ArrivalTrain extends Entity
 {
 
     /**

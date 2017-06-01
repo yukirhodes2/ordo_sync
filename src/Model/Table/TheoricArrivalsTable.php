@@ -36,7 +36,7 @@ class TheoricArrivalsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Trains', [
+        $this->belongsTo('ArrivalTrains', [
             'foreignKey' => 'train_id',
             'joinType' => 'INNER'
         ]);
@@ -60,6 +60,11 @@ class TheoricArrivalsTable extends Table
             ->notEmpty('paris_nord_arrival');
 
         $validator
+            ->time('landy_arrival')
+            ->requirePresence('landy_arrival', 'create')
+            ->notEmpty('landy_arrival');
+
+        $validator
             ->integer('ascent_time')
             ->requirePresence('ascent_time', 'create')
             ->notEmpty('ascent_time');
@@ -76,7 +81,7 @@ class TheoricArrivalsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['train_id'], 'Trains'));
+        $rules->add($rules->existsIn(['train_id'], 'ArrivalTrains'));
 
         return $rules;
     }

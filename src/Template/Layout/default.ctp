@@ -168,7 +168,11 @@ $title = 'ORDONNANCEMENT';
                   <p class="mega-navigation-title">Trains</p>
                   <ul class="mega-navigation-list">
                     <li class="mega-navigation-item">
-                      <?= $this->Html->link('Liste des trains', ['controller' => 'Trains', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link('Trains à l\'arrivée', ['controller' => 'ArrivalTrains', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                  
+                    </li>
+					<li class="mega-navigation-item">
+                      <?= $this->Html->link('Trains au départ', ['controller' => 'DepartureTrains', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                   
                     </li>
                   </ul>

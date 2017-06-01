@@ -43,8 +43,44 @@ function checkTime(){
 				$("#warning").html('<span class="rouge">Attention, les données sont peut-être périmées (plus de 3 minutes). Veuillez recharger la page.</span>');
 			}
 			checkTime();
-		}, 1000);	
+		}, 1000);
 }
 
-cTime();
+$(document).ready(function()
+{
+	cTime();
+	
+	$(".even").keyup(function(event){
+		var numero=parseInt($(this).val());
+		console.log(numero);
+			if(numero%2 != 0)
+			{
+				$('#erreur-numero').show();
+				$('button[type="submit"]').prop('disabled', true).css('background-color', 'grey');
+			}
+			else
+			{
+				$('#erreur-numero').hide();
+				$('button[type="submit"]').prop('disabled', false).css('background-color', '#6E1E78');
+			}
+	})
+	
+	$(".odd").keyup(function(event){
+		var numero=parseInt($(this).val());
+		console.log(numero);
+			if(numero%2 == 0)
+			{
+				$('#erreur-numero').show();
+				$('button[type="submit"]').prop('disabled', true).css('background-color', 'grey');
+			}
+			else
+			{
+				$('#erreur-numero').hide();
+				$('button[type="submit"]').prop('disabled', false).css('background-color', '#6E1E78');
+			}
+	})
+	
+})
+
+
 

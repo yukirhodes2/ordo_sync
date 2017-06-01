@@ -249,6 +249,11 @@ table.vertical-table th{
 	animation: blink-animation 0.3s steps(2, start) 5;
 }
 
+#erreur-numero{
+	color: red;
+	display: none;
+}
+
 span.error{
 	background: transparent;
 }

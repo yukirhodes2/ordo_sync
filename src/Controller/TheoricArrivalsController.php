@@ -19,7 +19,7 @@ class TheoricArrivalsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Trains']
+            'contain' => ['ArrivalTrains']
         ];
         $theoricArrivals = $this->paginate($this->TheoricArrivals);
 
@@ -37,7 +37,7 @@ class TheoricArrivalsController extends AppController
     public function view($id = null)
     {
         $theoricArrival = $this->TheoricArrivals->get($id, [
-            'contain' => ['Trains']
+            'contain' => ['ArrivalTrains']
         ]);
 
         $this->set('theoricArrival', $theoricArrival);
@@ -64,7 +64,7 @@ class TheoricArrivalsController extends AppController
             }
             $this->Flash->error(__('The theoric arrival could not be saved. Please, try again.'));
         }
-        $trains = $this->TheoricArrivals->Trains->find('list', ['limit' => 200]);
+        $trains = $this->TheoricArrivals->ArrivalTrains->find('list', ['limit' => 200]);
         $this->set(compact('theoricArrival', 'trains'));
         $this->set('_serialize', ['theoricArrival']);
     }
@@ -90,7 +90,7 @@ class TheoricArrivalsController extends AppController
             }
             $this->Flash->error(__('The theoric arrival could not be saved. Please, try again.'));
         }
-        $trains = $this->TheoricArrivals->Trains->find('list', ['limit' => 200]);
+        $trains = $this->TheoricArrivals->ArrivalTrains->find('list', ['limit' => 200]);
         $this->set(compact('theoricArrival', 'trains'));
         $this->set('_serialize', ['theoricArrival']);
     }
