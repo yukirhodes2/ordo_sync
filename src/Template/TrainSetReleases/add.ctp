@@ -20,11 +20,27 @@
             echo $this->Form->control('release2_id', ['label' => 'Libération départ', 'options' => $releases, 'empty' => true]);
             echo $this->Form->control('status1_id', ['label' => 'Statut arrivée', 'options' => $status, 'empty' => true]);
             echo $this->Form->control('status2_id', ['label' => 'Statut départ', 'options' => $status, 'empty' => true]);
+		?>
+			<span class='msg-alerte' hidden>L'heure de libération sera supprimée.</span>
+			
+		<script>
+			$(document).ready(function(){
+				$("div.input.select:last").css("display", "inline");
+				$('#status2-id').change(function(){
+					if ($('#status2-id option:selected').val()!=1) 
+						$('.msg-alerte').show(); 
+					else
+						$('.msg-alerte').hide();
+				});
+			});
+		</script>
+		
+		<?php
 			if ($trainSetRelease->status2_id === 1){
 				echo $this->Form->control('heure');
 			}
 			else{
-				echo "Note : L'heure de la libération ne peut pas être saisie tant que le statut départ n'est pas DEX.";
+				echo "<p>Note : L'heure de la libération ne peut pas être saisie tant que le statut départ n'est pas DEX.</p>";
 			}
         ?>
     </fieldset>

@@ -282,5 +282,8 @@ div.datetime select:nth-child(4){
 .icon{
 	height: 20px;
 	width: 20px;
-	
+}
+
+.msg-alerte{
+	display: inline;
 }
