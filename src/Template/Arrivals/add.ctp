@@ -25,7 +25,7 @@
 			
             echo $this->Form->control('way_id', ['options' => $ways, 'label' => 'Voie', 'empty' => true, 'required' => true]);
 			
-            echo $this->Form->control('train_id', ['options' => $trains, 'empty' => true, 'required' => true]);
+            echo $this->Form->control('train_id', ['options' => $arrivalTrains, 'label' => 'Train', 'empty' => true, 'required' => true]);
 			
             echo $this->Form->control('train_set1_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 1']);
 			

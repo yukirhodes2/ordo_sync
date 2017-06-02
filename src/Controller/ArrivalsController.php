@@ -32,7 +32,7 @@ class ArrivalsController extends AppController
 			return $this->redirect(['action' => 'index2', $id]);
 			
         $this->paginate = [
-            'contain' => ['Ways', 'Trains', 'TrainSets', 'Lavages'],
+            'contain' => ['Ways', 'ArrivalTrains', 'TrainSets', 'Lavages'],
 			'limit' => 15,
 			'order' => ['landy_arrival' => 'desc']
         ];
@@ -46,14 +46,14 @@ class ArrivalsController extends AppController
     public function index2()
     {
         $this->paginate = [
-            'contain' => ['Ways', 'Trains', 'TrainSets', 'Lavages'],
-			'limit' => 10,
+            'contain' => ['Ways', 'ArrivalTrains', 'TrainSets', 'Lavages'],
+			'limit' => 15,
 			'order' => ['landy_arrival' => 'desc']
         ];
 		
         $arrivals = $this->paginate($this->Arrivals);
-		$trainSets = $this->Arrivals->TrainSets->find('all')->toArray();
-        $this->set(compact('arrivals', 'trainSets'));
+		$trainSets = $this->Arrivals->TrainSets->find('all')->toArray();		
+		$this->set(compact('arrivals', 'trainSets'));
         $this->set('_serialize', ['arrivals']);
     }
 
@@ -67,7 +67,7 @@ class ArrivalsController extends AppController
     public function view($id = null)
     {
         $arrival = $this->Arrivals->get($id, [
-            'contain' => ['Ways', 'Trains', 'TrainSets', 'Lavages']
+            'contain' => ['Ways', 'ArrivalTrains', 'TrainSets', 'Lavages']
         ]);
 		$trainSets = $this->Arrivals->TrainSets->find('all')->toArray();
         $this->set(compact('arrival', 'trainSets'));
@@ -100,11 +100,11 @@ class ArrivalsController extends AppController
             $this->Flash->error(__('L\'arrivée n\'a pas été ajoutée. Veuillez réessayer.'));
         } 
         $ways = $this->Arrivals->Ways->find('list', ['limit' => 200]);
-        $trains = $this->Arrivals->Trains->find('list', ['limit' => 200]);
+        $arrivalTrains = $this->Arrivals->ArrivalTrains->find('list', ['limit' => 200]);
         $trainSets = $this->Arrivals->TrainSets->find('list', ['limit' => 200]);
         $lavages = $this->Arrivals->Lavages->find('list', ['limit' => 200]);
 
-        $this->set(compact('arrival', 'ways', 'trains', 'trainSets', 'lavages'));
+        $this->set(compact('arrival', 'ways', 'arrivalTrains', 'trainSets', 'lavages'));
         $this->set('_serialize', ['arrival']);
     }
 
@@ -141,11 +141,11 @@ class ArrivalsController extends AppController
 				$this->Flash->error(__('L\'arrivée n\'a pas été modifiée. Veuillez réessayer.'));
 			}
 			$ways = $this->Arrivals->Ways->find('list', ['limit' => 200]);
-			$trains = $this->Arrivals->Trains->find('list', ['limit' => 200]);
+			$arrival_trains = $this->Arrivals->ArrivalTrains->find('list', ['limit' => 200]);
 			$trainSets = $this->Arrivals->TrainSets->find('list', ['limit' => 200]);
 			$lavages = $this->Arrivals->Lavages->find('list', ['limit' => 200]);
 			
-			$this->set(compact('arrival', 'ways', 'trains', 'trainSets', 'lavages'));
+			$this->set(compact('arrival', 'ways', 'arrival_trains', 'trainSets', 'lavages'));
 			$this->set('_serialize', ['arrival']);
 		}
 		else
@@ -165,16 +165,13 @@ class ArrivalsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
-			debug($data);
 			$ts_announcement = $data['protection_time']['hour']*3600+$data['protection_time']['minute']*60;
 			$ts_landy_arrival = Time::parse($arrival->landy_arrival);
 			$ts_landy_arrival = strtotime($ts_landy_arrival->i18nFormat('yyyy-MM-dd HH:mm'))%86400;
-			debug($ts_announcement);
-			debug($ts_landy_arrival);
+			
 			if ( isset($data['protection_time']) ){
 				if($ts_announcement >= $ts_landy_arrival || (empty($data['protection_time']['hour']) && empty($data['protection_time']['minute']))){
 					$arrival = $this->Arrivals->patchEntity($arrival, $data);
-					debug($arrival);
 					if ($this->Arrivals->save($arrival)) {
 						$this->Flash->success(__('L\'arrivée a bien été modifiée.'));
 
@@ -183,13 +180,13 @@ class ArrivalsController extends AppController
 					$this->Flash->error(__('L\'arrivée n\'a pas été modifiée. Veuillez réessayer.'));
 				}
 			}
-            $this->Flash->error(__('L\'heure d\'annonce est antérieure à l\'heure d\'arrivée au Landy. Vérifiez votre saisie ?'));
+            $this->Flash->error(__('L\'heure d\'annonce est antérieure à l\'heure d\'arrivée au Landy. Vérifiez votre saisie.'));
         }
         $ways = $this->Arrivals->Ways->find('list', ['limit' => 200]);
-        $trains = $this->Arrivals->Trains->find('list', ['limit' => 200]);
+        $arrival_trains = $this->Arrivals->ArrivalTrains->find('list', ['limit' => 200]);
         $trainSets = $this->Arrivals->TrainSets->find('list', ['limit' => 200]);
         $lavages = $this->Arrivals->Lavages->find('list', ['limit' => 200]);
-        $this->set(compact('arrival', 'ways', 'trains', 'trainSets', 'lavages'));
+        $this->set(compact('arrival', 'ways', 'arrival_trains', 'trainSets', 'lavages'));
         $this->set('_serialize', ['arrival']);
     }
 	
@@ -222,10 +219,10 @@ class ArrivalsController extends AppController
             $this->Flash->error(__('L\'heure d\'annonce est antérieure à l\'heure d\'arrivée au Landy. Vérifiez votre saisie ?'));
         }
         $ways = $this->Arrivals->Ways->find('list', ['limit' => 200]);
-        $trains = $this->Arrivals->Trains->find('list', ['limit' => 200]);
+        $arrival_trains = $this->Arrivals->ArrivalTrains->find('list', ['limit' => 200]);
         $trainSets = $this->Arrivals->TrainSets->find('list', ['limit' => 200]);
         $lavages = $this->Arrivals->Lavages->find('list', ['limit' => 200]);
-        $this->set(compact('arrival', 'ways', 'trains', 'trainSets', 'lavages'));
+        $this->set(compact('arrival', 'ways', 'arrival_trains', 'trainSets', 'lavages'));
         $this->set('_serialize', ['arrival']);
     }
 

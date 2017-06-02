@@ -45,7 +45,7 @@ class ArrivalsTable extends Table
             'foreignKey' => 'way_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Trains', [
+        $this->belongsTo('ArrivalTrains', [
             'foreignKey' => 'train_id',
             'joinType' => 'INNER'
         ]);
@@ -113,7 +113,7 @@ class ArrivalsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['way_id'], 'Ways'));
-        $rules->add($rules->existsIn(['train_id'], 'Trains'));
+        $rules->add($rules->existsIn(['train_id'], 'ArrivalTrains'));
         $rules->add($rules->existsIn(['train_set1_id'], 'TrainSets'));
         $rules->add($rules->existsIn(['train_set2_id'], 'TrainSets'));
         $rules->add($rules->existsIn(['train_set3_id'], 'TrainSets'));

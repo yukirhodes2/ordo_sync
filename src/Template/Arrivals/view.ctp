@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <th scope="row" class="eic"><?= __('Train') ?></th>
-            <td><?= $arrival->has('train') ? $this->Html->link($arrival->train->numero, ['controller' => 'Trains', 'action' => 'view', $arrival->train->id]) : '' ?></td>
+            <td><?= $arrival->has('arrival_train') ? $this->Html->link($arrival->arrival_train->numero, ['controller' => 'ArrivalTrains', 'action' => 'view', $arrival->arrival_train->id]) : '' ?></td>
         </tr>
 		<tr>
             <th scope="row" class="eic"><?= __('Rame 1') ?></th>

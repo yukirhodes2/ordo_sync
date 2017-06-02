@@ -22,7 +22,7 @@
         <?php
             echo $this->Form->control('way_id', ['options' => $ways, 'label' => 'Voie']);
 			
-            echo $this->Form->control('train_id', ['options' => $trains]);
+            echo $this->Form->control('train_id', ['options' => $arrival_trains]);
 			
             echo $this->Form->control('train_set1_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 1']);
 			
