@@ -57,23 +57,43 @@ class DepartureTrainsController extends AppController
     public function add()
     {
         $departureTrain = $this->DepartureTrains->newEntity();
+		$theoricDeparture = $this->DepartureTrains->TheoricDepartures->newEntity();
+		
         if ($this->request->is('post')) {
 			$data = $this->request->getData();
+			
+	
 			if (empty($data['alerte1'])){
 				$data['alerte1'] = 0;
+			}
+			else{
+				$data['alerte1'] = minToSec(intval($data['alerte1']));
 			}
 			if (empty($data['alerte2'])){
 				$data['alerte2'] = 0;
 			}
+			else{
+				$data['alerte2'] = minToSec(intval($data['alerte2']));
+			}
             $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $data);
-            if ($this->DepartureTrains->save($departureTrain)) {
-                $this->Flash->success(__('The departure train has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+			
+			$result = null;
+            if ($result = $this->DepartureTrains->save($departureTrain)) {
+				$data['train_id'] = $result->id; // on récupère l'id du nouveau arrival_train pour associer les théoriques
+				$data['descent_duration'] = minToSec(intval($data['descent_duration']));
+				$data['rendition_duration'] = minToSec(intval($data['rendition_duration']));
+				$data['docking_time'] = minToSec(intval($data['docking_time']));
+				$theoricDeparture = $this->DepartureTrains->TheoricDepartures->patchEntity($theoricDeparture, $data);
+				if ($this->DepartureTrains->TheoricDepartures->save($theoricDeparture)){
+					$this->Flash->success(__('Ajouté'));
+					return $this->redirect(['action' => 'index']);
+				}
             }
-            $this->Flash->error(__('The departure train could not be saved. Please, try again.'));
+			debug($departureTrain);
+			debug(isset($data['landy_departure']));
+            $this->Flash->error(__('Problème lors de l\'ajout.'));
         }
-        $this->set(compact('departureTrain'));
+        $this->set(compact('departureTrain', 'theoricDeparture'));
         $this->set('_serialize', ['departureTrain']);
     }
 
@@ -92,11 +112,11 @@ class DepartureTrainsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $this->request->getData());
             if ($this->DepartureTrains->save($departureTrain)) {
-                $this->Flash->success(__('The departure train has been saved.'));
+                $this->Flash->success(__('Modifié'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The departure train could not be saved. Please, try again.'));
+            $this->Flash->error(__('Problème lors de la modification.'));
         }
         $this->set(compact('departureTrain'));
         $this->set('_serialize', ['departureTrain']);
@@ -114,9 +134,9 @@ class DepartureTrainsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $departureTrain = $this->DepartureTrains->get($id);
         if ($this->DepartureTrains->delete($departureTrain)) {
-            $this->Flash->success(__('The departure train has been deleted.'));
+            $this->Flash->success(__('Supprimé'));
         } else {
-            $this->Flash->error(__('The departure train could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Problème lors de la suppression.'));
         }
 
         return $this->redirect(['action' => 'index']);

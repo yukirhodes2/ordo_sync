@@ -59,6 +59,11 @@ class TheoricDeparturesTable extends Table
             ->requirePresence('paris_nord_departure', 'create')
             ->notEmpty('paris_nord_departure');
 
+		$validator
+            ->time('landy_departure')
+            ->requirePresence('landy_departure', 'create')
+            ->notEmpty('landy_departure');
+			
         $validator
             ->integer('docking_time')
             ->requirePresence('docking_time', 'create')

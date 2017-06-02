@@ -10,7 +10,7 @@
     </ul>
 </nav>
 <div class="arrivalTrains index large-9 medium-8 columns content">
-    <h3><?= __('Trains à l\'arrivée') ?></h3>
+    <h3><?= __('Trains type arrivée') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>

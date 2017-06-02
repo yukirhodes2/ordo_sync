@@ -7,8 +7,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $arrivalTrain->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $arrivalTrain->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $arrivalTrain->id)]) ?> </li>
-        <li><?= $this->Html->link(__('Liste des trains à l\'arrivée'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $arrivalTrain->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée ?')]) ?> </li>
+        <li><?= $this->Html->link(__('Liste des trains type arrivée'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Liste des arrivées'), ['controller' => 'Arrivals', 'action' => 'index']) ?> </li>
     </ul>
 </nav>

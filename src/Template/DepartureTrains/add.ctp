@@ -19,6 +19,23 @@
             echo $this->Form->control('alerte1', ['label' => 'Alerte avant départ Landy (en minutes, facultatif)']);
             echo $this->Form->control('alerte2', ['label' => 'Alerte avant rendu matériel (en minutes, facultatif)']);
         ?>
+		<?= $this->Form->create($theoricDeparture) ?>
+		<fieldset>
+			<legend><?= __('Départ théorique') ?></legend>
+			<?php
+				echo $this->Form->control('paris_nord_departure', ['label' => 'Départ PNO', 'empty' => true]);
+					echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('paris_nord_departure')"]);
+					echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('paris_nord_departure')"]);
+					echo '<br/>';
+				echo $this->Form->control('landy_departure', ['label' => 'Départ Landy', 'empty' => true]);
+					echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('landy_departure')"]);
+					echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('landy_departure')"]);
+				echo '<br/>'.__('Les temps sont exprimés en <span class="sncf-color-plum">minutes</span>').'<br/>'; 
+				echo $this->Form->control('docking_time', ['label' => 'Temps de mise à quai']);
+				echo $this->Form->control('descent_duration', ['label' => 'Temps de descente']);
+				echo $this->Form->control('rendition_duration', ['label' => 'Temps de rendu matériel']);
+			?>
+		</fieldset>
     </fieldset>
     <?= $this->Form->button(__('Valider')) ?>
     <?= $this->Form->end() ?>

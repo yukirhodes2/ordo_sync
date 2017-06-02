@@ -62,7 +62,7 @@ class DepartureTrainsTable extends Table
         $validator
             ->requirePresence('numero', 'create')
             ->notEmpty('numero');
-
+			
         return $validator;
     }
 }
