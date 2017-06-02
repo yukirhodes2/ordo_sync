@@ -21,6 +21,7 @@ class DeparturesController extends AppController
 	public function beforeFilter(Event $event)
     {
 		parent::beforeFilter($event);
+		$this->Auth->allow('indexeic');
 		// if ( self::isAuthorized($this->Auth->user("role_id")) === false ){
 			// $this->Auth->deny('delete');
 		// }
@@ -57,8 +58,7 @@ class DeparturesController extends AppController
 		elseif ($id_role === parent::CPT)
 			return $this->redirect(['action' => 'indexcpt']);
 			
-		elseif ($id_role === parent::EIC)
-			return $this->redirect(['action' => 'indexeic']);
+		elseif ($id_role === parent::GEOPS){
 			
         $this->paginate = [
             'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
@@ -91,6 +91,11 @@ class DeparturesController extends AppController
 		
         $this->set(compact('departures', 'trainSets'));
         $this->set('_serialize', ['departures']);
+
+		}
+		
+		else // if ($id_role === parent::EIC) || other
+			return $this->redirect(['action' => 'indexeic']);
     }
 	
 	public function indexrlp()
@@ -115,7 +120,7 @@ class DeparturesController extends AppController
 	public function indexeic()
     {
 		$id_role = $this->Auth->user("role_id");
-		if ($id_role !== 5)
+		if ($id_role !== 5 && isset($id_role))
 			return $this->redirect(['action' => 'index']);
 		
         $this->paginate = [

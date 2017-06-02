@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Releases Controller
@@ -11,6 +12,17 @@ use App\Controller\AppController;
 class ReleasesController extends AppController
 {
 
+	public function beforeFilter(Event $event)
+    {
+		parent::beforeFilter($event);
+		$this->Auth->deny();
+    }
+	
+	public function isAuthorized($user)
+	{
+		return $user['role_id'] !== parent::ADMIN;
+	}
+	
     /**
      * Index method
      *
