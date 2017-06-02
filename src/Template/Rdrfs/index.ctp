@@ -6,15 +6,14 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Rdrf'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Nouveau RD/RF'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="rdrfs index large-9 medium-8 columns content">
-    <h3><?= __('Rdrfs') ?></h3>
+    <h3><?= __('RD/RF') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('libelle') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -22,25 +21,15 @@
         <tbody>
             <?php foreach ($rdrfs as $rdrf): ?>
             <tr>
-                <td><?= $this->Number->format($rdrf->id) ?></td>
                 <td><?= h($rdrf->libelle) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $rdrf->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $rdrf->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $rdrf->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rdrf->id)]) ?>
+                    <?= $this->Html->link($this->Html->image('view.png', ['alt' => 'Observations', 'class' => 'icon']), ['action' => 'view', $rdrf->id], ['escape' => false, 'title' => 'Observations']) ?>
+                    <?= $this->Html->link($this->Html->image('edit.png', ['alt' => __('Editer'), 'class' => 'icon']), ['action' => 'edit', $rdrf->id], ['escape' => false, 'title' => 'Modifier']) ?>
+					<?= $this->Form->postLink($this->Html->image('delete.png', ['alt' => __('Supprimer'), 'class' => 'icon']), ['action' => 'delete', $rdrf->id], ['escape' => false, 'title' => 'Supprimer', 'confirm' => __('Voulez-vous vraiment supprimer cette donnée ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+    <?php include('paginator.php'); ?>
 </div>

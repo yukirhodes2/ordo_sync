@@ -228,6 +228,10 @@ $title = 'ORDONNANCEMENT';
                       <?= $this->Html->link('Libérations de produit', ['controller' => 'Releases', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     
                     </li>
+					<li class="mega-navigation-item">
+                      <?= $this->Html->link('RD/RF', ['controller' => 'Rdrfs', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                    
+                    </li>
                   </ul>
                 </div><!-- /mega-navigation-col -->
            

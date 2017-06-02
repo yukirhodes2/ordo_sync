@@ -52,11 +52,11 @@ class RdrfsController extends AppController
         if ($this->request->is('post')) {
             $rdrf = $this->Rdrfs->patchEntity($rdrf, $this->request->getData());
             if ($this->Rdrfs->save($rdrf)) {
-                $this->Flash->success(__('The rdrf has been saved.'));
+                $this->Flash->success(__('Ajouté'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The rdrf could not be saved. Please, try again.'));
+            $this->Flash->error(__('Problème lors de l\'ajout'));
         }
         $this->set(compact('rdrf'));
         $this->set('_serialize', ['rdrf']);
@@ -77,11 +77,11 @@ class RdrfsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $rdrf = $this->Rdrfs->patchEntity($rdrf, $this->request->getData());
             if ($this->Rdrfs->save($rdrf)) {
-                $this->Flash->success(__('The rdrf has been saved.'));
+                $this->Flash->success(__('Modifié'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The rdrf could not be saved. Please, try again.'));
+            $this->Flash->error(__('Problème lors de la modification.'));
         }
         $this->set(compact('rdrf'));
         $this->set('_serialize', ['rdrf']);
@@ -99,9 +99,9 @@ class RdrfsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $rdrf = $this->Rdrfs->get($id);
         if ($this->Rdrfs->delete($rdrf)) {
-            $this->Flash->success(__('The rdrf has been deleted.'));
+            $this->Flash->success(__('Supprimé'));
         } else {
-            $this->Flash->error(__('The rdrf could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Problème lors de la suppression.'));
         }
 
         return $this->redirect(['action' => 'index']);

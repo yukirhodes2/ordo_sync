@@ -7,24 +7,32 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
-                __('Delete'),
+                __('Supprimer'),
                 ['action' => 'delete', $departureTrain->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $departureTrain->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée ?')]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Departure Trains'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des trains type départ'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="departureTrains form large-9 medium-8 columns content">
     <?= $this->Form->create($departureTrain) ?>
     <fieldset>
-        <legend><?= __('Edit Departure Train') ?></legend>
+        <legend><?= __('Editer train type départ') ?></legend>
         <?php
+			echo __('Les temps et alertes sont exprimés en <span class="sncf-color-plum">minutes</span>').'<br/>'; 
             echo $this->Form->control('numero');
-            echo $this->Form->control('alerte1');
+			echo $this->Form->control('alerte1');
             echo $this->Form->control('alerte2');
+			
+			echo $this->Form->create($theoricDeparture);
+            echo $this->Form->control('paris_nord_departure', ['label' => 'Départ théorique PNO']);
+            echo $this->Form->control('landy_departure', ['label' => 'Départ théorique Landy']);
+            echo $this->Form->control('docking_time', ['label' => 'Temps de mise à quai']);
+            echo $this->Form->control('descent_duration', ['label' => 'Temps de descente']);
+            echo $this->Form->control('rendition_duration', ['label' => 'Temps de rendu matériel']);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Valider')) ?>
     <?= $this->Form->end() ?>
 </div>

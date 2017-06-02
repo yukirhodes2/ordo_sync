@@ -12,11 +12,11 @@
 <div class="rdrfs form large-9 medium-8 columns content">
     <?= $this->Form->create($rdrf) ?>
     <fieldset>
-        <legend><?= __('Add Rdrf') ?></legend>
+        <legend><?= __('Ajouter Rdrf') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Valider')) ?>
     <?= $this->Form->end() ?>
 </div>

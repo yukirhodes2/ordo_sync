@@ -109,16 +109,37 @@ class DepartureTrainsController extends AppController
         $departureTrain = $this->DepartureTrains->get($id, [
             'contain' => ['TheoricDepartures']
         ]);
+		
+		$theoricDeparture = $this->DepartureTrains->TheoricDepartures->get($departureTrain->theoric_departures['0']->id, [
+			'contain' => []
+		]);
+		
+		$theoricDeparture['descent_duration'] = intval($theoricDeparture['descent_duration'])/60;
+		$theoricDeparture['docking_time'] = intval($theoricDeparture['docking_time'])/60;
+		$theoricDeparture['rendition_duration'] = intval($theoricDeparture['rendition_duration'])/60;
+		$departureTrain['alerte1'] = intval($departureTrain['alerte1'])/60;
+		$departureTrain['alerte2'] = intval($departureTrain['alerte2'])/60;
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $this->request->getData());
-            if ($this->DepartureTrains->save($departureTrain)) {
+			
+			$data = $this->request->getData();
+			$data['descent_duration'] = minToSec(intval($data['descent_duration']));
+			$data['docking_time'] = minToSec(intval($data['docking_time']));
+			$data['rendition_duration'] = minToSec(intval($data['rendition_duration']));
+			$data['alerte1'] = minToSec(intval($data['alerte1']));
+			$data['alerte2'] = minToSec(intval($data['alerte2']));
+			
+            $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $data);
+			$theoricDeparture = $this->DepartureTrains->TheoricDepartures->patchEntity($theoricDeparture, $data);
+			
+            if ($this->DepartureTrains->save($departureTrain) && $this->DepartureTrains->TheoricDepartures->save($theoricDeparture)) {
                 $this->Flash->success(__('Modifié'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Problème lors de la modification.'));
         }
-        $this->set(compact('departureTrain'));
+        $this->set(compact('departureTrain', 'theoricDeparture'));
         $this->set('_serialize', ['departureTrain']);
     }
 

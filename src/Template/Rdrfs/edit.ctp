@@ -7,9 +7,9 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
-                __('Delete'),
+                __('Supprimer'),
                 ['action' => 'delete', $rdrf->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $rdrf->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée ?')]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Rdrfs'), ['action' => 'index']) ?></li>
@@ -18,11 +18,11 @@
 <div class="rdrfs form large-9 medium-8 columns content">
     <?= $this->Form->create($rdrf) ?>
     <fieldset>
-        <legend><?= __('Edit Rdrf') ?></legend>
+        <legend><?= __('Editer Rdrf') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Valider')) ?>
     <?= $this->Form->end() ?>
 </div>

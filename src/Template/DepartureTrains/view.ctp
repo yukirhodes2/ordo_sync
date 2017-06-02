@@ -19,6 +19,26 @@
             <th scope="row"><?= __('Numero') ?></th>
             <td><?= h($departureTrain->numero) ?></td>
         </tr>
+		<tr>
+            <th scope="row"><?= __('Départ théorique PNO') ?></th>
+            <td><?= $this->Time->format($departureTrain->theoric_departures[0]->paris_nord_departure, "HH:mm") ?></td>
+        </tr>
+		<tr>
+            <th scope="row"><?= __('Départ théorique Landy') ?></th>
+            <td><?= $this->Time->format($departureTrain->theoric_departures[0]->landy_departure, "HH:mm") ?></td>
+        </tr>
+		<tr>
+            <th scope="row"><?= __('Temps de mise à quai') ?></th>
+            <td><?= duration($departureTrain->theoric_departures[0]->docking_time) ?></td>
+        </tr>
+		<tr>
+            <th scope="row"><?= __('Temps de descente') ?></th>
+            <td><?= duration($departureTrain->theoric_departures[0]->descent_duration) ?></td>
+        </tr>
+		<tr>
+            <th scope="row"><?= __('Temps de rendu matériel') ?></th>
+            <td><?= duration($departureTrain->theoric_departures[0]->rendition_duration) ?></td>
+        </tr>
         <tr>
             <th scope="row"><?= __('Alerte1') ?></th>
             <td><?= empty($departureTrain->alerte1) ? 'Définie selon alerte globale' : duration($departureTrain->alerte1) ?></td>
