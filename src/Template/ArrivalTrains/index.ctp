@@ -6,41 +6,36 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Arrival Train'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Nouveau train à l\'arrivée'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="arrivalTrains index large-9 medium-8 columns content">
-    <h3><?= __('Arrival Trains') ?></h3>
+    <h3><?= __('Trains à l\'arrivée') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('numero') ?></th>
+				<th scope="col"><?= $this->Paginator->sort('landy_arrival', 'Arrivée Théorique PNO') ?></th>
+				<th scope="col"><?= $this->Paginator->sort('paris_nord_arrival', 'Arrivée Théorique Landy') ?></th>
+				<th scope="col"><?= $this->Paginator->sort('ascent_time', 'Temps de montée') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($arrivalTrains as $arrivalTrain): ?>
             <tr>
-                <td><?= $this->Number->format($arrivalTrain->id) ?></td>
                 <td><?= h($arrivalTrain->numero) ?></td>
+				<td><?= h($this->Time->format($arrivalTrain->theoric_arrivals['0']->paris_nord_arrival, "HH:mm")) ?></td>
+				<td><?= h($this->Time->format($arrivalTrain->theoric_arrivals['0']->landy_arrival, "HH:mm")) ?></td>
+				<td><?= h(duration($arrivalTrain->theoric_arrivals['0']->ascent_time)) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $arrivalTrain->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $arrivalTrain->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $arrivalTrain->id], ['confirm' => __('Are you sure you want to delete # {0}?', $arrivalTrain->id)]) ?>
+                    <?= $this->Html->link($this->Html->image('view.png', ['alt' => __('Voir'), 'class' => 'icon']), ['action' => 'view', $arrivalTrain->id], ['escape' => false, 'title' => 'Plus de détails']) ?>
+                    <?= $this->Html->link($this->Html->image('edit.png', ['alt' => __('Editer'), 'class' => 'icon']), ['action' => 'edit', $arrivalTrain->id], ['escape' => false, 'title' => 'Modifier']) ?>
+                    <?= $this->Form->postLink($this->Html->image('delete.png', ['alt' => __('Supprimer'), 'class' => 'icon']), ['action' => 'delete', $arrivalTrain->id], ['escape' => false, 'title' => 'Supprimer', 'confirm' => __('Voulez-vous vraiment supprimer ce train type arrivée ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+    <?php include('paginator.php'); ?>
 </div>

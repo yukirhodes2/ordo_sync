@@ -22,7 +22,13 @@
         <?php
             echo $this->Form->control('numero');
         ?>
+		<?= $this->Form->create($theoricArrival) ?>
+		<?php
+			echo $this->Form->control('paris_nord_arrival', ['label' => 'Arrivée PNO']);
+			echo $this->Form->control('landy_arrival', ['label' => 'Arrivée Landy']);
+			echo $this->Form->control('ascent_time', ['label' => 'Temps de montée (en minutes)']);
+		?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Valider')) ?>
     <?= $this->Form->end() ?>
 </div>

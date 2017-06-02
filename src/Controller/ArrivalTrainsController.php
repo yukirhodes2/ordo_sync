@@ -25,7 +25,8 @@ class ArrivalTrainsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['TheoricArrivals']
+            'contain' => ['TheoricArrivals'],
+			'limit' => 15,
         ];
         $arrivalTrains = $this->paginate($this->ArrivalTrains);
 		
@@ -43,7 +44,7 @@ class ArrivalTrainsController extends AppController
     public function view($id = null)
     {
         $arrivalTrain = $this->ArrivalTrains->get($id, [
-            'contain' => ['Arrivals' => ['Lavages'], 'Departures' => ['Brakes', 'Ways'], 'TheoricArrivals']
+            'contain' => ['Arrivals' => ['Lavages'], 'TheoricArrivals']
         ]);
 
         $this->set('arrivalTrain', $arrivalTrain);
@@ -71,12 +72,12 @@ class ArrivalTrainsController extends AppController
 				$data['ascent_time'] = minToSec(intval($data['ascent_time']));
 				$theoricArrival = $this->ArrivalTrains->TheoricArrivals->patchEntity($theoricArrival, $data);
 				if ($this->ArrivalTrains->TheoricArrivals->save($theoricArrival)){
-                $this->Flash->success(__('The arrival_train has been saved.'));
+                $this->Flash->success(__('Ajouté'));
                 return $this->redirect(['action' => 'index']);
 				}
             }
 			
-            $this->Flash->error(__('Le train à l\'arrivée ne peut pas être ajouté. Veuillez réessayer.'));
+            $this->Flash->error(__('Problème lors de l\'ajout.'));
         }
         $this->set(compact('arrivalTrain', 'theoricDeparture', 'theoricArrival'));
         $this->set('_serialize', ['arrivalTrain']);
@@ -92,34 +93,29 @@ class ArrivalTrainsController extends AppController
     public function edit($id = null)
     {
         $arrivalTrain = $this->ArrivalTrains->get($id, [
-            'contain' => ['TheoricArrivals', 'TheoricDepartures']
+            'contain' => ['TheoricArrivals']
         ]);
-		$theoricArrival = $this->ArrivalTrains->TheoricArrivals->get($arrival_train->theoric_arrivals['0']->id, [
-			'contain' => []
-		]);
-			
-		$theoricDeparture = $this->ArrivalTrains->TheoricDepartures->get($arrival_train->theoric_departures['0']->id, [
+		$theoricArrival = $this->ArrivalTrains->TheoricArrivals->get($arrivalTrain->theoric_arrivals['0']->id, [
 			'contain' => []
 		]);
 		
-			$theoricArrival['ascent_time'] = intval($theoricArrival['ascent_time'])/60;
+		$theoricArrival['ascent_time'] = intval($theoricArrival['ascent_time'])/60;
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
 			
 			$data = $this->request->getData();
 			$data['ascent_time'] = minToSec(intval($data['ascent_time']));
             $arrivalTrain = $this->ArrivalTrains->patchEntity($arrivalTrain, $data);
-			$theoricDeparture = $this->ArrivalTrains->TheoricDepartures->patchEntity($theoricDeparture, $data);
 			$theoricArrival = $this->ArrivalTrains->TheoricArrivals->patchEntity($theoricArrival, $data);
 			
-            if ($this->ArrivalTrains->save($arrivalTrain) && $this->ArrivalTrains->TheoricArrivals->save($theoricArrival) && $this->ArrivalTrains->TheoricDepartures->save($theoricDeparture)) {
-                $this->Flash->success(__('The arrival_train has been saved.'));
+            if ($this->ArrivalTrains->save($arrivalTrain) && $this->ArrivalTrains->TheoricArrivals->save($theoricArrival)) {
+                $this->Flash->success(__('Modifié'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The arrival_train could not be saved. Please, try again.'));
+            $this->Flash->error(__('Problème lors de la modification.'));
         }
-        $this->set(compact('arrivalTrain', 'theoricArrival', 'theoricDeparture'));
+        $this->set(compact('arrivalTrain', 'theoricArrival'));
         $this->set('_serialize', ['arrivalTrain']);
     }
 
@@ -135,9 +131,9 @@ class ArrivalTrainsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $arrivalTrain = $this->ArrivalTrains->get($id);
         if ($this->ArrivalTrains->delete($arrivalTrain)) {
-            $this->Flash->success(__('The arrival_train has been deleted.'));
+            $this->Flash->success(__('Supprimé'));
         } else {
-            $this->Flash->error(__('The arrival_train could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Problème lors de la suppression.'));
         }
 
         return $this->redirect(['action' => 'index']);
