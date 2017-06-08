@@ -17,6 +17,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\Core\Configure;
+use Cake\ORM\Table;
 
 /**
  * Application Controller
@@ -93,9 +94,27 @@ class AppController extends Controller
         }
     }
 	
+	// public function afterSave(){
+			// $logsTable = TableRegistry::get("Logs");
+			// $log = $logsTable->newEntity();
+			// $log->user_id = $this->Auth->user("id");
+			// $log->content = implode("|", $_POST);
+			// $this->LogsController->save($log);
+	// }
+	
 	public function isAuthorized($user)
 	{
 		return true;
+	}
+	
+	public function number(Table $table){
+		if ( isset($_POST['numero']) ){
+			$numero = $_POST['numero'];
+			$matches = $table->findByNumero($numero);
+			$matches->execute();
+			$matches = $matches->toArray();
+			$this->set(compact('matches'));
+		}
 	}
 
 }

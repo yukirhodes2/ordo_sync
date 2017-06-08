@@ -58,9 +58,11 @@ use Cake\Core\Plugin;
 use Cake\Database\Type;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\ErrorHandler;
+use Cake\Event\Event;
 use Cake\Log\Log;
 use Cake\Mailer\Email;
 use Cake\Network\Request;
+use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
 

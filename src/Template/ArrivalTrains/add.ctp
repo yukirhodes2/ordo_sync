@@ -15,6 +15,7 @@
         <legend><?= __('Ajouter un train type arrivée') ?></legend>
         <?php
             echo $this->Form->control('numero', ['class' => 'even']);
+			echo '<span id="erreur"> </span>';
 			echo '<span id="erreur-numero"> Le numéro doit être pair </span>';
         ?>
 		<?= $this->Form->create($theoricArrival) ?>

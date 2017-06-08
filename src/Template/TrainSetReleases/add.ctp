@@ -17,8 +17,9 @@
        <?php
 			echo $this->Form->control('train_set_id', ['options' => $trainSets, 'label' => 'Rame']);
             echo $this->Form->control('release1_id', ['label' => 'Libération arrivée', 'options' => $releases, 'empty' => true]);
+			echo $this->Form->control('status1_id', ['label' => 'Statut arrivée', 'options' => $status, 'empty' => true]);
+			
             echo $this->Form->control('release2_id', ['label' => 'Libération départ', 'options' => $releases, 'empty' => true]);
-            echo $this->Form->control('status1_id', ['label' => 'Statut arrivée', 'options' => $status, 'empty' => true]);
             echo $this->Form->control('status2_id', ['label' => 'Statut départ', 'options' => $status, 'empty' => true]);
 		?>
 			<span class='msg-alerte' hidden>L'heure de libération sera supprimée.</span>

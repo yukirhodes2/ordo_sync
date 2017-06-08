@@ -62,7 +62,7 @@ class DeparturesController extends AppController
 			
         $this->paginate = [
             'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-			'limit' => 5,
+			'limit' => 15,
 			'order' => [
             'id' => 'desc'
         ],
@@ -320,6 +320,11 @@ class DeparturesController extends AppController
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
+			if (isset($data['present_id'])){
+				if ($data['present_id'] == 4){ // CRML seul
+					$data['brake_id'] = 3;
+				}
+			}
             $departure = $this->Departures->patchEntity($departure, $data);
             if ($this->Departures->save($departure)) {
 				// if (isset($departure['landy_departure'])){
