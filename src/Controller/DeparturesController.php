@@ -63,7 +63,9 @@ class DeparturesController extends AppController
         $this->paginate = [
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 15
+			'order' => ['id' => 'desc']
         ];
+		
         $departures = $this->paginate($this->Departures);
 		
 		if($this->request->is('post')){
