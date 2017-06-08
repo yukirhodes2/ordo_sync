@@ -58,8 +58,7 @@ class AlertsTable extends Table
 
         $validator
             ->integer('second_timer')
-            ->requirePresence('second_timer', 'create')
-            ->notEmpty('second_timer');
+            ->allowEmpty('second_timer');
 
         return $validator;
     }

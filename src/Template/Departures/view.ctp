@@ -16,7 +16,7 @@
     <table class="vertical-table">
         <tr>
             <th scope="row" class="geops" ><?= __('Voie') ?></th>
-            <td><?= $departure->has('way') ? $this->Html->link($departure->way->numero, ['controller' => 'Ways', 'action' => 'view', $departure->way->id]) : "" ?></td>
+            <td><?= $departure->has('way') ? $this->Html->link($departure->way->numero, ['controller' => 'Ways', 'action' => 'view', $departure->way->id]) : '' ?></td>
         </tr>
 		<tr>
             <th scope="row" class="geops" ><?= __('Tire/Pousse') ?></th>

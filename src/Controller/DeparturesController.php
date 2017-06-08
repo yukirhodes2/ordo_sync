@@ -62,10 +62,11 @@ class DeparturesController extends AppController
 			
         $this->paginate = [
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-			'limit' => 15
-			'order' => ['id' => 'desc']
+			'limit' => 15,
+			'order' => [
+            'id' => 'desc'
+        ],
         ];
-		
         $departures = $this->paginate($this->Departures);
 		
 		if($this->request->is('post')){
@@ -104,7 +105,7 @@ class DeparturesController extends AppController
 			return $this->redirect(['action' => 'index']);
 		
         $this->paginate = [
-            'contain' => ['DepartureTrains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
+            'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 10,
 			'order' => [
             'id' => 'desc'
@@ -123,7 +124,7 @@ class DeparturesController extends AppController
 			return $this->redirect(['action' => 'index']);
 		
         $this->paginate = [
-            'contain' => ['DepartureTrains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
+            'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 10,
 			'order' => [
             'id' => 'desc'
@@ -141,8 +142,7 @@ class DeparturesController extends AppController
 													'Departures.landy_departure <' => date('Y-m-d', (strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day'])+86400)),
 													'Departures.landy_departure >=' => date('Y-m-d', strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day']))
 												])
-												->contain(['DepartureTrains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']])
-												
+												->contain(['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']])
 												->limit(5);
 				}
 			}
@@ -163,11 +163,8 @@ class DeparturesController extends AppController
 			return $this->redirect(['action' => 'index']);
 		
         $this->paginate = [
-            'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-		   // 'contain' => ['Ways', 'DepartureTrains', 'TrainSet1s', 'TrainSet2s', 'TrainSet3s', 'BrakeControls'],
+            'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 10,
-			'order' => ['landy_departure' => 'desc']
-
 		];
         $departures = $this->paginate($this->Departures);
 		$trainSets = $this->Departures->TrainSet1s->find('all')->toArray();
@@ -185,7 +182,7 @@ class DeparturesController extends AppController
     public function view($id = null)
     {
         $departure = $this->Departures->get($id, [
-            'contain' => ['Ways', 'DepartureTrains', 'Brakes', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']]
+            'contain' => ['Ways', 'Trains', 'Brakes', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']]
         ]);
         $this->set('departure', $departure);
         $this->set('_serialize', ['departure']);
@@ -219,11 +216,11 @@ class DeparturesController extends AppController
             $this->Flash->error(__('Il y a eu un problème lors de l\'ajout du départ.'));
 			debug($departure);
         }
-        $departureTrains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
 		$trainSets = $this->Departures->TrainSet1s->find('list', ['limit' => 200]);
 
-        $this->set(compact('departure', 'departureTrains', 'ways', 'trainSets'));
+        $this->set(compact('departure', 'trains', 'ways', 'trainSets'));
         $this->set('_serialize', ['departure']);
     }
 
@@ -292,12 +289,12 @@ class DeparturesController extends AppController
 			}
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $departureTrains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
         $trainSets = $this->Departures->TrainSet1s->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$presents = $this->Departures->BrakeControls->Presents->find('list');
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
-        $this->set(compact('departure', 'departureTrains', 'brakes', 'ways', 'presents', 'brakeControl', 'trainSets'));
+        $this->set(compact('departure', 'trains', 'brakes', 'ways', 'presents', 'brakeControl', 'trainSets'));
         $this->set('_serialize', ['departure']);
 		
     }
@@ -353,12 +350,12 @@ class DeparturesController extends AppController
 			}
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $departureTrains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
         $trainSets = $this->Departures->TrainSet1s->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$presents = $this->Departures->BrakeControls->Presents->find('list');
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
-        $this->set(compact('departure', 'departureTrains', 'brakes', 'ways', 'presents', 'brakeControl', 'trainSets'));
+        $this->set(compact('departure', 'trains', 'brakes', 'ways', 'presents', 'brakeControl', 'trainSets'));
         $this->set('_serialize', ['departure']);
     }
 	
@@ -383,10 +380,10 @@ class DeparturesController extends AppController
             }
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $departureTrains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
-        $this->set(compact('departure', 'departureTrains', 'brakes', 'ways'));
+        $this->set(compact('departure', 'trains', 'brakes', 'ways'));
         $this->set('_serialize', ['departure']);
     }
 
@@ -412,10 +409,10 @@ class DeparturesController extends AppController
             }
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $departureTrains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
-        $this->set(compact('departure', 'departureTrains', 'brakes', 'ways'));
+        $this->set(compact('departure', 'trains', 'brakes', 'ways'));
         $this->set('_serialize', ['departure']);
     }	
 	
@@ -443,10 +440,10 @@ class DeparturesController extends AppController
             }
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $departureTrains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
-        $this->set(compact('departure', 'departureTrains', 'brakes', 'ways'));
+        $this->set(compact('departure', 'trains', 'brakes', 'ways'));
         $this->set('_serialize', ['departure']);
     }	
 

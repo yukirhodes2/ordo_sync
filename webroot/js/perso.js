@@ -46,6 +46,33 @@ function checkTime(){
 		}, 1000);
 }
 
+var landy_calc = function(event){
+	var heure = parseInt($("[name='paris_nord_departure\[hour\]'] option:selected").text());
+	var minute = parseInt($("[name='paris_nord_departure\[minute\]'] option:selected").text());
+	var docktime = parseInt($("#docking-time").val());
+	var dd = parseInt($("#descent-duration").val());
+		$.ajax({
+			url : 'landyDeparture',
+			type : 'POST',
+			data : {
+				heure: heure,
+				minute: minute,
+				docktime: docktime,
+				dd: dd
+			},
+			dataType : 'html',
+			success : function(code_html, statut){
+				$('#landy_calc').html(code_html);
+			},
+			error : function(resultat, statut, error){
+				
+			},
+			complete: function(code_html, resultat, statut){
+				
+			}
+		})
+}
+
 $(document).ready(function()
 {
 	cTime();
@@ -123,6 +150,10 @@ $(document).ready(function()
 			
 	})
 	
+	$("button").click(landy_calc);
+	$("#docking-time, #descent-duration").keyup(landy_calc);
+	
+
 	
 	
 })
