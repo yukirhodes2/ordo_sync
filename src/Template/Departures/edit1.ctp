@@ -22,7 +22,7 @@
         <legend><?= __('Editer Départ') ?></legend>
         <?php		
 			echo $this->Form->control('way_id', ['label' => 'Voie','options' => $ways]);
-            echo $this->Form->control('train_id', ['options' => $trains]);
+            echo $this->Form->control('train_id', ['options' => $departureTrains]);
             echo $this->Form->control('train_set1_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 1']);
             echo $this->Form->control('train_set2_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 2']);
             echo $this->Form->control('train_set3_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 3']);
