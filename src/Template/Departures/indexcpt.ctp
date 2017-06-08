@@ -52,8 +52,7 @@
                 <td><?= h($departure->adc_arrival) ?></td>
                 <td><?= h($departure->annoucement) ?></td>
 				<td><?= h($departure->radio_number) ?></td>
-                <td <?= isset($departure->osmose, $departure->restit, $departure->brake_controls['0']->realisation_time) ? 'class="green"' : 'class="red"' ?> > <?=  h($departure->information) ?></td>
-				
+                <td <?= highlightClass("CommandeCRML", $departure) ?> > <?=  h($departure->information) ?></td>
                 <td class="actions">
 				<?= $departure->comment_eic != null || $departure->comment_rlp != null || $departure->comment_cpt != null || $departure->comment_geops != null? $this->Html->link($this->Html->image('eye.png', ['alt' => 'Observations', 'class' => 'icon']), ['action' => 'view_obs', $departure->id], ['target' => '_blank', 'escape' => false, 'title' => 'Observations']) : '' ?>
 				

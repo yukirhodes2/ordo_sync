@@ -285,3 +285,55 @@ function showDefine($var){
 	}
 	return('<span class="error">'.__('A définir').'</span>');
 }
+
+function isOsmose($entity){
+	$liberations = [];
+			$countSet = 0;
+			if ( isset($entity->train_set1) ){
+				++$countSet;
+				if (count($entity->train_set1->train_set_releases) > 0){
+					if ( $entity->train_set1->train_set_releases[count($entity->train_set1->train_set_releases)-1]->active){
+						array_push($liberations, $entity->train_set1->train_set_releases[count($entity->train_set1->train_set_releases)-1]->heure);
+					}
+				}
+			} 
+			if ( isset($entity->train_set2) ){
+				++$countSet;
+				if (count($entity->train_set2->train_set_releases) > 0){
+					if ( $entity->train_set2->train_set_releases[count($entity->train_set2->train_set_releases)-1]->active){
+						array_push($liberations, $entity->train_set2->train_set_releases[count($entity->train_set2->train_set_releases)-1]->heure);
+					}
+				}
+			}
+			if ( isset($entity->train_set3) ){
+				++$countSet;
+				if (count($entity->train_set3->train_set_releases) > 0){
+					if ( $entity->train_set3->train_set_releases[count($entity->train_set3->train_set_releases)-1]->active){
+						array_push($liberations, $entity->train_set3->train_set_releases[count($entity->train_set3->train_set_releases)-1]->heure);
+					}
+				}
+			}
+	if ((!empty($liberations) && !in_array(null, $liberations) && $countSet !== 0 && count($liberations) === $countSet && $countSet !== 0) || isset($entity->osmose)){
+		return true;
+	}
+	return false;
+}
+
+function highlightClass($condition, $entity){
+	switch($condition){
+		case "Commande CRML":	case "CommandeCRML":	case "commandecrml":	case "COMMANDECRML":
+			// si toutes les libérations de rame sont faites, si la restit est faite et le freinage a été réalisé
+			if ( isset($entity->restit, $entity->brake_controls['0']->realisation_time) && isOsmose($departure) ){
+				return 'class="green"';
+			}
+			if ( isset($entity->restit, $entity->brake_controls['0']->present_id) && ($entity->brake_controls['0']->present_id == 2 ||  $entity->brake_controls['0']->present_id == 3)){
+				return 'class="orange"';
+			}
+			return 'class="red"';
+			break;
+		
+		default:
+			return null;
+	}
+}
+
