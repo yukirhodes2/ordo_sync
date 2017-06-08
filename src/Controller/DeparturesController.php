@@ -21,6 +21,7 @@ class DeparturesController extends AppController
 	public function beforeFilter(Event $event)
     {
 		parent::beforeFilter($event);
+		$this->Auth->allow('indexeic');
 		// if ( self::isAuthorized($this->Auth->user("role_id")) === false ){
 			// $this->Auth->deny('delete');
 		// }
@@ -57,12 +58,16 @@ class DeparturesController extends AppController
 		elseif ($id_role === parent::CPT)
 			return $this->redirect(['action' => 'indexcpt']);
 			
-		elseif ($id_role === parent::EIC)
-			return $this->redirect(['action' => 'indexeic']);
+		elseif ($id_role === parent::GEOPS){
 			
         $this->paginate = [
+<<<<<<< HEAD
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 5,
+=======
+            'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
+			'limit' => 15,
+>>>>>>> origin/master
 			'order' => [
             'id' => 'desc'
         ],
@@ -91,6 +96,11 @@ class DeparturesController extends AppController
 		
         $this->set(compact('departures', 'trainSets'));
         $this->set('_serialize', ['departures']);
+
+		}
+		
+		else // if ($id_role === parent::EIC) || other
+			return $this->redirect(['action' => 'indexeic']);
     }
 	
 	public function indexrlp()
@@ -115,7 +125,7 @@ class DeparturesController extends AppController
 	public function indexeic()
     {
 		$id_role = $this->Auth->user("role_id");
-		if ($id_role !== 5)
+		if ($id_role !== 5 && isset($id_role))
 			return $this->redirect(['action' => 'index']);
 		
         $this->paginate = [
@@ -319,6 +329,11 @@ class DeparturesController extends AppController
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
+			if (isset($data['present_id'])){
+				if ($data['present_id'] == 4){ // CRML seul
+					$data['brake_id'] = 3;
+				}
+			}
             $departure = $this->Departures->patchEntity($departure, $data);
             if ($this->Departures->save($departure)) {
 				// if (isset($departure['landy_departure'])){

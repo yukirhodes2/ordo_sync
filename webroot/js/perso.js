@@ -52,33 +52,78 @@ $(document).ready(function()
 	
 	$(".even").keyup(function(event){
 		var numero=parseInt($(this).val());
-		console.log(numero);
-			if(numero%2 != 0)
-			{
-				$('#erreur-numero').show();
-				$('button[type="submit"]').prop('disabled', true).css('background-color', 'grey');
+		var unique = true;
+		
+		$.ajax({
+			url : 'trainNumber',
+			type : 'POST',
+			data : 'numero=' + numero,
+			dataType : 'html',
+			success : function(code_html, statut){
+				$('#erreur').html(code_html);
+				unique = $.isEmptyObject(code_html);
+				if(numero%2 != 0){
+					$('#erreur-numero').show();
+				}
+				else{
+					$('#erreur-numero').hide();
+					if (!unique){
+						$('#erreur').show();
+						$('button[type="submit"]').prop('disabled', true).css('background-color', 'grey');
+					}
+					else{
+						$('#erreur').hide();
+						$('button[type="submit"]').prop('disabled', false).css('background-color', '#6E1E78');
+					}
+				}
+			},
+			error : function(resultat, statut, error){
+				
+			},
+			complete: function(code_html, resultat, statut){
+				
 			}
-			else
-			{
-				$('#erreur-numero').hide();
-				$('button[type="submit"]').prop('disabled', false).css('background-color', '#6E1E78');
-			}
+		})
 	})
 	
 	$(".odd").keyup(function(event){
 		var numero=parseInt($(this).val());
-		console.log(numero);
-			if(numero%2 == 0)
-			{
-				$('#erreur-numero').show();
-				$('button[type="submit"]').prop('disabled', true).css('background-color', 'grey');
+		var unique = true;
+		
+		$.ajax({
+			url : 'trainNumber',
+			type : 'POST',
+			data : 'numero=' + numero,
+			dataType : 'html',
+			success : function(code_html, statut){
+				$('#erreur').html(code_html);
+				unique = $.isEmptyObject(code_html);
+				if(numero%2 == 0){
+					$('#erreur-numero').show();
+				}
+				else{
+					$('#erreur-numero').hide();
+					if (!unique){
+						$('#erreur').show();
+						$('button[type="submit"]').prop('disabled', true).css('background-color', 'grey');
+					}
+					else{
+						$('#erreur').hide();
+						$('button[type="submit"]').prop('disabled', false).css('background-color', '#6E1E78');
+					}
+				}
+			},
+			error : function(resultat, statut, error){
+				
+			},
+			complete: function(code_html, resultat, statut){
+				
 			}
-			else
-			{
-				$('#erreur-numero').hide();
-				$('button[type="submit"]').prop('disabled', false).css('background-color', '#6E1E78');
-			}
+		})
+			
 	})
+	
+	
 	
 })
 

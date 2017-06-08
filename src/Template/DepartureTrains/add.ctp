@@ -15,6 +15,7 @@
         <legend><?= __('Ajouter un train type départ') ?></legend>
         <?php
             echo $this->Form->control('numero', ['label' => __('Numéro'), 'class' => 'odd']);
+			echo '<span id="erreur"> </span> <br/>';
 			echo '<span id="erreur-numero"> Le numéro doit être impair </span>';
             echo $this->Form->control('alerte1', ['label' => 'Alerte avant départ Landy (en minutes, facultatif)']);
             echo $this->Form->control('alerte2', ['label' => 'Alerte avant rendu matériel (en minutes, facultatif)']);

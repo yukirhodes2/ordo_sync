@@ -46,12 +46,12 @@
 				<td><?= h($this->Time->format($departure->train->theoric_departures['0']->paris_nord_departure, "HH:mm")) ?></td>
                 <td><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
 				<?php if ($departure->formed === true){ ?>
-					<td class="green"> Oui </td>
+					<td class="green"> </td>
 				<?php }else{ ?>
-					<td class="red"> Non </td>
+					<td class="red"> </td>
 				<?php } ?>
                 <td <?php 
-					if ( !empty($departure->brake_controls['0']->realisation_time) && !empty($departure->brake_controls['0']->present) ){ // si le freinage a été fait
+					if ( (!empty($departure->brake_controls['0']->realisation_time) && !empty($departure->brake_controls['0']->present)) || $departure->brake_controls['0']->present_id == 4){ // si le freinage a été fait
 						echo 'class="green"';
 					} else {
 						if ( isset($departure->brake_controls['0']->present) ){

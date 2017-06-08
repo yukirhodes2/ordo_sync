@@ -10,22 +10,26 @@
     </ul>
 </nav>
 <div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Users') ?></h3>
+    <h3><?= __('Utilisateurs') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 
                 <th scope="col"><?= $this->Paginator->sort('username', __('Nom d\'utilisateur')) ?></th>
-                <th scope="col"><?= $this->Paginator->sort('role_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('prenom') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('nom') ?></th>
+				<th scope="col"><?= $this->Paginator->sort('role_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created', __('Créé')) ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified', __('Modifié')) ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($users as $user): ?>
+            <?php foreach ($users as $user):?>
             <tr>
                 <td><?= h($user->username) ?></td>
+                <td><?= h($user->prenom) ?></td>
+                <td><?= h($user->nom) ?></td>
                 <td><?= h($user->role->libelle) ?></td>
                 <td><?= h($user->created) ?></td>
                 <td><?= h($user->modified) ?></td>
@@ -38,14 +42,5 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('début')) ?>
-            <?= $this->Paginator->prev('< ' . __('précédent')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('suivant') . ' >') ?>
-            <?= $this->Paginator->last(__('dernier') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} sur {{pages}}, {{current}} résultat(s) sur un total de {{count}}')]) ?></p>
-    </div>
+    <?php include('paginator.php'); ?>
 </div>

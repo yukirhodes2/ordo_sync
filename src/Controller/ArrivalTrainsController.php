@@ -138,4 +138,8 @@ class ArrivalTrainsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+	
+	public function trainNumber(){
+		parent::number($this->ArrivalTrains);
+	}
 }
