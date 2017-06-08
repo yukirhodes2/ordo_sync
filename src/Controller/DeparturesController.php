@@ -61,16 +61,8 @@ class DeparturesController extends AppController
 		elseif ($id_role === parent::GEOPS){
 			
         $this->paginate = [
-<<<<<<< HEAD
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-			'limit' => 5,
-=======
-            'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-			'limit' => 15,
->>>>>>> origin/master
-			'order' => [
-            'id' => 'desc'
-        ],
+			'limit' => 15
         ];
         $departures = $this->paginate($this->Departures);
 		
