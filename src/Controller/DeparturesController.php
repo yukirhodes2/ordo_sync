@@ -62,7 +62,7 @@ class DeparturesController extends AppController
 			
         $this->paginate = [
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-			'limit' => 15
+			'limit' => 15,
 			'order' => ['id' => 'desc']
         ];
 		
@@ -123,7 +123,7 @@ class DeparturesController extends AppController
 			return $this->redirect(['action' => 'index']);
 		
         $this->paginate = [
-            'contain' => ['DepartureTrains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
+            'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 10,
 			'order' => [
             'id' => 'desc'

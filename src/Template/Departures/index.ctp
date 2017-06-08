@@ -39,34 +39,18 @@
 			<?php // debug($departure); ?>
                 <td><?= $departure->has('way') ? $this->Html->link($departure->way->numero, ['controller' => 'Ways', 'action' => 'view', $departure->way->id]) : '' ?></td>
                 <td><?= $departure->push_pool ?></td>
-                <td><?= $departure->has('train') ? $this->Html->link($departure->train->numero, ['controller' => 'Trains', 'action' => 'view', $departure->train->id]) : '' ?></td>
+                <td><?= $departure->has('departure_train') ? $this->Html->link($departure->departure_train->numero, ['controller' => 'DepartureTrains', 'action' => 'view', $departure->departure_train->id]) : '' ?></td>
                 <td><?= $departure->has('train_set1') ? $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set1->id]) : '' ?></td>
                 <td><?= $departure->has('train_set2') ? $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set2->id]) : '' ?></td>
                 <td><?= $departure->has('train_set3') ? $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set3->id]) : '' ?></td>
-				<td><?= h($this->Time->format($departure->train->theoric_departures['0']->paris_nord_departure, "HH:mm")) ?></td>
+				<td><?= h($this->Time->format($departure->departure_train->theoric_departures['0']->paris_nord_departure, "HH:mm")) ?></td>
                 <td><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
 				<?php if ($departure->formed === true){ ?>
 					<td class="green"> </td>
 				<?php }else{ ?>
 					<td class="red"> </td>
 				<?php } ?>
-                <td <?php 
-					if ( (!empty($departure->brake_controls['0']->realisation_time) && !empty($departure->brake_controls['0']->present)) || $departure->brake_controls['0']->present_id == 4){ // si le freinage a été fait
-						echo 'class="green"';
-					} else {
-						if ( isset($departure->brake_controls['0']->present) ){
-							if ( $departure->brake_controls['0']->present->id === 2 ){
-								echo 'class="orange"';
-							}
-							else{
-								echo 'class="red"';
-							}
-						}
-						else{
-							echo 'class="red"';
-						}
-							
-					} ?> > <?= $departure->has('brake') ? $this->Html->link($departure->brake->type, ['controller' => 'Brakes', 'action' => 'view', $departure->brake->id]) : '' ?></td>
+                <td <?= highlightClass("Freinage", $departure) ?> > <?= $departure->has('brake') ? $this->Html->link($departure->brake->type, ['controller' => 'Brakes', 'action' => 'view', $departure->brake->id]) : '' ?></td>
                 <td 
 					<?php
 						$liberations = [];

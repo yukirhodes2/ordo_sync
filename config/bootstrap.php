@@ -332,6 +332,24 @@ function highlightClass($condition, $entity){
 			return 'class="red"';
 			break;
 		
+		case "Freinage":	case "FREINAGE":	case "freinage":
+		if ( (!empty($entity->brake_controls['0']->realisation_time) && !empty($entity->brake_controls['0']->present)) || 
+			  $entity->brake_controls['0']->present_id == 4){ // si le freinage a été fait
+						return 'class="green"';
+					} else {
+						if ( isset($entity->brake_controls['0']->present) ){
+							if (($entity->brake_controls['0']->present->id === 2) || ($entity->brake_controls['0']->present->id === 3) /*|| ($entity->brake_controls['0']->present->id === 4)*/){
+								return 'class="orange"';
+							}
+							else{
+								return 'class="red"';
+							}
+						}
+						else{
+							return 'class="red"';
+						}							
+					} 
+		
 		default:
 			return null;
 	}

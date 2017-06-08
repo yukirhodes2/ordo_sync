@@ -47,7 +47,7 @@
                 <td><?= $departure->has('train_set') ? $this->Html->link($departure->train_set->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set->id]) : '' ?></td>
                 <td><?= $this->Time->format(strtotime($departure->departure_train->theoric_departures['0']->paris_nord_departure) - ($departure->departure_train->theoric_departures['0']->descent_duration) - ($departure->departure_train->theoric_departures['0']->docking_time), "HH:mm") ?></td>
                 <td><?= h($departure->landy_departure) ?></td>
-                <td><?= isset($departure->brake) ? h($departure->brake->type) : '' ?></td>
+                <td <?= highlightClass("Freinage", $departure) ?> > </td>
                 <td><?= h($departure->refouleur_arrival) ?></td>
                 <td><?= h($departure->adc_arrival) ?></td>
                 <td><?= h($departure->annoucement) ?></td>
