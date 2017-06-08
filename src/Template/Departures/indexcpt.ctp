@@ -34,18 +34,16 @@
             </tr>
         </thead>
         <tbody>
-			
-			<?php
-			//$id_role = $this->request->session()->read('Auth.User.role_id');
-            foreach ($departures as $departure): ?>
+		
+            <?php foreach ($departures as $departure): ?>
             <tr>
-			<?php //debug($departure); ?>
+			<?php // debug($departure); ?>
                 <td><?= $departure->has('way') ? $this->Html->link($departure->way->numero, ['controller' => 'Ways', 'action' => 'view', $departure->way->id]) : '' ?></td>
-                <td><?= $departure->has('departure_train') ? $this->Html->link($departure->departure_train->numero, ['controller' => 'DepartureTrains', 'action' => 'view', $departure->departure_train->id]) : '' ?></td>
+                <td><?= $departure->has('train') ? $this->Html->link($departure->train->numero, ['controller' => 'Trains', 'action' => 'view', $departure->train->id]) : '' ?></td>
                 <td><?= $departure->train_set1_id !== null ? $trainSets[($departure->train_set1_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->train_set2_id !== null ? $trainSets[($departure->train_set2_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->has('train_set') ? $this->Html->link($departure->train_set->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set->id]) : '' ?></td>
-                <td><?= $this->Time->format(strtotime($departure->departure_train->theoric_departures['0']->paris_nord_departure) - ($departure->departure_train->theoric_departures['0']->descent_duration) - ($departure->departure_train->theoric_departures['0']->docking_time), "HH:mm") ?></td>
+                <td><?= h(date('H:m', strtotime($departure->train->theoric_departures['0']->paris_nord_departure)+$departure->train->theoric_departures['0']->descent_duration)) ?></td>
                 <td><?= h($departure->landy_departure) ?></td>
                 <td <?= highlightClass("Freinage", $departure) ?> > </td>
                 <td><?= h($departure->refouleur_arrival) ?></td>

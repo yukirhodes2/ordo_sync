@@ -22,7 +22,7 @@
         <legend><?= __('Editer Départ') ?></legend>
         <?php	
 			echo $this->Form->control('way_id', ['label' => 'Voie','options' => $ways]);
-            echo $this->Form->control('train_id', ['options' => $departureTrains]);
+            echo $this->Form->control('train_id', ['options' => $trains]);
 			
             echo $this->Form->control('adc_arrival', ['label' => 'Arrivée EM, CRML ou ADC', 'empty' => true]);
 			echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('adc_arrival')"]);

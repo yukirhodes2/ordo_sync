@@ -12,13 +12,13 @@
 <div class="alerts form large-9 medium-8 columns content">
     <?= $this->Form->create($alert) ?>
     <fieldset>
-        <legend><?= __('Ajouter Alert') ?></legend>
+        <legend><?= __('Add Alert') ?></legend>
         <?php
             echo $this->Form->control('libelle');
             echo $this->Form->control('first_timer');
             echo $this->Form->control('second_timer');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Envoyer')) ?>
+    <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

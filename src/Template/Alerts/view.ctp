@@ -25,11 +25,11 @@
         </tr>
         <tr>
             <th scope="row"><?= __('First Timer') ?></th>
-            <td><?= h($alert->first_timer) ?></td>
+            <td><?= $this->Number->format($alert->first_timer) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Second Timer') ?></th>
-            <td><?= h($alert->second_timer) ?></td>
+            <td><?= $this->Number->format($alert->second_timer) ?></td>
         </tr>
     </table>
 </div>

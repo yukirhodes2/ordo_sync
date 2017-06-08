@@ -198,7 +198,9 @@ div.input input:focus {
 form button{
     background-color: #6E1E78;
 	color: #fff;
-    margin: 1.5rem;
+    margin-right: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 form button:hover{
@@ -258,7 +260,7 @@ span.error{
 	background: transparent;
 }
 
-input[type="radio"]{
+input[type="radio"], label.landy_calc{
 	margin-left: 15px;
 	margin-right: 5px;
 }
@@ -286,4 +288,9 @@ div.datetime select:nth-child(4){
 
 .msg-alerte{
 	display: inline;
+}
+
+#landy_calc{
+	margin-left: 5px;
+	margin-right: 5px;
 }

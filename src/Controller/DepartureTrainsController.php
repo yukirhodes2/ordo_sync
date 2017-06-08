@@ -75,22 +75,28 @@ class DepartureTrainsController extends AppController
 			else{
 				$data['alerte2'] = minToSec(intval($data['alerte2']));
 			}
-            $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $data);
 			
+            $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $data);
 			$result = null;
             if ($result = $this->DepartureTrains->save($departureTrain)) {
 				$data['train_id'] = $result->id; // on récupère l'id du nouveau arrival_train pour associer les théoriques
+				
+				$data['landy_departure']['hour'] = ($data['paris_nord_departure']['hour']*60 + $data['paris_nord_departure']['minute'] - $data['docking_time'] - $data['descent_duration'])/60;
+				$data['landy_departure']['minute'] = ($data['paris_nord_departure']['hour']*60 + $data['paris_nord_departure']['minute'] - $data['docking_time'] - $data['descent_duration'])%60;
+				
 				$data['descent_duration'] = minToSec(intval($data['descent_duration']));
 				$data['rendition_duration'] = minToSec(intval($data['rendition_duration']));
 				$data['docking_time'] = minToSec(intval($data['docking_time']));
+				
+				
 				$theoricDeparture = $this->DepartureTrains->TheoricDepartures->patchEntity($theoricDeparture, $data);
 				if ($this->DepartureTrains->TheoricDepartures->save($theoricDeparture)){
 					$this->Flash->success(__('Ajouté'));
 					return $this->redirect(['action' => 'index']);
 				}
             }
-			debug($departureTrain);
-			debug(isset($data['landy_departure']));
+			// debug($departureTrain);
+			// debug(isset($data['landy_departure']));
             $this->Flash->error(__('Problème lors de l\'ajout.'));
         }
         $this->set(compact('departureTrain', 'theoricDeparture'));
@@ -165,5 +171,24 @@ class DepartureTrainsController extends AppController
 	
 	public function trainNumber(){
 		parent::number($this->DepartureTrains);
+	}
+	
+	public function landyDeparture(){
+		if ( isset($_POST['heure']) ){
+			$heure = $_POST['heure'];
+			$this->set(compact('heure'));
+		}
+		if ( isset($_POST['minute']) ){
+			$minute = $_POST['minute'];
+			$this->set(compact('minute'));
+		}
+		if ( isset($_POST['docktime']) ){
+			$docktime = $_POST['docktime'];
+			$this->set(compact('docktime'));
+		}
+		if ( isset($_POST['dd']) ){
+			$dd = $_POST['dd'];
+			$this->set(compact('dd'));
+		}
 	}
 }
