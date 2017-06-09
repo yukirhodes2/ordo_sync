@@ -44,12 +44,12 @@
                 <td><?= $departure->train_set2_id !== null ? $trainSets[($departure->train_set2_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->has('train_set') ? $this->Html->link($departure->train_set->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set->id]) : '' ?></td>
                 <td><?= h(date('H:m', strtotime($departure->departure_train->theoric_departures['0']->paris_nord_departure)+$departure->departure_train->theoric_departures['0']->descent_duration)) ?></td>
-                <td><?= h($departure->landy_departure) ?></td>
+                <td><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
                 <td <?= highlightClass("Freinage", $departure) ?> > </td>
-                <td><?= h($departure->refouleur_arrival) ?></td>
-                <td><?= h($departure->adc_arrival) ?></td>
-                <td><?= h($departure->annoucement) ?></td>
-				<td><?= h($departure->radio_number) ?></td>
+                <td><?= h($this->Time->format($departure->refouleur_arrival, "HH:mm")) ?></td>
+                <td><?= h($this->Time->format($departure->adc_arrival, "HH:mm")) ?></td>
+                <td><?= h($this->Time->format($departure->annoucement, "HH:mm")) ?></td>
+				<td><?= $departure->radio_number ?></td>
                 <td <?= highlightClass("CommandeCRML", $departure) ?> > <?=  h($departure->information) ?></td>
                 <td class="actions">
 				<?= $departure->comment_eic != null || $departure->comment_rlp != null || $departure->comment_cpt != null || $departure->comment_geops != null? $this->Html->link($this->Html->image('eye.png', ['alt' => 'Observations', 'class' => 'icon']), ['action' => 'view_obs', $departure->id], ['target' => '_blank', 'escape' => false, 'title' => 'Observations']) : '' ?>

@@ -40,11 +40,11 @@
                 <td><?= $departure->train_set1_id !== null ? $trainSets[($departure->train_set1_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->train_set2_id !== null ? $trainSets[($departure->train_set2_id)-1]['numero'] : '' ?></td>
                <td><?= $departure->train_set3_id !== null ? $trainSets[($departure->train_set3_id)-1]['numero'] : '' ?></td>
-                <td><?= h($departure->departure_train->theoric_departures['0']->landy_departure) ?></td>
-                <td><?= h($departure->landy_departure) ?></td>
-                <td><?= h($departure->annoucement) ?></td>
-				<td><?= h($departure->postep_departure) ?></td>
-				<td><?= h($departure->passagecarre_departure) ?></td>
+                <td><?= h($this->Time->format($departure->departure_train->theoric_departures['0']->landy_departure, "HH:mm")) ?></td>
+                <td><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
+                <td><?= h($this->Time->format($departure->annoucement, "HH:mm")) ?></td>
+				<td><?= h($this->Time->format($departure->postep_departure, "HH:mm")) ?></td>
+				<td><?= h($this->Time->format($departure->passagecarre_departure, "HH:mm")) ?></td>
                 <td class="actions">
 				<?= $departure->comment_eic != null || $departure->comment_rlp != null || $departure->comment_cpt != null || $departure->comment_geops != null? $this->Html->link($this->Html->image('eye.png', ['alt' => 'Observations', 'class' => 'icon']), ['action' => 'view_obs', $departure->id], ['target' => '_blank', 'escape' => false, 'title' => 'Observations']) : '' ?>
 				

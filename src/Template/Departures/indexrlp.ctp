@@ -37,11 +37,11 @@
             <tr>
 			<?php // debug($departure); ?>
                 <td><?= $departure->has('way') ? $this->Html->link($departure->way->numero, ['controller' => 'Ways', 'action' => 'view', $departure->way->id]) : '' ?></td>
-                <td><?= $departure->has('departure_train') ? $this->Html->link($departure->train->numero, ['controller' => 'DepartureTrains', 'action' => 'view', $departure->departure_train->id]) : '' ?></td>
+                <td><?= $departure->has('departure_train') ? $this->Html->link($departure->departure_train->numero, ['controller' => 'DepartureTrains', 'action' => 'view', $departure->departure_train->id]) : '' ?></td>
                 <td><?= $departure->train_set1_id !== null ? $trainSets[($departure->train_set1_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->train_set2_id !== null ? $trainSets[($departure->train_set2_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->train_set3_id !== null ? $trainSets[($departure->train_set3_id)-1]['numero'] : '' ?></td>
-                <td><?= h($this->Time->format($departure->train->theoric_departures['0']->paris_nord_departure, "HH:mm")) ?></td>
+                <td><?= h($this->Time->format($departure->departure_train->theoric_departures['0']->paris_nord_departure, "HH:mm")) ?></td>
                 <td><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
 				<?php if ($departure->formed === true){ ?>
 					<td class="green"> Oui </td>

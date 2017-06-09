@@ -29,7 +29,7 @@
         <tbody>
             <?php foreach ($trainSetReleases as $trainSetRelease): ?>
             <tr>
-                <td><?= h($trainSetRelease->heure) ?></td>
+                <td><?= h($this->Time->format($trainSetRelease->heure, "HH:mm")) ?></td>
 				<td><?= $trainSetRelease->has('train_set') ? $this->Html->link($trainSetRelease->train_set->numero, ['controller' => 'TrainSets', 'action' => 'view', $trainSetRelease->train_set->id]) : '' ?></td>
                 <td><?= $trainSetRelease->has('releases1') ? $this->Html->link($trainSetRelease->releases1->libelle, ['controller' => 'Releases', 'action' => 'view', $trainSetRelease->releases1->id]) : '' ?></td>
                 <td><?= $trainSetRelease->has('releases2') ? $this->Html->link($trainSetRelease->releases2->libelle, ['controller' => 'Releases', 'action' => 'view', $trainSetRelease->releases2->id]) : '' ?></td>
