@@ -46,24 +46,33 @@ function checkTime(){
 		}, 1000);
 }
 
-function alert_daemon(def, spec, type){
-	var duree, ld_theorique_parts, ld_theorique_minutes;
+function alert_daemon(def, entity, type){
+	var duree1, duree2, ld_theorique_parts, ld_theorique_minutes;
 	var now = new Date();
 	now = (+now.getHours()*60) + (+now.getMinutes());
+	rend = entity.theoric_departures['0'].rendition_duration/60;
 	
-	if(spec == 0){	duree = def;	}
-	else		{	duree = spec/60;}
+	if(entity.alerte1 == 0){	duree1 = def;	}
+	else		{	duree1 = entity.alerte1/60;}
+	
+	if(entity.alerte2 == 0){	duree2 = def;	}
+	else		{	duree2 = entity.alerte2/60;}
 	
 	switch(type){
 		case 1: // role geops, rlp
-		// pour chaque ligne, tester : si dep reel vide, si dep theorique - heure systeme <= duree, clignoter en orange. Si de plus dep theorique - heure systeme <= 0, clignoter en rouge
+		// pour chaque ligne, tester : si dep reel vide, si dep theorique - heure systeme <= duree1 ou alerte rendu matériel, clignoter en orange. Si de plus dep theorique - heure systeme <= 0 ou rendu matériel en retard, clignoter en rouge
 		$('tr').each(function(){
 			if ( $(this).children(".ld_reel").is(':empty') ){
-				console.log("ok");
 				ld_theorique_parts = $(this).children(".ld_theorique").text().split(":");
 				ld_theorique_minutes = ((+ld_theorique_parts[0]*60) + (+ld_theorique_parts[1]));
-				if ( ld_theorique_minutes - now <= duree){
-					$(this).children(".train").addClass("blink-orange");
+				
+				if ( ld_theorique_minutes - now <= duree1 || ($(this).children(".restit").is(':empty') && ld_theorique_minutes - rend - now  <= duree2) ){
+					if( ld_theorique_minutes - now <= 0 || ld_theorique_minutes - rend - now  <= 0){
+						$(this).children(".train").addClass("blink-red");						
+					}
+					else{
+						$(this).children(".train").addClass("blink-orange");
+					}
 				}
 			}
 		});
@@ -183,6 +192,7 @@ $(document).ready(function()
 	})
 	
 	$("button").click(landy_calc);
+	$("select").change(landy_calc);
 	$("#docking-time, #descent-duration").keyup(landy_calc);
 	
 

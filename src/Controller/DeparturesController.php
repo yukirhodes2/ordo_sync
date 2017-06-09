@@ -69,7 +69,7 @@ class DeparturesController extends AppController
 													'Departures.landy_departure <' => date('Y-m-d', (strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day'])+86400)),
 													'Departures.landy_departure >=' => date('Y-m-d', strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day']))
 												])
-												->contain(['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']])
+												->contain(['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']])
 												->limit(5);
 				}
 			}
@@ -95,7 +95,7 @@ class DeparturesController extends AppController
 			return $this->redirect(['action' => 'index']);
 		
         $this->paginate = [
-            'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
+            'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 10,
 			'order' => ['id' => 'desc']
         ];
@@ -134,7 +134,7 @@ class DeparturesController extends AppController
 													'Departures.landy_departure <' => date('Y-m-d', (strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day'])+86400)),
 													'Departures.landy_departure >=' => date('Y-m-d', strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day']))
 												])
-												->contain(['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']])
+												->contain(['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']])
 												->limit(5);
 				}
 			}
@@ -157,7 +157,7 @@ class DeparturesController extends AppController
 		$this->loadAlerts();
 		
         $this->paginate = [
-            'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
+            'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 10,
 		];
         $departures = $this->paginate($this->Departures);
@@ -417,7 +417,7 @@ class DeparturesController extends AppController
 			return $this->redirect(['action' => 'edit', $id]);
 		
          $departure = $this->Departures->get($id, [
-            'contain' => ['Ways', 'Trains', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases']]
+            'contain' => ['Ways', 'DepartureTrains', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases']]
         ]);
 	
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -464,20 +464,26 @@ class DeparturesController extends AppController
 	public function desactivateReleases($departure, $id){
 		$trainSetReleases = array();
 		
+		if( isset($departure['loc']) ){
+			$trainSetReleases[0] = $this->Departures->Locs->TrainSetReleases->get($departure->loc->train_set_releases[count($departure->loc->train_set_releases)-1]->id, [
+				'contain' => []
+			]);
+		}
+		
 		if( isset($departure['train_set1']) ){
-			$trainSetReleases[0] = $this->Departures->TrainSet1s->TrainSetReleases->get($departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->id, [
+			$trainSetReleases[1] = $this->Departures->TrainSet1s->TrainSetReleases->get($departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->id, [
 				'contain' => []
 			]);
 		}
 		
 		if( isset($departure->train_set2) ){
-			$trainSetReleases[1] = $this->Departures->TrainSet2s->TrainSetReleases->get($departure->train_set2->train_set_releases[count($departure->train_set1->train_set_releases)-1]->id, [
+			$trainSetReleases[2] = $this->Departures->TrainSet2s->TrainSetReleases->get($departure->train_set2->train_set_releases[count($departure->train_set1->train_set_releases)-1]->id, [
 				'contain' => []
 			]);
 		}
 		
 		if( isset($departure->train_set3) ){
-			$trainSetReleases[2] = $this->Departures->TrainSet3s->TrainSetReleases->get($departure->train_set3->train_set_releases[count($departure->train_set1->train_set_releases)-1]->id, [
+			$trainSetReleases[3] = $this->Departures->TrainSet3s->TrainSetReleases->get($departure->train_set3->train_set_releases[count($departure->train_set1->train_set_releases)-1]->id, [
 				'contain' => []
 			]);
 		}

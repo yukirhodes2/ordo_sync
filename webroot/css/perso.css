@@ -156,13 +156,26 @@ td.actions a.rouge, li.rouge{
 @keyframes blink-orange-animation {
   to {
     color: white;
-	background-color: orange;
+	background-color: rgb(224,82,6);
   }
 }
 @-webkit-keyframes blink-orange-animation {
   to {
     color: white;
-	background-color: orange;
+	background-color: rgb(224,82,6);
+  }
+}
+
+@keyframes blink-red-animation {
+  to {
+    color: white;
+	background-color: rgb(213,43,30);
+  }
+}
+@-webkit-keyframes blink-red-animation {
+  to {
+    color: white;
+	background-color: rgb(213,43,30);
   }
 }
 
@@ -309,6 +322,11 @@ div.datetime select:nth-child(4){
 }
 
 .blink-orange{
-  animation: blink-orange-animation 2s steps(2, start) infinite;
-  -webkit-animation: blink-orange-animation 2s steps(2, start) infinite;
+  animation: blink-orange-animation 4s steps(2, start) infinite;
+  -webkit-animation: blink-orange-animation 4s steps(2, start) infinite;
+}
+
+.blink-red{
+  animation: blink-red-animation 1s steps(2, start) infinite;
+  -webkit-animation: blink-red-animation 1s steps(2, start) infinite;
 }
