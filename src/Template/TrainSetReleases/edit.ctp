@@ -28,17 +28,20 @@
             echo $this->Form->control('release2_id', ['label' => 'Libération départ', 'options' => $releases, 'empty' => ['' => '']]);
             echo $this->Form->control('status2_id', ['label' => 'Statut départ', 'options' => $status, 'empty' => ['' => '']]);
 		?>
-			<span class='msg-alerte' hidden>L'heure de libération sera supprimée.</span>
+			<span class='msg-alerte'>L'heure de libération sera supprimée.</span>
 			
 		<script>
-			$(document).ready(function(){
-				$("div.input.select:last").css("display", "inline");
-				$('#status2-id').change(function(){
-					if ($('#status2-id option:selected').val()!=1) 
-						$('.msg-alerte').show(); 
+			$(document).ready(function(){		
+				var f_verif = function(){
+					if ($('#status2-id option:selected').val()==1) 
+						$('.msg-alerte').hide(); 
 					else
-						$('.msg-alerte').hide();
-				});
+						$('.msg-alerte').show();
+					}
+
+				f_verif();
+				$("div.input.select:last").css("display", "inline");
+				$('#status2-id').change(f_verif);
 			});
 		</script>
 		

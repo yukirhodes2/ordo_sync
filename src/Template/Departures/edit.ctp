@@ -14,7 +14,7 @@
         ?></li>
         <li><?= $this->Html->link(__('Liste des départs'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Liste des voies'), ['controller' => 'Ways', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'Trains', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'DepartureTrains', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Liste des rames'), ['controller' => 'TrainSets', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Liste des freinages'), ['controller' => 'Brakes', 'action' => 'index']) ?></li>
     </ul>
