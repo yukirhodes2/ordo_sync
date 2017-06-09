@@ -63,14 +63,9 @@ class DeparturesController extends AppController
         $this->paginate = [
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 15,
-<<<<<<< HEAD
 			'order' => ['id' => 'desc']
-=======
-			'order' => [
-            'id' => 'desc'
-        ],
->>>>>>> origin/master
         ];
+		
         $departures = $this->paginate($this->Departures);
 		
 		if($this->request->is('post')){
@@ -111,10 +106,9 @@ class DeparturesController extends AppController
         $this->paginate = [
             'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 10,
-			'order' => [
-            'id' => 'desc'
-        ],
+			'order' => ['id' => 'desc']
         ];
+		
         $departures = $this->paginate($this->Departures);
 		$trainSets = $this->Departures->TrainSet1s->find('all')->toArray();
         $this->set(compact('departures', 'trainSets'));
@@ -128,16 +122,11 @@ class DeparturesController extends AppController
 			return $this->redirect(['action' => 'index']);
 		
         $this->paginate = [
-<<<<<<< HEAD
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-=======
-            'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
->>>>>>> origin/master
 			'limit' => 10,
-			'order' => [
-            'id' => 'desc'
-        ],
+			'order' => ['id' => 'desc']
 		];
+		
         $departures = $this->paginate($this->Departures);
 		
 		if($this->request->is('post')){
