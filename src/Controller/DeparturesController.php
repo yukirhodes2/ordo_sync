@@ -213,7 +213,7 @@ class DeparturesController extends AppController
             $this->Flash->error(__('Il y a eu un problème lors de l\'ajout du départ.'));
 			debug($departure);
         }
-        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
 		$trainSets = $this->Departures->TrainSet1s->find('list', ['limit' => 200]);
 
@@ -286,7 +286,7 @@ class DeparturesController extends AppController
 			}
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $trainSets = $this->Departures->TrainSet1s->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$presents = $this->Departures->BrakeControls->Presents->find('list');
@@ -347,7 +347,7 @@ class DeparturesController extends AppController
 			}
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $trainSets = $this->Departures->TrainSet1s->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$presents = $this->Departures->BrakeControls->Presents->find('list');
@@ -377,7 +377,7 @@ class DeparturesController extends AppController
             }
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
         $this->set(compact('departure', 'trains', 'brakes', 'ways'));
@@ -406,7 +406,7 @@ class DeparturesController extends AppController
             }
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
         $this->set(compact('departure', 'trains', 'brakes', 'ways'));
@@ -437,7 +437,7 @@ class DeparturesController extends AppController
             }
             $this->Flash->error(__('The departure could not be saved. Please, try again.'));
         }
-        $trains = $this->Departures->Trains->find('list', ['limit' => 200]);
+        $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
 		$ways = $this->Departures->Ways->find('list', ['limit' => 200]);
         $this->set(compact('departure', 'trains', 'brakes', 'ways'));
