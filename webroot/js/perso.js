@@ -46,6 +46,10 @@ function checkTime(){
 		}, 1000);
 }
 
+function color(entity, col){
+	$(entity).addClass(col);
+}
+
 function alert_daemon(def, entity, type){
 	var duree1, duree2, ld_theorique_parts, ld_theorique_minutes;
 	var now = new Date();
@@ -113,6 +117,7 @@ var landy_calc = function(event){
 			}
 		})
 }
+
 
 $(document).ready(function()
 {

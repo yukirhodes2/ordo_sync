@@ -59,15 +59,15 @@
 					} else {
 						echo 'class="red"';
 					} ?> > <?= $departure->has('brake') ? $this->Html->link($departure->brake->type, ['controller' => 'Brakes', 'action' => 'view', $departure->brake->id]) : '' ?></td>
-                <td class="osmose"
-				<?php
-					if( isOsmose($departure) ){
-						echo 'class="green"';
+                <td class="osmose" >
+				<!-- osmose -->
+				<?php 
+				if ( isOsmose($departure) ){
+						echo '<script>color(".osmose", "green");</script>';
 					}
 					else {
-						echo 'class="red"';
-					}  
-				?> > <!-- osmose --> 
+						echo '<script>color(".osmose", "red");</script>';
+					}  ?>
 				</td>
                 <td class="restit" <?= $departure->restit !== null ? 'class="green"' : 'class="red"' ?>></td>
                 <td class="actions">
@@ -81,5 +81,5 @@
         </tbody>
     </table>
     <?php include('paginator.php'); ?>
-	<?php echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
+	<?php if (isset($departure)) echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
 </div>

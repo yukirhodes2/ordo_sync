@@ -321,6 +321,8 @@ function isOsmose($entity){
 					}
 				}
 			}
+	
+	
 	if ((!empty($liberations) && !in_array(null, $liberations) && $countSet !== 0 && count($liberations) === $countSet && $countSet !== 0) || isset($entity->osmose)){
 		return true;
 	}

@@ -53,20 +53,22 @@
 					<td class="red"> </td>
 				<?php } ?>
                 <td <?= highlightClass("Freinage", $departure) ?> > <?= $departure->has('brake') ? $this->Html->link($departure->brake->type, ['controller' => 'Brakes', 'action' => 'view', $departure->brake->id]) : '' ?></td>
-                <td class="osmose" 
-				<?php
-					if ( isOsmose($departure) ){
-						echo 'class="green"';
+                <td class="osmose" >
+				<!-- osmose -->
+				<?php 
+				if ( isOsmose($departure) ){
+						echo '<script>color(".osmose", "green");</script>';
 					}
 					else {
-						echo 'class="red"';
+						echo '<script>color(".osmose", "red");</script>';
 					}  
-				?> > <!-- osmose --> <?php if (isset($departure->landy_departure)){
+				if (isset($departure->landy_departure)){
 					echo h($this->Time->format($departure->osmose, "HH:mm"));
 				}
-				else if (!empty($liberations)){
-					echo h($this->Time->format(max($liberations), "HH:mm"));
-				}  ?>
+				// else if (!empty($liberations)){
+					// echo h($this->Time->format(max($liberations), "HH:mm"));
+				// }  
+				?>
 				</td>
                 <td class="restit" <?php if ( isset($departure->restit) ){
 					echo 'class="green"';
@@ -99,5 +101,5 @@
 		</div>
     <?= $this->Form->end();?>
 	
-	<?php echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
+	<?php if (isset($departure)) echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
 </div>
