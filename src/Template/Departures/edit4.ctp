@@ -13,7 +13,7 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des départs'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'Trains', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'DepartureTrains', 'action' => 'index']) ?></li>
 	</ul>
 </nav>
 <div class="departures form large-9 medium-8 columns content">

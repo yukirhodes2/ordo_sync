@@ -46,5 +46,6 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <?php include('paginator.php'); ?>
+    <?php include "paginator.php"; ?>
+
 </div>

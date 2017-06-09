@@ -8,7 +8,7 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Nouveau départ'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('Liste des voies'), ['controller' => 'Ways', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'Trains', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'DepartureTrains', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Liste des rames'), ['controller' => 'TrainSets', 'action' => 'index']) ?></li>
     </ul>
 </nav>
@@ -37,7 +37,7 @@
             <tr>
 			<?php // debug($departure); ?>
                 <td><?= $departure->has('way') ? $this->Html->link($departure->way->numero, ['controller' => 'Ways', 'action' => 'view', $departure->way->id]) : '' ?></td>
-                <td><?= $departure->has('train') ? $this->Html->link($departure->train->numero, ['controller' => 'Trains', 'action' => 'view', $departure->train->id]) : '' ?></td>
+                <td><?= $departure->has('departure_train') ? $this->Html->link($departure->train->numero, ['controller' => 'DepartureTrains', 'action' => 'view', $departure->departure_train->id]) : '' ?></td>
                 <td><?= $departure->train_set1_id !== null ? $trainSets[($departure->train_set1_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->train_set2_id !== null ? $trainSets[($departure->train_set2_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->train_set3_id !== null ? $trainSets[($departure->train_set3_id)-1]['numero'] : '' ?></td>
@@ -81,6 +81,5 @@
         </tbody>
     </table>
     <?php include('paginator.php'); ?>
-	
 	<?php echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
 </div>
