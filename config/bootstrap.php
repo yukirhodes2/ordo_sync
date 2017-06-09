@@ -289,6 +289,14 @@ function showDefine($var){
 function isOsmose($entity){
 	$liberations = [];
 			$countSet = 0;
+			if ( isset($entity->loc) ){
+				++$countSet;
+				if (count($entity->loc->train_set_releases) > 0){
+					if ( $entity->loc->train_set_releases[count($entity->loc->train_set_releases)-1]->active){
+						array_push($liberations, $entity->loc->train_set_releases[count($entity->loc->train_set_releases)-1]->heure);
+					}
+				}
+			} 
 			if ( isset($entity->train_set1) ){
 				++$countSet;
 				if (count($entity->train_set1->train_set_releases) > 0){
