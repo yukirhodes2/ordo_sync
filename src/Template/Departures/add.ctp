@@ -20,6 +20,7 @@
         <?php
             echo $this->Form->control('way_id', ['label' => 'Voie']);
             echo $this->Form->control('train_id', ['options' => $trains]);
+			echo $this->Form->control('loc_id', ['label' => 'Loc', 'options' => $trainSets, 'empty' => ['' => '']]);
 			echo $this->Form->control('train_set1_id', ['label' => 'Rame 1', 'options' => $trainSets, 'empty' => ['' => '']]);
             echo $this->Form->control('train_set2_id', ['label' => 'Rame 2', 'options' => $trainSets, 'empty' => ['' => '']]);
             echo $this->Form->control('train_set3_id', ['label' => 'Rame 3', 'options' => $trainSets, 'empty' => ['' => '']]);    

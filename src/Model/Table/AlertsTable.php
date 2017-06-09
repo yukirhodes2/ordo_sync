@@ -31,7 +31,7 @@ class AlertsTable extends Table
         parent::initialize($config);
 
         $this->setTable('alerts');
-        $this->setDisplayField('id');
+        $this->setDisplayField('first_timer');
         $this->setPrimaryKey('id');
     }
 

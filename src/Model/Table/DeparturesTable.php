@@ -50,15 +50,6 @@ class DeparturesTable extends Table
             'foreignKey' => 'train_id',
             'joinType' => 'INNER'
         ]);
-        // $this->belongsTo('TrainSets', [
-            // 'foreignKey' => 'train_set1_id'
-        // ]);
-        // $this->belongsTo('TrainSets', [
-            // 'foreignKey' => 'train_set2_id'
-        // ]);
-        // $this->belongsTo('TrainSets', [
-            // 'foreignKey' => 'train_set3_id'
-        // ]);
 		
 		$this->belongsTo('TrainSet1s', [
 			'foreignKey' => 'train_set1_id',
@@ -72,6 +63,12 @@ class DeparturesTable extends Table
 			'foreignKey' => 'train_set3_id',
 			'className' => 'TrainSets' 
 			]);
+			
+		$this->belongsTo('Locs', [
+			'foreignKey' => 'loc_id',
+			'className' => 'TrainSets' 
+			]);
+			
         $this->belongsTo('Brakes', [
             'foreignKey' => 'brake_id'
         ]);
@@ -173,6 +170,7 @@ class DeparturesTable extends Table
         $rules->add($rules->existsIn(['train_set1_id'], 'TrainSet1s'));
         $rules->add($rules->existsIn(['train_set2_id'], 'TrainSet2s'));
         $rules->add($rules->existsIn(['train_set3_id'], 'TrainSet3s'));
+        $rules->add($rules->existsIn(['loc_id'], 'Locs'));
         $rules->add($rules->existsIn(['brake_id'], 'Brakes'));
 
         return $rules;

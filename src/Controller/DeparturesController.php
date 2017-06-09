@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\ORM\Table\TableRegistry;
+use Cake\ORM\TableRegistry;
 use Cake\Event\Event;
 
 
@@ -22,26 +22,15 @@ class DeparturesController extends AppController
     {
 		parent::beforeFilter($event);
 		$this->Auth->allow('indexeic');
-		// if ( self::isAuthorized($this->Auth->user("role_id")) === false ){
-			// $this->Auth->deny('delete');
-		// }
-		// $id_role = $this->Auth->user("role_id");
-		// if ($id_role === 1)
-			// $this->Auth->Allow();
-		// elseif ($id_role === 2)
-		
-			// $this->Auth->Allow(['edit1']);
-			
-		// elseif ($id_role === 3)
-			// $this->Auth->Allow(['edit2']);
-			
-		// elseif ($id_role === 4)
-			// $this->Auth->Allow(['edit3']);
-			
-		// elseif ($id_role === 5)
-			// $this->Auth->Allow(['edit4']);
     }
 	
+	public function loadAlerts(){
+		$alerts = TableRegistry::get('Alerts');
+		$alerts = $alerts->find('list');
+		$alerts->execute();
+		$alerts = $alerts->toArray();
+		$this->set(compact('alerts'));
+	}
 	
     /**
      * Index method
@@ -67,6 +56,8 @@ class DeparturesController extends AppController
         ];
 		
         $departures = $this->paginate($this->Departures);
+		
+		$this->loadAlerts();
 		
 		if($this->request->is('post')){
 			if($this->request->getData()){
@@ -109,6 +100,8 @@ class DeparturesController extends AppController
 			'order' => ['id' => 'desc']
         ];
 		
+		$this->loadAlerts();
+		
         $departures = $this->paginate($this->Departures);
 		$trainSets = $this->Departures->TrainSet1s->find('all')->toArray();
         $this->set(compact('departures', 'trainSets'));
@@ -128,6 +121,8 @@ class DeparturesController extends AppController
 		];
 		
         $departures = $this->paginate($this->Departures);
+		
+		$this->loadAlerts();
 		
 		if($this->request->is('post')){
 			if($this->request->getData()){
@@ -159,6 +154,8 @@ class DeparturesController extends AppController
 		if ($id_role !== 4)
 			return $this->redirect(['action' => 'index']);
 		
+		$this->loadAlerts();
+		
         $this->paginate = [
             'contain' => ['Trains' => ['TheoricDepartures', 'TheoricArrivals'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 10,
@@ -179,7 +176,7 @@ class DeparturesController extends AppController
     public function view($id = null)
     {
         $departure = $this->Departures->get($id, [
-            'contain' => ['Ways', 'Trains', 'Brakes', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']]
+            'contain' => ['Ways', 'DepartureTrains', 'Brakes', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']]
         ]);
         $this->set('departure', $departure);
         $this->set('_serialize', ['departure']);

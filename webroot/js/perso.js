@@ -46,6 +46,38 @@ function checkTime(){
 		}, 1000);
 }
 
+function alert_daemon(def, spec, type){
+	var duree, ld_theorique_parts, ld_theorique_minutes;
+	var now = new Date();
+	now = (+now.getHours()*60) + (+now.getMinutes());
+	
+	if(spec == 0){	duree = def;	}
+	else		{	duree = spec/60;}
+	
+	switch(type){
+		case 1: // role geops, rlp
+		// pour chaque ligne, tester : si dep reel vide, si dep theorique - heure systeme <= duree, clignoter en orange. Si de plus dep theorique - heure systeme <= 0, clignoter en rouge
+		$('tr').each(function(){
+			if ( $(this).children(".ld_reel").is(':empty') ){
+				console.log("ok");
+				ld_theorique_parts = $(this).children(".ld_theorique").text().split(":");
+				ld_theorique_minutes = ((+ld_theorique_parts[0]*60) + (+ld_theorique_parts[1]));
+				if ( ld_theorique_minutes - now <= duree){
+					$(this).children(".train").addClass("blink-orange");
+				}
+			}
+		});
+		break;
+		
+		default:
+			console.log("alert_daemon not set properly. no action required.");
+	}
+	
+	setTimeout( function(){
+			alert_daemon();
+		}, 60000);
+}
+
 var landy_calc = function(event){
 	var heure = parseInt($("[name='paris_nord_departure\[hour\]'] option:selected").text());
 	var minute = parseInt($("[name='paris_nord_departure\[minute\]'] option:selected").text());
