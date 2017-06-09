@@ -59,43 +59,17 @@
 					} else {
 						echo 'class="red"';
 					} ?> > <?= $departure->has('brake') ? $this->Html->link($departure->brake->type, ['controller' => 'Brakes', 'action' => 'view', $departure->brake->id]) : '' ?></td>
-                <td 
-					<?php
-						$liberations = [];
-						$countSet = 0;
-						if ( isset($departure->train_set1) ){
-							++$countSet;
-							if (count($departure->train_set1->train_set_releases) > 0){
-								if ( $departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->active){
-									array_push($liberations, $departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->heure);
-								}
-							}
-						} 
-						if ( isset($departure->train_set2) ){
-							++$countSet;
-							if (count($departure->train_set2->train_set_releases) > 0){
-								if ( $departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->active){
-									array_push($liberations, $departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->heure);
-								}
-							}
-						}
-						if ( isset($departure->train_set3) ){
-							++$countSet;
-							if (count($departure->train_set2->train_set_releases) > 0){
-								if ( $departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->active){
-									array_push($liberations, $departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->heure);
-								}
-							}
-						}
-				if ((!empty($liberations) && !in_array(null, $liberations) && $countSet !== 0 && count($liberations) === $countSet && $countSet !== 0) || isset($departure->osmose)){
-					echo 'class="green"';
-				}
-				else {
-					echo 'class="red"';
-				}  
+                <td class="osmose"
+				<?php
+					if( isOsmose($departure) ){
+						echo 'class="green"';
+					}
+					else {
+						echo 'class="red"';
+					}  
 				?> > <!-- osmose --> 
 				</td>
-                <td <?= $departure->restit !== null ? 'class="green"' : 'class="red"' ?>></td>
+                <td class="restit" <?= $departure->restit !== null ? 'class="green"' : 'class="red"' ?>></td>
                 <td class="actions">
 				<?= $departure->comment_eic != null || $departure->comment_rlp != null || $departure->comment_cpt != null || $departure->comment_geops != null? $this->Html->link($this->Html->image('eye.png', ['alt' => 'Observations', 'class' => 'icon']), ['action' => 'view_obs', $departure->id], ['target' => '_blank', 'escape' => false, 'title' => 'Observations']) : '' ?>
 				<?= $this->Html->link($this->Html->image('view.png', ['alt' => 'Voir', 'class' => 'icon']), ['action' => 'view', $departure->id], ['escape' => false, 'title' => 'Plus de détails']) ?>
@@ -106,5 +80,6 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <?php include "paginator.php"; ?>
+    <?php include('paginator.php'); ?>
+	<?php echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
 </div>

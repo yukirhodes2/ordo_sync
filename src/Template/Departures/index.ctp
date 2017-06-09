@@ -54,39 +54,13 @@
 				<?php } ?>
                 <td <?= highlightClass("Freinage", $departure) ?> > <?= $departure->has('brake') ? $this->Html->link($departure->brake->type, ['controller' => 'Brakes', 'action' => 'view', $departure->brake->id]) : '' ?></td>
                 <td class="osmose" 
-					<?php
-						$liberations = [];
-						$countSet = 0;
-						if ( isset($departure->train_set1) ){
-							++$countSet;
-							if (count($departure->train_set1->train_set_releases) > 0){
-								if ( $departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->active){
-									array_push($liberations, $departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->heure);
-								}
-							}
-						} 
-						if ( isset($departure->train_set2) ){
-							++$countSet;
-							if (count($departure->train_set2->train_set_releases) > 0){
-								if ( $departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->active){
-									array_push($liberations, $departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->heure);
-								}
-							}
-						}
-						if ( isset($departure->train_set3) ){
-							++$countSet;
-							if (count($departure->train_set3->train_set_releases) > 0){
-								if ( $departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->active){
-									array_push($liberations, $departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->heure);
-								}
-							}
-						}
-				if ((!empty($liberations) && !in_array(null, $liberations) && $countSet !== 0 && count($liberations) === $countSet && $countSet !== 0) || isset($departure->osmose)){
-					echo 'class="green"';
-				}
-				else {
-					echo 'class="red"';
-				}  
+				<?php
+					if ( isOsmose($departure) ){
+						echo 'class="green"';
+					}
+					else {
+						echo 'class="red"';
+					}  
 				?> > <!-- osmose --> <?php if (isset($departure->landy_departure)){
 					echo h($this->Time->format($departure->osmose, "HH:mm"));
 				}

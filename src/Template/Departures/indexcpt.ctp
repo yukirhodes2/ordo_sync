@@ -39,12 +39,13 @@
             <tr>
 			<?php // debug($departure); ?>
                 <td><?= $departure->has('way') ? $this->Html->link($departure->way->numero, ['controller' => 'Ways', 'action' => 'view', $departure->way->id]) : '' ?></td>
-                <td><?= $departure->has('train') ? $this->Html->link($departure->train->numero, ['controller' => 'Trains', 'action' => 'view', $departure->train->id]) : '' ?></td>
+                <td class="train"><?= $departure->has('departure_train') ? $this->Html->link($departure->departure_train->numero, ['controller' => 'DepartureTrains', 'action' => 'view', $departure->departure_train->id]) : '' ?></td>
+                <td><?= $departure->loc_id !== null ? $trainSets[($departure->loc_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->train_set1_id !== null ? $trainSets[($departure->train_set1_id)-1]['numero'] : '' ?></td>
                 <td><?= $departure->train_set2_id !== null ? $trainSets[($departure->train_set2_id)-1]['numero'] : '' ?></td>
-                <td><?= $departure->has('train_set') ? $this->Html->link($departure->train_set->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set->id]) : '' ?></td>
-                <td><?= h(date('H:m', strtotime($departure->departure_train->theoric_departures['0']->paris_nord_departure)+$departure->departure_train->theoric_departures['0']->descent_duration)) ?></td>
-                <td><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
+                <td><?= $departure->train_set3_id !== null ? $trainSets[($departure->train_set3_id)-1]['numero'] : '' ?></td>
+                <td class="ld_theorique"><?= h(date('H:m', strtotime($departure->train->theoric_departures['0']->paris_nord_departure)+$departure->train->theoric_departures['0']->descent_duration)) ?></td>
+                <td class="ld_reel"><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
                 <td <?= highlightClass("Freinage", $departure) ?> > </td>
                 <td><?= h($this->Time->format($departure->refouleur_arrival, "HH:mm")) ?></td>
                 <td><?= h($this->Time->format($departure->adc_arrival, "HH:mm")) ?></td>
@@ -62,5 +63,6 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-	<?php include "paginator.php"; ?>
+    <?php include('paginator.php'); ?>
+	<?php echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
 </div>
