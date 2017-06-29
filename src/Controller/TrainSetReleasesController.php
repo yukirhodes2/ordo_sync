@@ -12,19 +12,23 @@ use Cake\Event\Event;
  */
 class TrainSetReleasesController extends AppController
 {
+	
+	
 	public function isAuthorized($user)
 	{
+		$user = $this->Auth->user("role_id");
 		return isset($user) && ($user === parent::GEOPS || $user === parent::RLP);
 	}
 	
 	public function beforeFilter(Event $event)
     {
 		parent::beforeFilter($event);
+
 		if ( self::isAuthorized($this->Auth->user("role_id")) === false ){
 			$this->Auth->deny();
 		}
 		else{
-			$this->Auth->allow(['add', 'edit', 'delete']);
+			$this->Auth->allow(['add', 'edit', 'delete','view']);
 		}
     }
 	
@@ -33,6 +37,7 @@ class TrainSetReleasesController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+	 
     public function index()
     {
         $this->paginate = [
@@ -60,7 +65,7 @@ class TrainSetReleasesController extends AppController
             }
 		}
 		
-		
+		//debug($this->Auth->user("role_id"));
         $this->set(compact('trainSetReleases', 'releases', 'status'));
         $this->set('_serialize', ['trainSetReleases']);
     }
@@ -82,6 +87,14 @@ class TrainSetReleasesController extends AppController
         $this->set('_serialize', ['trainSetRelease']);
     }
 
+	public function viewObs($id = null)
+    {
+        $trainSetRelease = $this->TrainSetReleases->get($id);
+
+        $this->set(compact('trainSetRelease'));
+        $this->set('_serialize', ['trainSetRelease']);
+    }
+	
     /**
      * Add method
      *
@@ -100,7 +113,7 @@ class TrainSetReleasesController extends AppController
 			}
 			
 			$data['active'] = true;
-			$data['comment'] = "";
+			
             $trainSetRelease = $this->TrainSetReleases->patchEntity($trainSetRelease, $data);
             if ($this->TrainSetReleases->save($trainSetRelease)) {
                 $this->Flash->success(__('The train set release has been saved.'));

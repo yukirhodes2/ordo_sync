@@ -26,6 +26,10 @@
         <tr>
             <th scope="row" class="geops" ><?= __('Train') ?></th>
             <td><?= $departure->has('train') ? $this->Html->link($departure->train->numero, ['controller' => 'Trains', 'action' => 'view', $departure->train->id]) : '' ?></td>
+        </tr>        
+		<tr>
+            <th scope="row" class="geops" ><?= __('Loc') ?></th>
+            <td><?= $departure->has('loc') ? $this->Html->link($departure->loc->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->loc->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row" class="geops" ><?= __('Rame 1') ?></th>

@@ -67,7 +67,7 @@ class ArrivalsController extends AppController
     public function view($id = null)
     {
         $arrival = $this->Arrivals->get($id, [
-            'contain' => ['Ways', 'ArrivalTrains', 'TrainSets', 'Lavages']
+            'contain' => ['Ways', 'ArrivalTrains', 'TrainSets', 'Lavages', 'Locs' => ['TrainSetReleases']]
         ]);
 		$trainSets = $this->Arrivals->TrainSets->find('all')->toArray();
         $this->set(compact('arrival', 'trainSets'));

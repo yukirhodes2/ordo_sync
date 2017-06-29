@@ -7,9 +7,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Nouveau départ'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Liste des voies'), ['controller' => 'Ways', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'DepartureTrains', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des rames'), ['controller' => 'TrainSets', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="departures index large-9 medium-8 columns content">
@@ -19,6 +17,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('way_id', 'Voie') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('train_id') ?></th>
+				<th scope="col"><?= $this->Paginator->sort('loc_id', 'Loc') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('train_set1_id', 'Rame 1') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('train_set2_id', 'Rame 2') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('train_set3_id', 'Rame 3') ?></th>
@@ -40,11 +39,11 @@
 			<?php // debug($departure); ?>
                 <td><?= $departure->has('way') ? $this->Html->link($departure->way->numero, ['controller' => 'Ways', 'action' => 'view', $departure->way->id]) : '' ?></td>
                 <td class="train"><?= $departure->has('departure_train') ? $this->Html->link($departure->departure_train->numero, ['controller' => 'DepartureTrains', 'action' => 'view', $departure->departure_train->id]) : '' ?></td>
-                <td><?= $departure->loc_id !== null ? $trainSets[($departure->loc_id)-1]['numero'] : '' ?></td>
-                <td><?= $departure->train_set1_id !== null ? $trainSets[($departure->train_set1_id)-1]['numero'] : '' ?></td>
-                <td><?= $departure->train_set2_id !== null ? $trainSets[($departure->train_set2_id)-1]['numero'] : '' ?></td>
-                <td><?= $departure->train_set3_id !== null ? $trainSets[($departure->train_set3_id)-1]['numero'] : '' ?></td>
-                <td class="ld_theorique"><?= h(date('H:m', strtotime($departure->train->theoric_departures['0']->paris_nord_departure)+$departure->train->theoric_departures['0']->descent_duration)) ?></td>
+				<td><?= $departure->has('loc') ? $this->Html->link($departure->loc->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->loc->id]) : '' ?></td>
+                <td><?= $departure->has('train_set1') ? $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set1->id]) : '' ?></td>
+                <td><?= $departure->has('train_set2') ? $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set2->id]) : '' ?></td>
+                <td><?= $departure->has('train_set3') ? $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set3->id]) : '' ?></td>
+                <td class="ld_theorique"><?= h(date('H:m', strtotime($departure->departure_train->theoric_departures['0']->paris_nord_departure)+$departure->departure_train->theoric_departures['0']->descent_duration)) ?></td>
                 <td class="ld_reel"><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
                 <td <?= highlightClass("Freinage", $departure) ?> > </td>
                 <td><?= h($this->Time->format($departure->refouleur_arrival, "HH:mm")) ?></td>

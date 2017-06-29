@@ -7,8 +7,6 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Nouvelle libération de rame'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Liste des types de libération'), ['controller' => 'Releases', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des rames'), ['controller' => 'TrainSets', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="trainSetReleases index large-9 medium-8 columns content">
@@ -23,6 +21,7 @@
                 <th scope="col"><?= $this->Paginator->sort('status1_id', 'Statut arrivée') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status2_id', 'Statut départ') ?></th>
 				<th scope="col"><?= $this->Paginator->sort('active', 'Présent sur site') ?></th>
+				
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -36,8 +35,10 @@
                <td><?= $trainSetRelease->has('status1') ? $this->Html->link($trainSetRelease->status1->libelle, ['controller' => 'Status', 'action' => 'view', $trainSetRelease->status1->id]) : '' ?></td>
                 <td><?= $trainSetRelease->has('status2') ? $this->Html->link($trainSetRelease->status2->libelle, ['controller' => 'Status', 'action' => 'view', $trainSetRelease->status2->id]) : '' ?></td>
                 <td <?= $trainSetRelease->active ? 'class="green"' : 'class="red"' ?> ></td>
+				
                 <td class="actions">
-                    <?= $trainSetRelease->comment === '' ? $this->Html->link($this->Html->image('view.png', ['alt' => __('Voir'), 'class' => 'icon']), ['action' => 'view', $trainSetRelease->id], ['escape' => false]) : $this->Html->link($this->Html->image('eye.png', ['alt' => __('Voir'), 'class' => 'icon']), ['action' => 'view', $trainSetRelease->id], ['escape' => false])  ?>
+					<?= $trainSetRelease->comment != null ? $this->Html->link($this->Html->image('eye.png', ['alt' => 'Observations', 'class' => 'icon']), ['action' => 'view_obs', $trainSetRelease->id], ['target' => '_blank', 'escape' => false, 'title' => 'Observations']) : '' ?>
+					<?= $this->Html->link($this->Html->image('view.png', ['alt' => __('Voir'), 'class' => 'icon']), ['action' => 'view', $trainSetRelease->id], ['escape' => false, 'title' => 'Plus de détails']) ?>
                     <?= $trainSetRelease->active ? $this->Html->link($this->Html->image('edit.png', ['alt' => __('Editer'), 'class' => 'icon']), ['action' => 'edit', $trainSetRelease->id], ['escape' => false]) : '' ?>
                     <?= !$trainSetRelease->active && $this->request->session()->read('Auth.User.id') !== 1 ? '' : $this->Form->postLink($this->Html->image('delete.png', ['alt' => __('Supprimer'), 'class' => 'icon']), ['action' => 'delete', $trainSetRelease->id], ['escape' => false, 'confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $trainSetRelease->id)]) ?>
                 </td>

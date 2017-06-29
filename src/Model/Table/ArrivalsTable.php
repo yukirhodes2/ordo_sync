@@ -58,6 +58,10 @@ class ArrivalsTable extends Table
         $this->belongsTo('TrainSets', [
             'foreignKey' => 'train_set3_id'
         ]);
+		$this->belongsTo('Locs', [
+            'foreignKey' => 'loc_id',
+			'className' => 'TrainSets'
+        ]);
         $this->belongsTo('Lavages', [
             'foreignKey' => 'lavage_id'
         ]);
@@ -117,6 +121,7 @@ class ArrivalsTable extends Table
         $rules->add($rules->existsIn(['train_set1_id'], 'TrainSets'));
         $rules->add($rules->existsIn(['train_set2_id'], 'TrainSets'));
         $rules->add($rules->existsIn(['train_set3_id'], 'TrainSets'));
+		$rules->add($rules->existsIn(['loc_id'], 'Locs'));
         $rules->add($rules->existsIn(['lavage_id'], 'Lavages'));
 
         return $rules;

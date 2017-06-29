@@ -26,11 +26,9 @@
             echo $this->Form->control('way_id', ['options' => $ways, 'label' => 'Voie', 'empty' => true, 'required' => true]);
 			
             echo $this->Form->control('train_id', ['options' => $arrivalTrains, 'label' => 'Train', 'empty' => true, 'required' => true]);
-			
+			echo $this->Form->control('loc_id', ['label' => 'Loc', 'options' => $trainSets, 'empty' => ['' => '']]);
             echo $this->Form->control('train_set1_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 1']);
-			
             echo $this->Form->control('train_set2_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 2']);
-			
             echo $this->Form->control('train_set3_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 3']);
 			
 			$options = array('T' => 'Tire', 'P' => 'Pousse');

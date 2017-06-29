@@ -21,7 +21,7 @@
     <fieldset>
         <legend><?= __('Editer Départ') ?></legend>
         <?php			
-			echo ' Train n°'.$departure->train->numero .' prévu sur voie '.$departure->way->numero.'<br/>';
+			echo ' Train n°'.$departure->departure_train->numero .' prévu sur voie '.$departure->way->numero.'<br/>';
 			
             echo $this->Form->control('restit', ['label' => 'Rendu de voie','empty' => true]);
 			echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('restit')"]);

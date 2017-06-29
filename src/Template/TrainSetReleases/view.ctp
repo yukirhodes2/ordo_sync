@@ -8,8 +8,6 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $trainSetRelease->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $trainSetRelease->id], ['confirm' => __('Are you sure you want to delete # {0}?', $trainSetRelease->id)]) ?> </li>
-        <li><?= $this->Html->link(__('Liste des libérations de rame'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Liste des rames'), ['controller' => 'TrainSets', 'action' => 'index']) ?> </li>
     </ul>
 </nav>
 <div class="trainSetReleases view large-9 medium-8 columns content">
@@ -44,12 +42,15 @@
             <th scope="row" class="departure" ><?= __('Statut départ') ?></th>
             <td><?= $trainSetRelease->has('status2') ? $this->Html->link($trainSetRelease->status2->libelle, ['controller' => 'Status', 'action' => 'view', $trainSetRelease->status2->id]) : '' ?></td>
         </tr>
-        
-        
-        
+            
         <tr>
             <th scope="row" class="departure" ><?= __('Heure de libération') ?></th>
             <td><?= h($trainSetRelease->heure) ?></td>
+        </tr>
+        
+		<tr>
+            <th scope="row" class="rlp" ><?= __('Commmentaire RLP') ?></th>
+            <td><?= h($trainSetRelease->comment) ?></td>
         </tr>
         
     </table>

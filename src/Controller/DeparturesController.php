@@ -176,7 +176,7 @@ class DeparturesController extends AppController
     public function view($id = null)
     {
         $departure = $this->Departures->get($id, [
-            'contain' => ['Ways', 'DepartureTrains', 'Brakes', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']]
+            'contain' => ['Ways', 'DepartureTrains', 'Brakes', 'TrainSet1s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']]
         ]);
         $this->set('departure', $departure);
         $this->set('_serialize', ['departure']);
@@ -360,7 +360,7 @@ class DeparturesController extends AppController
 			return $this->redirect(['action' => 'edit', $id]);
 		
         $departure = $this->Departures->get($id, [
-            'contain' => ['Ways', 'Trains']
+            'contain' => ['Ways', 'DepartureTrains']
         ]);
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -389,7 +389,7 @@ class DeparturesController extends AppController
 		
 		
          $departure = $this->Departures->get($id, [
-            'contain' => ['BrakeControls']
+            'contain' => ['BrakeControls', 'DepartureTrains', 'Ways']
         ]);
 			
         if ($this->request->is(['patch', 'post', 'put'])) {

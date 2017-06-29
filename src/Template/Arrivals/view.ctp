@@ -27,6 +27,10 @@
             <td><?= $arrival->has('arrival_train') ? $this->Html->link($arrival->arrival_train->numero, ['controller' => 'ArrivalTrains', 'action' => 'view', $arrival->arrival_train->id]) : '' ?></td>
         </tr>
 		<tr>
+            <th scope="row" class="eic" ><?= __('Loc') ?></th>
+            <td><?= $arrival->has('loc') ? $this->Html->link($arrival->loc->numero, ['controller' => 'TrainSets', 'action' => 'view', $arrival->loc->id]) : '' ?></td>
+        </tr>
+		<tr>
             <th scope="row" class="eic"><?= __('Rame 1') ?></th>
             <td><?= $arrival->train_set1_id != null ? $this->Html->link($trainSets[($arrival->train_set1_id)-1]['numero'], ['controller' => 'TrainSets', 'action' => 'view', $arrival->train_set1_id]) : '-' ?></td>
         </tr>

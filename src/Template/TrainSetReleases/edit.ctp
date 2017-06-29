@@ -13,7 +13,6 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des libérations de rame'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des rames'), ['controller' => 'TrainSets', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="trainSetReleases form large-9 medium-8 columns content">
@@ -27,6 +26,8 @@
 			
             echo $this->Form->control('release2_id', ['label' => 'Libération départ', 'options' => $releases, 'empty' => ['' => '']]);
             echo $this->Form->control('status2_id', ['label' => 'Statut départ', 'options' => $status, 'empty' => ['' => '']]);
+			
+	
 		?>
 			<span class='msg-alerte'>L'heure de libération sera supprimée.</span>
 			
@@ -47,6 +48,7 @@
 		
 		<?php
             echo $this->Form->control('comment', ['type' => 'textarea', 'label' => 'Observations']);
+			
 			if ($trainSetRelease->status2_id === 1){
 				echo $this->Form->control('heure', ['label' => 'Heure de libération']);
 				echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('heure')"]);
