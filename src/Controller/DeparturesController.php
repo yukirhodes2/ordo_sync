@@ -464,13 +464,13 @@ class DeparturesController extends AppController
 	public function desactivateReleases($departure, $id){
 		$trainSetReleases = array();
 		
-		if( isset($departure['loc']) ){
+		if( isset($departure->loc) ){
 			$trainSetReleases[0] = $this->Departures->Locs->TrainSetReleases->get($departure->loc->train_set_releases[count($departure->loc->train_set_releases)-1]->id, [
 				'contain' => []
 			]);
 		}
 		
-		if( isset($departure['train_set1']) ){
+		if( isset($departure->train_set1) ){
 			$trainSetReleases[1] = $this->Departures->TrainSet1s->TrainSetReleases->get($departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->id, [
 				'contain' => []
 			]);
@@ -492,6 +492,7 @@ class DeparturesController extends AppController
 			$tsr = $this->Departures->TrainSet1s->TrainSetReleases->patchEntity($tsr, ['active' => false]);
             if (!$this->Departures->TrainSet1s->TrainSetReleases->save($tsr)) {
 				$this->Flash->error(__('Il y a eu un problème lors de la mise à jour des libérations de rame. Veuillez contacter un administrateur au plus vite si le problème persiste.'));
+				break;
             }
 		}
 		
