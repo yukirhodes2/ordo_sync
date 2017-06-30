@@ -343,8 +343,8 @@ $title = 'Ordonnancement';
   </div>
 </footer> <!-- /.footer -->
 <?php
-	if ($this->request->action === "index" || $this->request->action === "indexeic"){
-		echo '<script> refresh("'.$this->Url->build(null, true).'", 10000); </script>' ; // mise à jour des données du body
+	if ( preg_match('#^index#', $this->request->action) === 1 ){
+		echo '<script> refresh("'.$this->Url->build(null, true).'", 30000); </script>' ; // mise à jour des données du body
 	}
 ?>
 </body>

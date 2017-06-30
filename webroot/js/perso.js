@@ -24,14 +24,13 @@ function currentTime($arg){
 	$('[name="'+$arg+'[minute]"').val($minute);
 }
 
-function cTime(){
-	origin = new Date();
-	setTimeout( function(){
-			now = new Date();
-			// $("#timer").html(now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds());
-			checkTime();
-		}, 1000);
-}
+// function cTime(){
+	// origin = new Date();
+	// setTimeout( function(){
+			// now = new Date();
+			// checkTime();
+		// }, 1000);
+// }
 
 // function checkTime(){
 	// setTimeout( function(){
@@ -65,8 +64,8 @@ function alert_daemon(def, entity, type){
 		case 1: // role geops, rlp
 		// pour chaque ligne, tester : si dep reel vide, si dep theorique - heure systeme <= duree1 ou alerte rendu matériel, clignoter en orange. Si de plus dep theorique - heure systeme <= 0 ou rendu matériel en retard, clignoter en rouge
 		$('tr').each(function(){
-			console.log("ld_theorique_minutes - now <= 0 :" + (ld_theorique_minutes - now <= 0));
-			console.log("ld_theorique_minutes - rend - now  <= 0 :" + (ld_theorique_minutes - rend - now  <= 0));
+			// console.log("ld_theorique_minutes - now <= 0 :" + (ld_theorique_minutes - now <= 0));
+			// console.log("ld_theorique_minutes - rend - now  <= 0 :" + (ld_theorique_minutes - rend - now  <= 0));
 			if ( $(this).children(".ld_reel").is(':empty') ){
 				ld_theorique_parts = $(this).children(".ld_theorique").text().split(":");
 				ld_theorique_minutes = ((+ld_theorique_parts[0]*60) + (+ld_theorique_parts[1]));
@@ -135,7 +134,7 @@ function refresh(target_url, interval){
 
 $(document).ready(function()
 {
-	cTime();
+	// cTime();
 	
 	$(".even").keyup(function(event){
 		var numero=parseInt($(this).val());
