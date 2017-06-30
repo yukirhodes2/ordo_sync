@@ -58,11 +58,11 @@ class TheoricArrivalsController extends AppController
 			
             $theoricArrival = $this->TheoricArrivals->patchEntity($theoricArrival, $data);
             if ($this->TheoricArrivals->save($theoricArrival)) {
-                $this->Flash->success(__('The theoric arrival has been saved.'));
+                $this->Flash->success(__('L\'arrivée théorique est ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The theoric arrival could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\'arrivée théorique n\'a pas été ajoutée. Réessayez.'));
         }
         $trains = $this->TheoricArrivals->ArrivalTrains->find('list', ['limit' => 200]);
         $this->set(compact('theoricArrival', 'trains'));
@@ -84,11 +84,11 @@ class TheoricArrivalsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $theoricArrival = $this->TheoricArrivals->patchEntity($theoricArrival, $this->request->getData());
             if ($this->TheoricArrivals->save($theoricArrival)) {
-                $this->Flash->success(__('The theoric arrival has been saved.'));
+                $this->Flash->success(__('L\'arrivée théorique est modifiée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The theoric arrival could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\'arrivée théorique n\'a pas été modifiée. Réessayez.'));
         }
         $trains = $this->TheoricArrivals->ArrivalTrains->find('list', ['limit' => 200]);
         $this->set(compact('theoricArrival', 'trains'));
@@ -107,9 +107,9 @@ class TheoricArrivalsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $theoricArrival = $this->TheoricArrivals->get($id);
         if ($this->TheoricArrivals->delete($theoricArrival)) {
-            $this->Flash->success(__('The theoric arrival has been deleted.'));
+            $this->Flash->success(__('L\'arrivée théorique est supprimée.'));
         } else {
-            $this->Flash->error(__('The theoric arrival could not be deleted. Please, try again.'));
+            $this->Flash->error(__('L\'arrivée théorique n\'a pas été supprimée. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

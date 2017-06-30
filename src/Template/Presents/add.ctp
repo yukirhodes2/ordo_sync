@@ -12,7 +12,7 @@
 <div class="presents form large-9 medium-8 columns content">
     <?= $this->Form->create($present) ?>
     <fieldset>
-        <legend><?= __('Ajouter un intervenant') ?></legend>
+        <legend><?= __('Nouveau intervenant') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>

@@ -7,9 +7,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $departureTrain->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $departureTrain->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée ?')]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $departureTrain->id], ['confirm' => __('Voulez-vous vraiment supprimer ce train ?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des trains type départ'), ['action' => 'index']) ?> </li>
-		        <li><?= $this->Html->link(__('Liste des départs'), ['controller' => 'Departures', 'action' => 'index']) ?> </li>
     </ul>
 </nav>
 <div class="departureTrains view large-9 medium-8 columns content">

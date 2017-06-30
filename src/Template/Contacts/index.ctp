@@ -7,7 +7,6 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Nouveau Contact'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Liste des fonctions'), ['controller' => 'Positions', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="contacts index large-9 medium-8 columns content">

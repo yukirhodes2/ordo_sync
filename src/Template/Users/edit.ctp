@@ -9,7 +9,7 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $user->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $user->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer cet utilisateur ?')]
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des utilisateurs'), ['action' => 'index']) ?></li>

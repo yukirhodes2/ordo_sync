@@ -6,8 +6,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Editer une libération'), ['action' => 'edit', $release->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer une libération'), ['action' => 'delete', $release->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $release->id)]) ?> </li>
+        <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $release->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer', ['action' => 'delete', $release->id], ['confirm' => __('Voulez-vous vraiment supprimer cette libération ?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des libérations'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nouvelle libération'), ['action' => 'add']) ?> </li>
     </ul>

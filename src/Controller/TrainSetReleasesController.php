@@ -116,12 +116,12 @@ class TrainSetReleasesController extends AppController
 			
             $trainSetRelease = $this->TrainSetReleases->patchEntity($trainSetRelease, $data);
             if ($this->TrainSetReleases->save($trainSetRelease)) {
-                $this->Flash->success(__('The train set release has been saved.'));
+                $this->Flash->success(__('La libération de rame est ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
 			debug($trainSetRelease);
-            $this->Flash->error(__('The train set release could not be saved. Please, try again.'));
+            $this->Flash->error(__('La libération de rame n\'a pas été ajoutée. Réessayez.'));
         }
         $releases = $this->TrainSetReleases->Releases1->find('list', ['limit' => 200]);
         $status = $this->TrainSetReleases->Status1->find('list', ['limit' => 200]);
@@ -154,11 +154,11 @@ class TrainSetReleasesController extends AppController
 			
             $trainSetRelease = $this->TrainSetReleases->patchEntity($trainSetRelease, $data);
             if ($this->TrainSetReleases->save($trainSetRelease)) {
-                $this->Flash->success(__('The train set release has been saved.'));
+                $this->Flash->success(__('La libération de rame est modifiée.'));
                 return $this->redirect(['action' => 'index']);
             }
 			
-            $this->Flash->error(__('The train set release could not be saved. Please, try again.'));
+            $this->Flash->error(__('La libération de rame n\'a pas été modifiée. Réessayez.'));
         }
         $releases = $this->TrainSetReleases->Releases1->find('list', ['limit' => 200]);
         $status = $this->TrainSetReleases->Status1->find('list', ['limit' => 200]);
@@ -179,9 +179,9 @@ class TrainSetReleasesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $trainSetRelease = $this->TrainSetReleases->get($id);
         if ($this->TrainSetReleases->delete($trainSetRelease)) {
-            $this->Flash->success(__('The train set release has been deleted.'));
+            $this->Flash->success(__('La libération de rame est supprimée'));
         } else {
-            $this->Flash->error(__('The train set release could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La libération de rame n\'a pas été supprimée. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

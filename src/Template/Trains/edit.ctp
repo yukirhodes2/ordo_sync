@@ -9,13 +9,10 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $train->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $train->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer ce train ?')]
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des trains'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste rames'), ['controller' => 'TrainSets', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des arrivées'), ['controller' => 'Arrivals', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des départs'), ['controller' => 'Departures', 'action' => 'index']) ?></li>
 </ul>
 </nav>
 <div class="trains form large-9 medium-8 columns content">

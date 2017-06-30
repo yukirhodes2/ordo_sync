@@ -55,11 +55,11 @@ class BrakeControlsController extends AppController
         if ($this->request->is('post')) {
             $brakeControl = $this->BrakeControls->patchEntity($brakeControl, $this->request->getData());
             if ($this->BrakeControls->save($brakeControl)) {
-                $this->Flash->success(__('The brake control has been saved.'));
+                $this->Flash->success(__('Le contrôle de freinage est ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The brake control could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le contrôle de freinage n\'a pas été ajouté. Réessayez.'));
         }
         $departures = $this->BrakeControls->Departures->find('list', ['limit' => 200]);
         $presents = $this->BrakeControls->Presents->find('list', ['limit' => 200]);
@@ -82,11 +82,11 @@ class BrakeControlsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $brakeControl = $this->BrakeControls->patchEntity($brakeControl, $this->request->getData());
             if ($this->BrakeControls->save($brakeControl)) {
-                $this->Flash->success(__('The brake control has been saved.'));
+                $this->Flash->success(__('Le contrôle de freinage est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The brake control could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le contrôle de freinage n\'a pas été modifié. Réessayez.'));
         }
         $departures = $this->BrakeControls->Departures->find('list', ['limit' => 200]);
         $presents = $this->BrakeControls->Presents->find('list', ['limit' => 200]);
@@ -113,9 +113,9 @@ class BrakeControlsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $brakeControl = $this->BrakeControls->get($id);
         if ($this->BrakeControls->delete($brakeControl)) {
-            $this->Flash->success(__('The brake control has been deleted.'));
+            $this->Flash->success(__('Le contrôle de freinage est supprimé.'));
         } else {
-            $this->Flash->error(__('The brake control could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le contrôle de freinage n\'a pas été supprimé. Réessayez..'));
         }
 
         return $this->redirect(['action' => 'index']);

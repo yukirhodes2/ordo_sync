@@ -7,7 +7,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
-                __('Supprimer cette arrivée'),
+                __('Supprimer'),
                 ['action' => 'delete', $arrival->id],
                 ['confirm' => __('Etes-vous sûr de supprimer cette arrivée ?')]
             )

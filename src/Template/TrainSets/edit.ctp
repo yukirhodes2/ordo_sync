@@ -9,12 +9,10 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $trainSet->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $trainSet->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer cette rame ?')]
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des rames'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des libérations de rames'), ['controller' => 'TrainSetReleases', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Nouvelle libération de rame'), ['controller' => 'TrainSetReleases', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="trainSets form large-9 medium-8 columns content">

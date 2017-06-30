@@ -10,7 +10,7 @@
     </ul>
 </nav>
 <div class="presents index large-9 medium-8 columns content">
-    <h3><?= __('Presents') ?></h3>
+    <h3><?= __('Intervenants') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -26,7 +26,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['action' => 'view', $present->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['action' => 'edit', $present->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $present->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $present->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $present->id], ['confirm' => __('Voulez-vous vraiment supprimer cet intervenant ?', $present->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

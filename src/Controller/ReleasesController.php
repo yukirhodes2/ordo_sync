@@ -64,11 +64,11 @@ class ReleasesController extends AppController
         if ($this->request->is('post')) {
             $release = $this->Releases->patchEntity($release, $this->request->getData());
             if ($this->Releases->save($release)) {
-                $this->Flash->success(__('The release has been saved.'));
+                $this->Flash->success(__('La libération est ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The release could not be saved. Please, try again.'));
+            $this->Flash->error(__('La libération n\'a pas été ajoutée. Réessayez.'));
         }
         $this->set(compact('release'));
         $this->set('_serialize', ['release']);
@@ -89,11 +89,11 @@ class ReleasesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $release = $this->Releases->patchEntity($release, $this->request->getData());
             if ($this->Releases->save($release)) {
-                $this->Flash->success(__('The release has been saved.'));
+                $this->Flash->success(__('La libération est modifiée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The release could not be saved. Please, try again.'));
+            $this->Flash->error(__('La libération n\'a pas été modifiée. Réessayez.'));
         }
         $this->set(compact('release'));
         $this->set('_serialize', ['release']);
@@ -111,9 +111,9 @@ class ReleasesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $release = $this->Releases->get($id);
         if ($this->Releases->delete($release)) {
-            $this->Flash->success(__('The release has been deleted.'));
+            $this->Flash->success(__('La libération est supprimée.'));
         } else {
-            $this->Flash->error(__('The release could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La libération n\'a pas été supprimée. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

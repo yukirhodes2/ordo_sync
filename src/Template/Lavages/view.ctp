@@ -7,9 +7,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $lavage->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $lavage->id], ['confirm' => __('Voulez-vous vraiment supprimer ce MAL ?')]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $lavage->id], ['confirm' => __('Voulez-vous vraiment supprimer ce lavage ?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des MAL'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Liste des arrivées'), ['controller' => 'Arrivals', 'action' => 'index']) ?> </li>
     </ul>
 </nav>
 <div class="lavages view large-9 medium-8 columns content">

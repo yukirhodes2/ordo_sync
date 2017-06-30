@@ -6,11 +6,11 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Nouveau retard'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Nouveau type de retard'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="delays index large-9 medium-8 columns content">
-    <h3><?= __('Retards') ?></h3>
+    <h3><?= __('Types de retard') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>

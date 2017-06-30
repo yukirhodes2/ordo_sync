@@ -12,7 +12,7 @@
 <div class="trainSetReleases form large-9 medium-8 columns content">
     <?= $this->Form->create($trainSetRelease) ?>
     <fieldset>
-        <legend><?= __('Ajouter une libération de rame') ?><?php if (isset($train_set)){echo ' '.$train_set['numero'];} ?></legend>
+        <legend><?= __('Nouvelle libération de rame') ?><?php if (isset($train_set)){echo ' '.$train_set['numero'];} ?></legend>
        <?php
 			echo $this->Form->control('train_set_id', ['options' => $trainSets, 'label' => 'Rame']);
             echo $this->Form->control('release1_id', ['label' => 'Libération arrivée', 'options' => $releases, 'empty' => true]);

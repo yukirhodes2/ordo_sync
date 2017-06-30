@@ -203,11 +203,11 @@ class DeparturesController extends AppController
 			$data['formed'] = 0;
             $departure = $this->Departures->patchEntity($departure, $data);
             if ($this->Departures->save($departure)) {
-                $this->Flash->success(__('Départ ajouté.'));
+                $this->Flash->success(__('Le départ est ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Il y a eu un problème lors de l\'ajout du départ.'));
+            $this->Flash->error(__('Le départ n\'a pas été ajouté. Réessayez.'));
 			debug($departure);
         }
         $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
@@ -272,16 +272,16 @@ class DeparturesController extends AppController
 					$brakeControl = $this->Departures->BrakeControls->patchEntity($brakeControl, $data);
 					
 					if ($this->Departures->BrakeControls->save($brakeControl)) {
-						$this->Flash->success(__("Départ modifié.")); // attention l'attribut s'appelle paris nord mais c'est bien l'heure de départ du landy
+						$this->Flash->success(__("Le départ est modifié.")); // attention l'attribut s'appelle paris nord mais c'est bien l'heure de départ du landy
 						return $this->redirect(['action' => 'index']);
 					}
 				}
 				else{
-					$this->Flash->success(__("Départ modifié."));
+					$this->Flash->success(__("Le départ n\'a pas été modifié. Réessayez."));
 					return $this->redirect(['action' => 'index']);
 				}
 			}
-            $this->Flash->error(__('The departure could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le départ n\'a pas été modifié. Réessayez.'));
         }
         $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $trainSets = $this->Departures->TrainSet1s->find('list', ['limit' => 200]);
@@ -333,16 +333,16 @@ class DeparturesController extends AppController
 					$brakeControl = $this->Departures->BrakeControls->patchEntity($brakeControl, $data);
 					
 					if ($this->Departures->BrakeControls->save($brakeControl)) {
-						$this->Flash->success(__("Départ modifié.")); // attention l'attribut s'appelle paris nord mais c'est bien l'heure de départ du landy
+						$this->Flash->success(__("Le départ est modifié.")); // attention l'attribut s'appelle paris nord mais c'est bien l'heure de départ du landy
 						return $this->redirect(['action' => 'index']);
 					}
 				}
 				else{
-					$this->Flash->success(__("Départ modifié."));
+					$this->Flash->success(__("Le départ est modifié."));
 					return $this->redirect(['action' => 'index']);
 				}
 			}
-            $this->Flash->error(__('The departure could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le départ n\'a pas été modifié. Réessayez.'));
         }
         $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $trainSets = $this->Departures->TrainSet1s->find('list', ['limit' => 200]);
@@ -368,11 +368,11 @@ class DeparturesController extends AppController
 		
             $departure = $this->Departures->patchEntity($departure, $this->request->getData());
             if ($this->Departures->save($departure)) {
-                $this->Flash->success(__('Départ modifié.'));
+                $this->Flash->success(__('Le départ est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The departure could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le départ n\'a pas été modifié. Réessayez.'));
         }
         $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
@@ -397,11 +397,11 @@ class DeparturesController extends AppController
 			
             $departure = $this->Departures->patchEntity($departure, $this->request->getData());
             if ($this->Departures->save($departure)) {
-                $this->Flash->success(__('Départ modifié.'));
+                $this->Flash->success(__('Le départ est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The departure could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le départ n\'a pas été modifié. Réessayez.'));
         }
         $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
@@ -428,11 +428,11 @@ class DeparturesController extends AppController
 				if (isset($departure['landy_departure'])){
 					$this->desactivateReleases($departure, $id);
 				}
-                $this->Flash->success(__('Départ modifié.'));
+                $this->Flash->success(__('Le départ est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The departure could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le départ n\'a pas été modifié. Réessayez.'));
         }
         $trains = $this->Departures->DepartureTrains->find('list', ['limit' => 200]);
         $brakes = $this->Departures->Brakes->find('list', ['limit' => 200]);
@@ -453,9 +453,9 @@ class DeparturesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $departure = $this->Departures->get($id);
         if ($this->Departures->delete($departure)) {
-            $this->Flash->success(__('Départ supprimé.'));
+            $this->Flash->success(__('Le départ est supprimé.'));
         } else {
-            $this->Flash->error(__('The departure could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le départ n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

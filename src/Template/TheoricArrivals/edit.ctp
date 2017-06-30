@@ -9,12 +9,10 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $theoricArrival->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $theoricArrival->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer cette arrivée théorique?', $theoricArrival->id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des arrivées théoriques'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'Trains', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Nouveau train'), ['controller' => 'Trains', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="theoricArrivals form large-9 medium-8 columns content">

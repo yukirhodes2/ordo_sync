@@ -6,18 +6,13 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Editer voie'), ['action' => 'edit', $way->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer voie'), ['action' => 'delete', $way->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $way->id)]) ?> </li>
+        <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $way->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $way->id], ['confirm' => __('Voulez-vous vraiment supprimer cette voie ?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des voies'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nouvelle voie'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('Liste des arrivées'), ['controller' => 'Arrivals', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Nouvel arrivée'), ['controller' => 'Arrivals', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('Liste des départs'), ['controller' => 'Departures', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Nouveau départ'), ['controller' => 'Departures', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="ways view large-9 medium-8 columns content">
-	<span class="error">Page en cours de développement</span>
     <h3><?= 'Voie' ?></h3>
     <table class="vertical-table">
         <tr>
@@ -57,7 +52,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['controller' => 'Arrivals', 'action' => 'view', $arrivals->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['controller' => 'Arrivals', 'action' => 'edit', $arrivals->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Arrivals', 'action' => 'delete', $arrivals->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $arrivals->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Arrivals', 'action' => 'delete', $arrivals->id], ['confirm' => __('Voulez-vous vraiment supprimer cette arrivée ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -112,7 +107,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['controller' => 'Departures', 'action' => 'view', $departures->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['controller' => 'Departures', 'action' => 'edit', $departures->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Departures', 'action' => 'delete', $departures->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $departures->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Departures', 'action' => 'delete', $departures->id], ['confirm' => __('Voulez-vous vraiment supprimer ce depart ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

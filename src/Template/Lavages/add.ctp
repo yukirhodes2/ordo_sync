@@ -12,7 +12,7 @@
 <div class="lavages form large-9 medium-8 columns content">
     <?= $this->Form->create($lavage) ?>
     <fieldset>
-        <legend><?= __('Ajouter un MAL') ?></legend>
+        <legend><?= __('Nouveau MAL') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>

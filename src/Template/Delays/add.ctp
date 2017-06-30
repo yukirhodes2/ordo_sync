@@ -6,13 +6,13 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Liste des retards'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des types de retard'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="delays form large-9 medium-8 columns content">
     <?= $this->Form->create($delay) ?>
     <fieldset>
-        <legend><?= __('Ajouter un retard') ?></legend>
+        <legend><?= __('Ajouter un type de retard') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>

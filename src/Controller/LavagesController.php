@@ -52,11 +52,11 @@ class LavagesController extends AppController
         if ($this->request->is('post')) {
             $lavage = $this->Lavages->patchEntity($lavage, $this->request->getData());
             if ($this->Lavages->save($lavage)) {
-                $this->Flash->success(__('The lavage has been saved.'));
+                $this->Flash->success(__('Le lavage est ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lavage could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le lavage n\'a pas été ajouté. Réssayez.'));
         }
         $this->set(compact('lavage'));
         $this->set('_serialize', ['lavage']);
@@ -77,11 +77,11 @@ class LavagesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lavage = $this->Lavages->patchEntity($lavage, $this->request->getData());
             if ($this->Lavages->save($lavage)) {
-                $this->Flash->success(__('The lavage has been saved.'));
+                $this->Flash->success(__('Le lavage est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lavage could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le lavage n\'a pas été modifié. Réssayez.'));
         }
         $this->set(compact('lavage'));
         $this->set('_serialize', ['lavage']);
@@ -99,9 +99,9 @@ class LavagesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $lavage = $this->Lavages->get($id);
         if ($this->Lavages->delete($lavage)) {
-            $this->Flash->success(__('The lavage has been deleted.'));
+            $this->Flash->success(__('Le lavage est ssupprimé.'));
         } else {
-            $this->Flash->error(__('The lavage could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le lavage n\'a pas été ssupprimé. Réssayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

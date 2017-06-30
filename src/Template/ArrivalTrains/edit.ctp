@@ -9,16 +9,16 @@
         <li><?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $arrivalTrain->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $arrivalTrain->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer ce train ?', $arrivalTrain->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Arrival Trains'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des trains type arrivée'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="arrivalTrains form large-9 medium-8 columns content">
     <?= $this->Form->create($arrivalTrain) ?>
     <fieldset>
-        <legend><?= __('Edit Arrival Train') ?></legend>
+        <legend><?= __('Editer train type départ') ?></legend>
         <?php
             echo $this->Form->control('numero');
         ?>

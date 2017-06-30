@@ -6,9 +6,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Brakes'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Departures'), ['controller' => 'Departures', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Departure'), ['controller' => 'Departures', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Liste des freinages'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="brakes form large-9 medium-8 columns content">

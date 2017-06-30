@@ -36,7 +36,7 @@
                 <td class="actions">
                     <?= $this->Html->link($this->Html->image('view.png', ['alt' => __('Voir'), 'class' => 'icon']), ['action' => 'view', $user->id], ['escape' => false, 'title' => 'Plus de détails']) ?>
                     <?= $this->Html->link($this->Html->image('edit.png', ['alt' => __('Editer'), 'class' => 'icon']), ['action' => 'edit', $user->id], ['escape' => false, 'title' => 'Modifier']) ?>
-                    <?= $this->Form->postLink($this->Html->image('delete.png', ['alt' => __('Supprimer'), 'class' => 'icon']), ['action' => 'delete', $user->id], ['escape' => false, 'title' => 'Supprimer', 'confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $user->id)]) ?>
+                    <?= $this->Form->postLink($this->Html->image('delete.png', ['alt' => __('Supprimer'), 'class' => 'icon']), ['action' => 'delete', $user->id], ['escape' => false, 'title' => 'Supprimer', 'confirm' => __('Voulez-vous vraiment supprimer cet utilisateur ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -9,7 +9,7 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $trainSetRelease->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $trainSetRelease->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer cette libération de rame ?')]
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des libérations de rame'), ['action' => 'index']) ?></li>
@@ -18,7 +18,7 @@
 <div class="trainSetReleases form large-9 medium-8 columns content">
     <?= $this->Form->create($trainSetRelease) ?>
     <fieldset>
-        <legend><?= __('Edition de libération de rame') ?></legend>
+        <legend><?= __('Editer une libération de rame') ?></legend>
         <?php
 			echo $this->Form->control('train_set_id', ['options' => $trainSets, 'label' => 'Rame']);
             echo $this->Form->control('release1_id', ['label' => 'Libération arrivée', 'options' => $releases, 'empty' => ['' => '']]);

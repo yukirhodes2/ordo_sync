@@ -7,7 +7,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $user->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $user->id)]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $user->id], ['confirm' => __('Voulez-vous vraiment supprimer cet utilisateur ?')]) ?> </li>
         <li><?= $this->Html->link(__('Listes des utilisateurs'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nouvel utilisateur'), ['action' => 'add']) ?> </li>
     </ul>

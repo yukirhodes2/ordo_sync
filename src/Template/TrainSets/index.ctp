@@ -7,12 +7,10 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Nouvelle rame'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Liste des libérations de rames'), ['controller' => 'TrainSetReleases', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Nouvelle libération de rame'), ['controller' => 'TrainSetReleases', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="trainSets index large-9 medium-8 columns content">
-    <h3><?= __('Train Sets') ?></h3>
+    <h3><?= __('Rames') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -28,8 +26,8 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['action' => 'view', $trainSet->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['action' => 'edit', $trainSet->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $trainSet->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $trainSet->id)]) ?>
-					<?= $this->Html->link(__('Ajouter une libération de rame'), ['controller' => 'trainSetReleases', 'action' => 'add', $trainSet->id]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $trainSet->id], ['confirm' => __('Voulez-vous vraiment supprimer cette rame ?')]) ?>
+					<?= $this->Html->link(__('Nouvelle libération de rame'), ['controller' => 'trainSetReleases', 'action' => 'add', $trainSet->id]) ?>
 			   </td>
             </tr>
             <?php endforeach; ?>

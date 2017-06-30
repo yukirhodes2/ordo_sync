@@ -7,8 +7,6 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Liste des contrôles de freinage'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des départs'), ['controller' => 'Departures', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des présents'), ['controller' => 'Presents', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="brakeControls form large-9 medium-8 columns content">

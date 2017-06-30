@@ -12,7 +12,7 @@
 <div class="status form large-9 medium-8 columns content">
     <?= $this->Form->create($status) ?>
     <fieldset>
-        <legend><?= __('Ajouter un statut') ?></legend>
+        <legend><?= __('Nouveau statut') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>

@@ -52,11 +52,11 @@ class DelaysController extends AppController
         if ($this->request->is('post')) {
             $delay = $this->Delays->patchEntity($delay, $this->request->getData());
             if ($this->Delays->save($delay)) {
-                $this->Flash->success(__('The delay has been saved.'));
+                $this->Flash->success(__('Le type de retard est ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The delay could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le type de retard n\'a pas été ajouté. Réessayez.'));
         }
         $this->set(compact('delay'));
         $this->set('_serialize', ['delay']);
@@ -77,11 +77,11 @@ class DelaysController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $delay = $this->Delays->patchEntity($delay, $this->request->getData());
             if ($this->Delays->save($delay)) {
-                $this->Flash->success(__('The delay has been saved.'));
+                $this->Flash->success(__('Le type de retard est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The delay could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le type de retard n\'a pas été modifié. Réessayez.'));
         }
         $this->set(compact('delay'));
         $this->set('_serialize', ['delay']);
@@ -99,9 +99,9 @@ class DelaysController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $delay = $this->Delays->get($id);
         if ($this->Delays->delete($delay)) {
-            $this->Flash->success(__('The delay has been deleted.'));
+            $this->Flash->success(__('Le type de retard est supprimé.'));
         } else {
-            $this->Flash->error(__('The delay could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le type de retard n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

@@ -12,7 +12,7 @@
 <div class="trains form large-9 medium-8 columns content">
     <?= $this->Form->create($train) ?>
     <fieldset>
-        <legend><?= __('Ajouter un train') ?></legend>
+        <legend><?= __('Nouveau train') ?></legend>
         <?php
             echo $this->Form->control('numero');
         ?>

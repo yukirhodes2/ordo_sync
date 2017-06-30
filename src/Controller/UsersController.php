@@ -76,11 +76,11 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('L\' utilisateur est ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\' utilisateur n\'a pas été ajouté. Réessayez.'));
         }
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
@@ -101,11 +101,11 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('L\' utilisateur est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\' utilisateur n\'a pas été modifié. Réessayez.'));
         }
 		$roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $this->set(compact('user', 'roles'));
@@ -125,10 +125,10 @@ class UsersController extends AppController
         $user = $this->Users->get($id);
 		if ($user->role_id !== parent::ADMIN){
 			if ($this->Users->delete($user)) {
-				$this->Flash->success(__('Utilisateur supprimé.'));
+				$this->Flash->success(__('L\' utilisateur est supprimé.'));
 			}
         } else {
-            $this->Flash->error(__('L\'utilisateur ne peut pas être supprimé.'));
+            $this->Flash->error(__('L\'utilisateur n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -142,7 +142,7 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Nom ou mot de passe incorrect.'));
+            $this->Flash->error(__('Identifiant ou mot de passe incorrect.'));
         }
     }
 

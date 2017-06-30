@@ -6,8 +6,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Editer un statut'), ['action' => 'edit', $status->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer un statut'), ['action' => 'delete', $status->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $status->id)]) ?> </li>
+        <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $status->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $status->id], ['confirm' => __('Voulez-vous vraiment supprimer ce statut ?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des statuts'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nouveau statut'), ['action' => 'add']) ?> </li>
     </ul>

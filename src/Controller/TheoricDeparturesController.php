@@ -60,11 +60,11 @@ class TheoricDeparturesController extends AppController
 			
             $theoricDeparture = $this->TheoricDepartures->patchEntity($theoricDeparture, $data);
             if ($this->TheoricDepartures->save($theoricDeparture)) {
-                $this->Flash->success(__('The theoric departure has been saved.'));
+                $this->Flash->success(__('Le départ théorique est ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The theoric departure could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le départ théorique n\'a pas été ajouté. Réessayez.'));
         }
         $trains = $this->TheoricDepartures->Trains->find('list', ['limit' => 200]);
         $alerts = $this->TheoricDepartures->Alerts->find('list', ['limit' => 200]);
@@ -97,11 +97,11 @@ class TheoricDeparturesController extends AppController
 			
             $theoricDeparture = $this->TheoricDepartures->patchEntity($theoricDeparture, $data);
             if ($this->TheoricDepartures->save($theoricDeparture)) {
-                $this->Flash->success(__('The theoric departure has been saved.'));
+                $this->Flash->success(__('Le départ théorique est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The theoric departure could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le départ théorique n\'a pas été modifié. Réessayez.'));
         }
         $trains = $this->TheoricDepartures->Trains->find('list', ['limit' => 200]);
         $alerts = $this->TheoricDepartures->Alerts->find('list', ['limit' => 200]);
@@ -121,9 +121,9 @@ class TheoricDeparturesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $theoricDeparture = $this->TheoricDepartures->get($id);
         if ($this->TheoricDepartures->delete($theoricDeparture)) {
-            $this->Flash->success(__('The theoric departure has been deleted.'));
+            $this->Flash->success(__('Le départ théorique est supprimé.'));
         } else {
-            $this->Flash->error(__('The theoric departure could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le départ théorique n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

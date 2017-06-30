@@ -9,16 +9,16 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $rdrf->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée ?')]
+                ['confirm' => __('Voulez-vous vraiment supprimer ce RD/RF ?')]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Rdrfs'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste RD/RF'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="rdrfs form large-9 medium-8 columns content">
     <?= $this->Form->create($rdrf) ?>
     <fieldset>
-        <legend><?= __('Editer Rdrf') ?></legend>
+        <legend><?= __('Editer RD/RF') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>

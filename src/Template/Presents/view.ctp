@@ -6,8 +6,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Editer un intervenant'), ['action' => 'edit', $present->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer un intervenant'), ['action' => 'delete', $present->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $present->id)]) ?> </li>
+        <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $present->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $present->id], ['confirm' => __('Voulez-vous vraiment supprimer cet intervenant ?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des intervenants'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nouveau intervenant'), ['action' => 'add']) ?> </li>
     </ul>
@@ -25,7 +25,7 @@
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Related Brake Controls') ?></h4>
+        <h4><?= __('Contrôles de freinage associés') ?></h4>
         <?php if (!empty($present->brake_controls)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -42,7 +42,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['controller' => 'BrakeControls', 'action' => 'view', $brakeControls->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['controller' => 'BrakeControls', 'action' => 'edit', $brakeControls->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'BrakeControls', 'action' => 'delete', $brakeControls->id], ['confirm' => __('Are you sure you want to delete # {0}?', $brakeControls->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'BrakeControls', 'action' => 'delete', $brakeControls->id], ['confirm' => __('Voulez-vous vraiment supprimer ce contrôle de freinage ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

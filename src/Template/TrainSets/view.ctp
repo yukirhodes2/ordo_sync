@@ -6,12 +6,10 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Editer une rame'), ['action' => 'edit', $trainSet->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer une rame'), ['action' => 'delete', $trainSet->id], ['confirm' => __('Are you sure you want to delete # {0}?', $trainSet->id)]) ?> </li>
+        <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $trainSet->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $trainSet->id], ['confirm' => __('Voulez-vous vraiment supprimer cette rame ?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des rames'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nouvelle rame'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('Liste des libérations de rames'), ['controller' => 'TrainSetReleases', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Nouvelle libération de rame'), ['controller' => 'TrainSetReleases', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="trainSets view large-9 medium-8 columns content">
@@ -52,7 +50,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['controller' => 'TrainSetReleases', 'action' => 'view', $trainSetReleases->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['controller' => 'TrainSetReleases', 'action' => 'edit', $trainSetReleases->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'TrainSetReleases', 'action' => 'delete', $trainSetReleases->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $trainSetReleases->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'TrainSetReleases', 'action' => 'delete', $trainSetReleases->id], ['confirm' => __('Voulez-vous vraiment supprimer cette rame ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

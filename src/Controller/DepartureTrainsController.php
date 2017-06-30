@@ -91,13 +91,13 @@ class DepartureTrainsController extends AppController
 				
 				$theoricDeparture = $this->DepartureTrains->TheoricDepartures->patchEntity($theoricDeparture, $data);
 				if ($this->DepartureTrains->TheoricDepartures->save($theoricDeparture)){
-					$this->Flash->success(__('Ajouté'));
+					$this->Flash->success(__('Le train est ajouté.'));
 					return $this->redirect(['action' => 'index']);
 				}
             }
 			// debug($departureTrain);
 			// debug(isset($data['landy_departure']));
-            $this->Flash->error(__('Problème lors de l\'ajout.'));
+            $this->Flash->error(__('Le train n\'a pas été ajouté. Réessayez.'));
         }
         $this->set(compact('departureTrain', 'theoricDeparture'));
         $this->set('_serialize', ['departureTrain']);
@@ -139,11 +139,11 @@ class DepartureTrainsController extends AppController
 			$theoricDeparture = $this->DepartureTrains->TheoricDepartures->patchEntity($theoricDeparture, $data);
 			
             if ($this->DepartureTrains->save($departureTrain) && $this->DepartureTrains->TheoricDepartures->save($theoricDeparture)) {
-                $this->Flash->success(__('Modifié'));
+                $this->Flash->success(__('Le train est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Problème lors de la modification.'));
+            $this->Flash->error(__('Le train n\'a pas été modifié. Réessayez.'));
         }
         $this->set(compact('departureTrain', 'theoricDeparture'));
         $this->set('_serialize', ['departureTrain']);
@@ -161,9 +161,9 @@ class DepartureTrainsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $departureTrain = $this->DepartureTrains->get($id);
         if ($this->DepartureTrains->delete($departureTrain)) {
-            $this->Flash->success(__('Supprimé'));
+            $this->Flash->success(__('Le train est supprimé.'));
         } else {
-            $this->Flash->error(__('Problème lors de la suppression.'));
+            $this->Flash->error(__('Le train n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

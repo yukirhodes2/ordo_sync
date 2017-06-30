@@ -52,11 +52,11 @@ class AlertsController extends AppController
         if ($this->request->is('post')) {
             $alert = $this->Alerts->patchEntity($alert, $this->request->getData());
             if ($this->Alerts->save($alert)) {
-                $this->Flash->success(__('The alert has been saved.'));
+                $this->Flash->success(__('L\'alerte est ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The alert could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\'alerte n\'a pas été ajoutée. Réessayez.'));
         }
         $this->set(compact('alert'));
         $this->set('_serialize', ['alert']);
@@ -77,11 +77,11 @@ class AlertsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $alert = $this->Alerts->patchEntity($alert, $this->request->getData());
             if ($this->Alerts->save($alert)) {
-                $this->Flash->success(__('The alert has been saved.'));
+                $this->Flash->success(__('L\'alerte est modifiée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The alert could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\'alerte n\'a pas été modifiée. Réessayez.'));
         }
         $this->set(compact('alert'));
         $this->set('_serialize', ['alert']);
@@ -99,9 +99,9 @@ class AlertsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $alert = $this->Alerts->get($id);
         if ($this->Alerts->delete($alert)) {
-            $this->Flash->success(__('The alert has been deleted.'));
+            $this->Flash->success(__('L\'alerte est supprimée.'));
         } else {
-            $this->Flash->error(__('The alert could not be deleted. Please, try again.'));
+            $this->Flash->error(__('L\'alerte n\'a pas été supprimée. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

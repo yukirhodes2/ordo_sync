@@ -7,7 +7,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $trainSetRelease->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $trainSetRelease->id], ['confirm' => __('Are you sure you want to delete # {0}?', $trainSetRelease->id)]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $trainSetRelease->id], ['confirm' => __('Voulez-vous vraiment supprimer cette libération de rame ?')]) ?> </li>
     </ul>
 </nav>
 <div class="trainSetReleases view large-9 medium-8 columns content">

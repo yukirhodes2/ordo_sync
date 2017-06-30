@@ -9,7 +9,7 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $role->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $role->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer ce rôle ?')]
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des rôles'), ['action' => 'index']) ?></li>
@@ -18,7 +18,7 @@
 <div class="roles form large-9 medium-8 columns content">
     <?= $this->Form->create($role) ?>
     <fieldset>
-        <legend><?= __('Editer un rpole') ?></legend>
+        <legend><?= __('Editer rôle') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>

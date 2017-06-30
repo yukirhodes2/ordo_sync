@@ -8,7 +8,7 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $delay->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $delay->id], ['confirm' => __('Voulez-vous vraiment supprimer ce type de retard ?')]) ?> </li>
-        <li><?= $this->Html->link(__('Liste des retards'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('Liste des types de retard'), ['action' => 'index']) ?> </li>
     </ul>
 </nav>
 <div class="delays view large-9 medium-8 columns content">

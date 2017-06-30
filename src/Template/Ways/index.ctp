@@ -7,8 +7,6 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Nouvelle voie'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Liste des arrivées'), ['controller' => 'Arrivals', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Liste des départs'), ['controller' => 'Departures', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="ways index large-9 medium-8 columns content">
@@ -29,7 +27,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['action' => 'view', $way->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['action' => 'edit', $way->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $way->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $way->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $way->id], ['confirm' => __('Voulez-vous vraiment supprimer cette voie ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

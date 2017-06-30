@@ -9,7 +9,7 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $brakeControl->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $brakeControl->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer ce contrôle de freinage ?', $brakeControl->id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des contrôles de freinage'), ['action' => 'index']) ?></li>

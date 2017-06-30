@@ -6,9 +6,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Position'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Contacts'), ['controller' => 'Contacts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Contact'), ['controller' => 'Contacts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Nouvelle affectation'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="positions index large-9 medium-8 columns content">
@@ -28,7 +26,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['action' => 'view', $position->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['action' => 'edit', $position->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $position->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $position->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $position->id], ['confirm' => __('Voulez-vous vraiment supprimer cette affectation ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

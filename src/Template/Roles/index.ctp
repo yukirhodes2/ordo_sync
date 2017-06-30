@@ -6,7 +6,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><a href="/roles/add"><button class="btn btn-gradient btn-blue">Nouveau Rôle</button></a></li>
+        <li><a href="/roles/add"><button class="btn btn-gradient btn-blue">Nouveau rôle</button></a></li>
     </ul>
 </nav>
 <div class="roles index large-9 medium-8 columns content">
@@ -26,7 +26,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['action' => 'view', $role->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['action' => 'edit', $role->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $role->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $role->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $role->id], ['confirm' => __('Voulez-vous vraiment supprimer ce rôle ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

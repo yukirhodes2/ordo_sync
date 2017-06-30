@@ -7,8 +7,6 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Nouvelle arrivée théorique'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'Trains', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Nouveau train'), ['controller' => 'Trains', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="theoricArrivals index large-9 medium-8 columns content">
@@ -32,7 +30,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['action' => 'view', $theoricArrival->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['action' => 'edit', $theoricArrival->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $theoricArrival->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $theoricArrival->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $theoricArrival->id], ['confirm' => __('Voulez-vous vraiment supprimer cette arrivée théorique?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

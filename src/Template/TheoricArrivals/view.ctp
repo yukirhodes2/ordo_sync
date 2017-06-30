@@ -7,11 +7,9 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editer une arrivée théorique'), ['action' => 'edit', $theoricArrival->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer une arrivée théorique'), ['action' => 'delete', $theoricArrival->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $theoricArrival->id)]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer une arrivée théorique'), ['action' => 'delete', $theoricArrival->id], ['confirm' => __('Voulez-vous vraiment supprimer cette  arrivée théorique ?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des arrivées théoriques'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Nouvel arrivée théorique'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'Trains', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Nouveau train'), ['controller' => 'Trains', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Nouvelle arrivée théorique'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="theoricArrivals view large-9 medium-8 columns content">

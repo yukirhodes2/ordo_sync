@@ -52,11 +52,11 @@ class StatusController extends AppController
         if ($this->request->is('post')) {
             $status = $this->Status->patchEntity($status, $this->request->getData());
             if ($this->Status->save($status)) {
-                $this->Flash->success(__('The status has been saved.'));
+                $this->Flash->success(__('Le statut est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The status could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le statut n\'a pas été ajouté. Réessayez.'));
         }
         $this->set(compact('status'));
         $this->set('_serialize', ['status']);
@@ -77,11 +77,11 @@ class StatusController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $status = $this->Status->patchEntity($status, $this->request->getData());
             if ($this->Status->save($status)) {
-                $this->Flash->success(__('The status has been saved.'));
+                $this->Flash->success(__('Le statut est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The status could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le statut n\'a pas été modifié. Réessayez.'));
         }
         $this->set(compact('status'));
         $this->set('_serialize', ['status']);
@@ -99,9 +99,9 @@ class StatusController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $status = $this->Status->get($id);
         if ($this->Status->delete($status)) {
-            $this->Flash->success(__('The status has been deleted.'));
+            $this->Flash->success(__('Le statut est supprimé.'));
         } else {
-            $this->Flash->error(__('The status could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le statut n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

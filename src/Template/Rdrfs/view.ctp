@@ -7,7 +7,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $rdrf->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $rdrf->id], ['confirm' => __('Are you sure you want to delete # {0}?', $rdrf->id)]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $rdrf->id], ['confirm' => __('Voulez-vous vraiment ce RD/RF ?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des RD/RF'), ['action' => 'index']) ?> </li>
     </ul>
 </nav>

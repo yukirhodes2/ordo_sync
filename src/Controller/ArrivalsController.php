@@ -93,11 +93,11 @@ class ArrivalsController extends AppController
 			$data = $this->request->getData();
             $arrival = $this->Arrivals->patchEntity($arrival, $data);
             if ($this->Arrivals->save($arrival)) {
-                $this->Flash->success(__('L\'arrivée a bien été ajoutée.'));
+                $this->Flash->success(__('L\'arrivée est ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('L\'arrivée n\'a pas été ajoutée. Veuillez réessayer.'));
+            $this->Flash->error(__('L\'arrivée n\'a pas été ajoutée. Réessayez.'));
         } 
         $ways = $this->Arrivals->Ways->find('list', ['limit' => 200]);
         $arrivalTrains = $this->Arrivals->ArrivalTrains->find('list', ['limit' => 200]);
@@ -134,11 +134,11 @@ class ArrivalsController extends AppController
 			if ($this->request->is(['patch', 'post', 'put'])) {
 				$arrival = $this->Arrivals->patchEntity($arrival, $this->request->getData());
 				if ($this->Arrivals->save($arrival)) {
-					$this->Flash->success(__('L\'arrivée à bien été modifiée.'));
+					$this->Flash->success(__('L\'arrivée est modifiée.'));
 
 					return $this->redirect(['action' => 'index']);
 				}
-				$this->Flash->error(__('L\'arrivée n\'a pas été modifiée. Veuillez réessayer.'));
+				$this->Flash->error(__('L\'arrivée n\'a pas été modifiée. Réessayez.'));
 			}
 			$ways = $this->Arrivals->Ways->find('list', ['limit' => 200]);
 			$arrival_trains = $this->Arrivals->ArrivalTrains->find('list', ['limit' => 200]);
@@ -173,11 +173,11 @@ class ArrivalsController extends AppController
 				if($ts_announcement >= $ts_landy_arrival || (empty($data['protection_time']['hour']) && empty($data['protection_time']['minute']))){
 					$arrival = $this->Arrivals->patchEntity($arrival, $data);
 					if ($this->Arrivals->save($arrival)) {
-						$this->Flash->success(__('L\'arrivée a bien été modifiée.'));
+						$this->Flash->success(__('L\'arrivée est modifiée.'));
 
 						return $this->redirect(['action' => 'index']);
 					}
-					$this->Flash->error(__('L\'arrivée n\'a pas été modifiée. Veuillez réessayer.'));
+					$this->Flash->error(__('L\'arrivée n\'a pas été modifiée. Réessayez.'));
 				}
 			}
             $this->Flash->error(__('L\'heure d\'annonce est antérieure à l\'heure d\'arrivée au Landy. Vérifiez votre saisie.'));
@@ -209,11 +209,11 @@ class ArrivalsController extends AppController
 				if ($ts_announcement >= $ts_landy_arrival || (empty($data['announcement_time']['hour']) && empty($data['announcement_time']['minute']))){
 					$arrival = $this->Arrivals->patchEntity($arrival, $data);
 					if ($this->Arrivals->save($arrival)) {
-						$this->Flash->success(__('L\'arrivée a bien été modifiée.'));
+						$this->Flash->success(__('L\'arrivée est modifiée.'));
 
 						return $this->redirect(['action' => 'index']);
 					}
-					$this->Flash->error(__('L\'arrivée n\'a pas été modifiée. Veuillez réessayer.'));
+					$this->Flash->error(__('L\'arrivée n\'a pas été modifiée. Réessayez.'));
 				}
 			}
             $this->Flash->error(__('L\'heure d\'annonce est antérieure à l\'heure d\'arrivée au Landy. Vérifiez votre saisie ?'));
@@ -238,9 +238,9 @@ class ArrivalsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $arrival = $this->Arrivals->get($id);
         if ($this->Arrivals->delete($arrival)) {
-            $this->Flash->success(__('L\'arrivée à bien été supprimée.'));
+            $this->Flash->success(__('L\'arrivée est supprimée.'));
         } else {
-            $this->Flash->error(__('L\'arrivée n\'a pas été supprimée. Veuillez réessayer.'));
+            $this->Flash->error(__('L\'arrivée n\'a pas été supprimée. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

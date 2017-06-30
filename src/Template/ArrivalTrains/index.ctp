@@ -6,7 +6,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Nouveau train à l\'arrivée'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Nouveau train type arrivée'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="arrivalTrains index large-9 medium-8 columns content">

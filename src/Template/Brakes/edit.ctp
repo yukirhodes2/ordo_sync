@@ -9,7 +9,7 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $brake->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $brake->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer ce freinage ?', $brake->id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('Liste des freinages'), ['action' => 'index']) ?></li>
@@ -18,7 +18,7 @@
 <div class="brakes form large-9 medium-8 columns content">
     <?= $this->Form->create($brake) ?>
     <fieldset>
-        <legend><?= __('Édition du freinage') ?></legend>
+        <legend><?= __('Editer le freinage') ?></legend>
         <?php
             echo $this->Form->control('type');
         ?>

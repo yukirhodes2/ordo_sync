@@ -26,7 +26,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Voir'), ['action' => 'view', $status->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['action' => 'edit', $status->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $status->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $status->id)]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $status->id], ['confirm' => __('Voulez-vous vraiment supprimer ce statut ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

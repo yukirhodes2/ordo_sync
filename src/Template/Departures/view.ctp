@@ -6,9 +6,9 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Editer départ'), ['action' => 'edit', $departure->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer départ'), ['action' => 'delete', $departure->id], ['confirm' => __('Voulez-vous vraiment supprimer ce départ ?')]) ?> </li>
-        <li><?= $this->Html->link(__('Liste départs'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $departure->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $departure->id], ['confirm' => __('Voulez-vous vraiment supprimer ce départ ?')]) ?> </li>
+        <li><?= $this->Html->link(__('Liste des départs'), ['action' => 'index']) ?> </li>
     </ul>
 </nav>
 <div class="departures view large-9 medium-8 columns content">

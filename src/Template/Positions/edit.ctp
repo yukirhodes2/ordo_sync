@@ -9,18 +9,16 @@
         <li><?= $this->Form->postLink(
                 __('Supprimer'),
                 ['action' => 'delete', $position->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $position->id)]
+                ['confirm' => __('Voulez-vous vraiment supprimer cette affectation ?')]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Positions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Contacts'), ['controller' => 'Contacts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Contact'), ['controller' => 'Contacts', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Liste des affectations'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="positions form large-9 medium-8 columns content">
     <?= $this->Form->create($position) ?>
     <fieldset>
-        <legend><?= __('Edit Position') ?></legend>
+        <legend><?= __('Editer affectation') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>

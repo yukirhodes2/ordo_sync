@@ -6,12 +6,10 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Editer un départ théorique'), ['action' => 'edit', $theoricDeparture->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer un départ théorique'), ['action' => 'delete', $theoricDeparture->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $theoricDeparture->id)]) ?> </li>
+        <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $theoricDeparture->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $theoricDeparture->id], ['confirm' => __('Voulez-vous vraiment supprimer ce départ théorique?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des départs théoriques'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nouveau départ théorique'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'Trains', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Nouveau train'), ['controller' => 'Trains', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="theoricDepartures view large-9 medium-8 columns content">

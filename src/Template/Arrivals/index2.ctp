@@ -7,8 +7,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Nouvelle arrivée'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Liste des trains'), ['controller' => 'ArrivalTrains', 'action' => 'index']) ?></li>
-    </ul>
+	</ul>
 </nav>
 <div class="arrivals index large-9 medium-8 columns content">
     <h3><?= __('Arrivées') ?></h3>

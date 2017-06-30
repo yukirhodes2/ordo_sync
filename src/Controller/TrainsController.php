@@ -80,11 +80,11 @@ class TrainsController extends AppController
 				$theoricDeparture = $this->Trains->TheoricDepartures->patchEntity($theoricDeparture, $data);
 				$theoricArrival = $this->Trains->TheoricArrivals->patchEntity($theoricArrival, $data);
 				if ($this->Trains->TheoricDepartures->save($theoricDeparture) && $this->Trains->TheoricArrivals->save($theoricArrival)){
-                $this->Flash->success(__('The train has been saved.'));
+                $this->Flash->success(__('Le train est ajouté.'));
                 return $this->redirect(['action' => 'index']);
 				}
             }
-            $this->Flash->error(__('The train could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le train n\'a pas été ajouté. Réessayez.'));
         }
         $this->set(compact('train', 'theoricDeparture', 'theoricArrival'));
         $this->set('_serialize', ['train']);
@@ -128,11 +128,11 @@ class TrainsController extends AppController
 			$theoricArrival = $this->Trains->TheoricArrivals->patchEntity($theoricArrival, $data);
 			
             if ($this->Trains->save($train) && $this->Trains->TheoricArrivals->save($theoricArrival) && $this->Trains->TheoricDepartures->save($theoricDeparture)) {
-                $this->Flash->success(__('The train has been saved.'));
+                $this->Flash->success(__('Le train est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The train could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le train n\'a pas été modifié. Réessayez.'));
         }
         $this->set(compact('train', 'theoricArrival', 'theoricDeparture'));
         $this->set('_serialize', ['train']);
@@ -150,9 +150,9 @@ class TrainsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $train = $this->Trains->get($id);
         if ($this->Trains->delete($train)) {
-            $this->Flash->success(__('The train has been deleted.'));
+            $this->Flash->success(__('Le train est supprimé.'));
         } else {
-            $this->Flash->error(__('The train could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le train n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

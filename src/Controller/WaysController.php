@@ -52,11 +52,11 @@ class WaysController extends AppController
         if ($this->request->is('post')) {
             $way = $this->Ways->patchEntity($way, $this->request->getData());
             if ($this->Ways->save($way)) {
-                $this->Flash->success(__('The way has been saved.'));
+                $this->Flash->success(__('La voie est ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The way could not be saved. Please, try again.'));
+            $this->Flash->error(__('La voie n\'a pas été ajoutée. Réessayez.'));
         }
         $this->set(compact('way'));
         $this->set('_serialize', ['way']);
@@ -77,11 +77,11 @@ class WaysController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $way = $this->Ways->patchEntity($way, $this->request->getData());
             if ($this->Ways->save($way)) {
-                $this->Flash->success(__('The way has been saved.'));
+                $this->Flash->success(__('La voie est modifiée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The way could not be saved. Please, try again.'));
+            $this->Flash->error(__('La voie n\'a pas été modifiée. Réessayez.'));
         }
         $this->set(compact('way'));
         $this->set('_serialize', ['way']);
@@ -99,9 +99,9 @@ class WaysController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $way = $this->Ways->get($id);
         if ($this->Ways->delete($way)) {
-            $this->Flash->success(__('The way has been deleted.'));
+            $this->Flash->success(__('La voie est supprimée.'));
         } else {
-            $this->Flash->error(__('The way could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La voie n\'a pas été supprimée. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

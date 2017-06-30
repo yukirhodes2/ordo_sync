@@ -52,11 +52,11 @@ class PositionsController extends AppController
         if ($this->request->is('post')) {
             $position = $this->Positions->patchEntity($position, $this->request->getData());
             if ($this->Positions->save($position)) {
-                $this->Flash->success(__('The position has been saved.'));
+                $this->Flash->success(__('L\'affectation est ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The position could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\'affectation n\'a pas été ajoutée. Réessayez.'));
         }
         $this->set(compact('position'));
         $this->set('_serialize', ['position']);
@@ -77,11 +77,11 @@ class PositionsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $position = $this->Positions->patchEntity($position, $this->request->getData());
             if ($this->Positions->save($position)) {
-                $this->Flash->success(__('The position has been saved.'));
+                $this->Flash->success(__('L\'affectation est modifiée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The position could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\'affectation n\'a pas été modifiée. Réessayez.'));
         }
         $this->set(compact('position'));
         $this->set('_serialize', ['position']);
@@ -99,9 +99,9 @@ class PositionsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $position = $this->Positions->get($id);
         if ($this->Positions->delete($position)) {
-            $this->Flash->success(__('The position has been deleted.'));
+            $this->Flash->success(__('L\'affectation est supprimée.'));
         } else {
-            $this->Flash->error(__('The position could not be deleted. Please, try again.'));
+            $this->Flash->error(__('L\'affectation n\'a pas été supprimée. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

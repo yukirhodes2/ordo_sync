@@ -55,11 +55,11 @@ class ContactsController extends AppController
         if ($this->request->is('post')) {
             $contact = $this->Contacts->patchEntity($contact, $this->request->getData());
             if ($this->Contacts->save($contact)) {
-                $this->Flash->success(__('The contact has been saved.'));
+                $this->Flash->success(__('Le contact est ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The contact could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le contact n\'a pas été ajouté. Réessayez.'));
         }
         $positions = $this->Contacts->Positions->find('list', ['limit' => 200]);
         $this->set(compact('contact', 'positions'));
@@ -81,11 +81,11 @@ class ContactsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $contact = $this->Contacts->patchEntity($contact, $this->request->getData());
             if ($this->Contacts->save($contact)) {
-                $this->Flash->success(__('The contact has been saved.'));
+                $this->Flash->success(__('Le contact est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The contact could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le contact n\'a pas été modifié. Réessayez.'));
         }
         $positions = $this->Contacts->Positions->find('list', ['limit' => 200]);
         $this->set(compact('contact', 'positions'));
@@ -104,9 +104,9 @@ class ContactsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $contact = $this->Contacts->get($id);
         if ($this->Contacts->delete($contact)) {
-            $this->Flash->success(__('The contact has been deleted.'));
+            $this->Flash->success(__('Le contact est supprimé.'));
         } else {
-            $this->Flash->error(__('The contact could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le contact n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

@@ -52,11 +52,11 @@ class BrakesController extends AppController
         if ($this->request->is('post')) {
             $brake = $this->Brakes->patchEntity($brake, $this->request->getData());
             if ($this->Brakes->save($brake)) {
-                $this->Flash->success(__('The brake has been saved.'));
+                $this->Flash->success(__('Le freinage est ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The brake could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le freinage n\'a pas été ajouté. Réessayez.'));
         }
         $this->set(compact('brake'));
         $this->set('_serialize', ['brake']);
@@ -77,11 +77,11 @@ class BrakesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $brake = $this->Brakes->patchEntity($brake, $this->request->getData());
             if ($this->Brakes->save($brake)) {
-                $this->Flash->success(__('The brake has been saved.'));
+                $this->Flash->success(__('Le freinage est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The brake could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le freinage n\'a pas été modifié. Réessayez.'));
         }
         $this->set(compact('brake'));
         $this->set('_serialize', ['brake']);
@@ -99,9 +99,9 @@ class BrakesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $brake = $this->Brakes->get($id);
         if ($this->Brakes->delete($brake)) {
-            $this->Flash->success(__('The brake has been deleted.'));
+            $this->Flash->success(__('Le freinage est supprimé.'));
         } else {
-            $this->Flash->error(__('The brake could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le freinage n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

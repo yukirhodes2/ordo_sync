@@ -52,11 +52,11 @@ class TrainSetsController extends AppController
         if ($this->request->is('post')) {
             $trainSet = $this->TrainSets->patchEntity($trainSet, $this->request->getData());
             if ($this->TrainSets->save($trainSet)) {
-                $this->Flash->success(__('The train set has been saved.'));
+                $this->Flash->success(__('La rame est ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The train set could not be saved. Please, try again.'));
+            $this->Flash->error(__('La rame n\'a pas été ajoutée. Réessayez.'));
         }
         $this->set(compact('trainSet'));
         $this->set('_serialize', ['trainSet']);
@@ -77,11 +77,11 @@ class TrainSetsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $trainSet = $this->TrainSets->patchEntity($trainSet, $this->request->getData());
             if ($this->TrainSets->save($trainSet)) {
-                $this->Flash->success(__('The train set has been saved.'));
+                $this->Flash->success(__('La rame est modifiée'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The train set could not be saved. Please, try again.'));
+            $this->Flash->error(__('La rame n\'a pas été modifiée. Réessayez.'));
         }
         $this->set(compact('trainSet'));
         $this->set('_serialize', ['trainSet']);
@@ -99,9 +99,9 @@ class TrainSetsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $trainSet = $this->TrainSets->get($id);
         if ($this->TrainSets->delete($trainSet)) {
-            $this->Flash->success(__('The train set has been deleted.'));
+            $this->Flash->success(__('La rame est supprimée.'));
         } else {
-            $this->Flash->error(__('The train set could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La rame n\'a pas été supprimée. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

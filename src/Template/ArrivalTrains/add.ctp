@@ -6,13 +6,13 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Liste des trains à l\'arrivée'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Liste des trains type arrivée'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="arrivalTrains form large-9 medium-8 columns content">
     <?= $this->Form->create($arrivalTrain) ?>
     <fieldset>
-        <legend><?= __('Ajouter un train type arrivée') ?></legend>
+        <legend><?= __('Nouveau train type arrivée') ?></legend>
         <?php
             echo $this->Form->control('numero', ['class' => 'even']);
 			echo '<span id="erreur"> </span>';

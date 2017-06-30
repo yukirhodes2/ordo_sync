@@ -52,11 +52,11 @@ class PresentsController extends AppController
         if ($this->request->is('post')) {
             $present = $this->Presents->patchEntity($present, $this->request->getData());
             if ($this->Presents->save($present)) {
-                $this->Flash->success(__('The present has been saved.'));
+                $this->Flash->success(__('Le contrôleur de freinage est ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The present could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le contrôleur de freinage n\'a pas été ajouté. Réessayez.'));
         }
         $this->set(compact('present'));
         $this->set('_serialize', ['present']);
@@ -77,11 +77,11 @@ class PresentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $present = $this->Presents->patchEntity($present, $this->request->getData());
             if ($this->Presents->save($present)) {
-                $this->Flash->success(__('The present has been saved.'));
+                $this->Flash->success(__('Le contrôleur de freinage est modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The present could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le contrôleur de freinage n\'a pas été modifié. Réessayez.'));
         }
         $this->set(compact('present'));
         $this->set('_serialize', ['present']);
@@ -99,9 +99,9 @@ class PresentsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $present = $this->Presents->get($id);
         if ($this->Presents->delete($present)) {
-            $this->Flash->success(__('The present has been deleted.'));
+            $this->Flash->success(__('Le contrôleur de freinage est supprimé.'));
         } else {
-            $this->Flash->error(__('The present could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le contrôleur de freinage n\'a pas été supprimé. Réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

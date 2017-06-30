@@ -12,7 +12,7 @@
 <div class="roles form large-9 medium-8 columns content">
     <?= $this->Form->create($role) ?>
     <fieldset>
-        <legend><?= __('Ajouter un rôle') ?></legend>
+        <legend><?= __('Nouveau rôle') ?></legend>
         <?php
             echo $this->Form->control('libelle');
         ?>

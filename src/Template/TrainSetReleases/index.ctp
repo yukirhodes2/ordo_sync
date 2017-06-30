@@ -40,7 +40,7 @@
 					<?= $trainSetRelease->comment != null ? $this->Html->link($this->Html->image('eye.png', ['alt' => 'Observations', 'class' => 'icon']), ['action' => 'view_obs', $trainSetRelease->id], ['target' => '_blank', 'escape' => false, 'title' => 'Observations']) : '' ?>
 					<?= $this->Html->link($this->Html->image('view.png', ['alt' => __('Voir'), 'class' => 'icon']), ['action' => 'view', $trainSetRelease->id], ['escape' => false, 'title' => 'Plus de détails']) ?>
                     <?= $trainSetRelease->active ? $this->Html->link($this->Html->image('edit.png', ['alt' => __('Editer'), 'class' => 'icon']), ['action' => 'edit', $trainSetRelease->id], ['escape' => false]) : '' ?>
-                    <?= !$trainSetRelease->active && $this->request->session()->read('Auth.User.id') !== 1 ? '' : $this->Form->postLink($this->Html->image('delete.png', ['alt' => __('Supprimer'), 'class' => 'icon']), ['action' => 'delete', $trainSetRelease->id], ['escape' => false, 'confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $trainSetRelease->id)]) ?>
+                    <?= !$trainSetRelease->active && $this->request->session()->read('Auth.User.id') !== 1 ? '' : $this->Form->postLink($this->Html->image('delete.png', ['alt' => __('Supprimer'), 'class' => 'icon']), ['action' => 'delete', $trainSetRelease->id], ['escape' => false, 'confirm' => __('Voulez-vous vraiment supprimer cette libération de rame ?')]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -50,7 +50,7 @@
 	
 	<?= $this->form->create(null);?>
 		<fieldset class="cahierDeLevage find columns large-3">
-			<legend> Rechercher sur un autre jour</legend>
+			<legend>Rechercher sur un autre jour</legend>
 				<?php echo $this->Form->date('date');?>
 		</fieldset>
 		

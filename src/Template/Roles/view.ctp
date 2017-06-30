@@ -6,8 +6,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Editer un rôle'), ['action' => 'edit', $role->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Supprimer un rôle'), ['action' => 'delete', $role->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $role->id)]) ?> </li>
+        <li><?= $this->Html->link(__('Editer'), ['action' => 'edit', $role->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $role->id], ['confirm' => __('Voulez-vous vraiment supprimer ce rôle?')]) ?> </li>
         <li><?= $this->Html->link(__('Liste des rôles'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nouveau rôle'), ['action' => 'add']) ?> </li>
     </ul>
