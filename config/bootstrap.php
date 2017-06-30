@@ -322,8 +322,14 @@ function isOsmose($entity){
 				}
 			}
 	
+	// echo '!empty($liberations) :'.!empty($liberations);
+	// echo '<br/>!in_array(null, $liberations) :'.!in_array(null, $liberations);
+	// echo '<br/>$countSet !== 0 :'.($countSet !== 0);
+	// echo '<br/>count($liberations) === $countSet :'.(count($liberations) === $countSet);
+	// echo '<br/>isset($entity->osmose) :'.isset($entity->osmose);
+	// var_dump($liberations);
 	
-	if ((!empty($liberations) && !in_array(null, $liberations) && $countSet !== 0 && count($liberations) === $countSet && $countSet !== 0) || isset($entity->osmose)){
+	if ((!empty($liberations) && !in_array(null, $liberations) &&  $countSet !== 0 && count($liberations) === $countSet) || isset($entity->osmose)){
 		return true;
 	}
 	return false;
@@ -368,3 +374,7 @@ function highlightClass($condition, $entity){
 	}
 }
 
+function camelToUnderscore($string, $us = "-") {
+    return strtolower(preg_replace(
+        '/(?<=\d)(?=[A-Za-z])|(?<=[A-Za-z])(?=\d)|(?<=[a-z])(?=[A-Z])/', $us, $string));
+}

@@ -33,18 +33,17 @@ function cTime(){
 		}, 1000);
 }
 
-function checkTime(){
-	setTimeout( function(){
-			now = new Date();
-			// $("#timer").html(now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds());
-			if (now.getMinutes() - origin.getMinutes() >= 3){
-				$("#warning").addClass("rouge");
-				$("#warning").css({"font-weight":"bold", "text-shadow":"0 0 3px #FFFF00", "padding":"5px", "max-width":"46%"});
-				$("#warning").html('<span class="rouge">Attention, les données sont peut-être périmées (plus de 3 minutes). Veuillez recharger la page.</span>');
-			}
-			checkTime();
-		}, 1000);
-}
+// function checkTime(){
+	// setTimeout( function(){
+			// now = new Date();
+			// if (now.getMinutes() - origin.getMinutes() >= 3){
+				// $("#warning").addClass("rouge");
+				// $("#warning").css({"font-weight":"bold", "text-shadow":"0 0 3px #FFFF00", "padding":"5px", "max-width":"46%"});
+				// $("#warning").html('<span class="rouge">Attention, les données sont peut-être périmées (plus de 3 minutes). Veuillez recharger la page.</span>');
+			// }
+			// checkTime();
+		// }, 1000);
+// }
 
 function color(entity, col){
 	$(entity).addClass(col);
@@ -66,6 +65,8 @@ function alert_daemon(def, entity, type){
 		case 1: // role geops, rlp
 		// pour chaque ligne, tester : si dep reel vide, si dep theorique - heure systeme <= duree1 ou alerte rendu matériel, clignoter en orange. Si de plus dep theorique - heure systeme <= 0 ou rendu matériel en retard, clignoter en rouge
 		$('tr').each(function(){
+			console.log("ld_theorique_minutes - now <= 0 :" + (ld_theorique_minutes - now <= 0));
+			console.log("ld_theorique_minutes - rend - now  <= 0 :" + (ld_theorique_minutes - rend - now  <= 0));
 			if ( $(this).children(".ld_reel").is(':empty') ){
 				ld_theorique_parts = $(this).children(".ld_theorique").text().split(":");
 				ld_theorique_minutes = ((+ld_theorique_parts[0]*60) + (+ld_theorique_parts[1]));
@@ -97,7 +98,7 @@ var landy_calc = function(event){
 	var docktime = parseInt($("#docking-time").val());
 	var dd = parseInt($("#descent-duration").val());
 		$.ajax({
-			url : 'landyDeparture',
+			url : 'http://ordo/departure-trains/landyDeparture',
 			type : 'POST',
 			data : {
 				heure: heure,
@@ -116,6 +117,19 @@ var landy_calc = function(event){
 				
 			}
 		})
+}
+
+function refresh(target_url, interval){
+	console.log("refresh");
+	$.ajax({
+		url: target_url,
+		success : function(code_html, statut){
+			$('.clearfix').html(code_html);
+		}
+	});
+	setTimeout( function(){
+			refresh(target_url, interval);
+		}, interval);
 }
 
 

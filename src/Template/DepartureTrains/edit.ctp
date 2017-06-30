@@ -24,14 +24,22 @@
             echo $this->Form->control('numero');
 			echo $this->Form->control('alerte1');
             echo $this->Form->control('alerte2');
-			
-			echo $this->Form->create($theoricDeparture);
-            echo $this->Form->control('paris_nord_departure', ['label' => 'Départ théorique PNO']);
-            echo $this->Form->control('landy_departure', ['label' => 'Départ théorique Landy']);
-            echo $this->Form->control('docking_time', ['label' => 'Temps de mise à quai']);
-            echo $this->Form->control('descent_duration', ['label' => 'Temps de descente']);
-            echo $this->Form->control('rendition_duration', ['label' => 'Temps de rendu matériel']);
-        ?>
+		        ?>
+			<?= $this->Form->create($theoricDeparture) ?>
+		<fieldset>
+			<legend><?= __('Départ théorique') ?></legend>
+			<?php
+				echo $this->Form->control('paris_nord_departure', ['label' => 'Départ PNO', 'empty' => true]);
+					echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('paris_nord_departure')"]);
+					echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('paris_nord_departure')"]);
+				echo '<label class="landy_calc">Départ Landy</label> <span id="landy_calc">'.$this->time->format($theoricDeparture->landy_departure, "HH:mm").'</span>';
+				echo '<br/>'.__('Les temps sont exprimés en <span class="sncf-color-plum">minutes</span>').'<br/>'; 
+				echo $this->Form->control('docking_time', ['label' => 'Temps de mise à quai']);
+				echo $this->Form->control('descent_duration', ['label' => 'Temps de descente']);
+				echo $this->Form->control('rendition_duration', ['label' => 'Temps de rendu matériel']);
+			?>
+		</fieldset>
+
     </fieldset>
     <?= $this->Form->button(__('Valider')) ?>
     <?= $this->Form->end() ?>
