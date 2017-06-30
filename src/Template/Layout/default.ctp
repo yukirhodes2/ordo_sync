@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$title = 'ORDONNANCEMENT';
+$title = 'Ordonnancement';
 ?>
 <!DOCTYPE html>
 <html>
@@ -261,46 +261,6 @@ $title = 'ORDONNANCEMENT';
 	
 	
     <footer id="footer" class="footer" role="contentinfo">
-  <!-- <div id="footer-illustrated" class="footer-illustrated">
-    <ul class="footer-illustrated-list">
-      <li class="footer-illustrated-item">
-        <a href="#" class="footer-illustrated-link">
-          <img src="../img/footer/download-sncf-32x32.png" height="32" width="32" alt="" class="footer-illustrated-img">
-          <p class="footer-illustrated-content">
-            <span class="footer-illustrated-txt1">
-              Lorem ipsum
-              <span class="footer-illustrated-txt1-alt">dolor</span>
-            </span>
-            <span class="footer-illustrated-txt2">sit amet, consectetur</span>
-          </p>
-        </a>
-      </li>
-      <li class="footer-illustrated-item">
-        <a href="#" class="footer-illustrated-link">
-          <img src="../img/footer/disc-beta-32x32.png" height="32" width="32" alt="" class="footer-illustrated-img">
-          <p class="footer-illustrated-content">
-            <span class="footer-illustrated-txt1">
-              Lorem ipsum
-              <span class="footer-illustrated-txt1-alt">dolor</span>
-            </span>
-            <span class="footer-illustrated-txt2">sit amet, consectetur</span>
-          </p>
-        </a>
-      </li>
-      <li class="footer-illustrated-item">
-        <a href="#" class="footer-illustrated-link">
-          <img src="../img/footer/speech-bubble-32x32.png" height="32" width="32" alt="" class="footer-illustrated-img">
-          <p class="footer-illustrated-content">
-            <span class="footer-illustrated-txt1">
-              Lorem ipsum
-              <span class="footer-illustrated-txt1-alt">dolor</span>
-            </span>
-            <span class="footer-illustrated-txt2">sit amet, consectetur</span>
-          </p>
-        </a>
-      </li>
-    </ul>
-  </div> --> <!-- /.footer-illustrated -->
   <div class="footer-inner">
     <div class="footer-primary">
       <ul class="footer-primary-list">
@@ -382,6 +342,10 @@ $title = 'ORDONNANCEMENT';
 	
   </div>
 </footer> <!-- /.footer -->
-
+<?php
+	if ($this->request->action === "index" || $this->request->action === "indexeic"){
+		echo '<script> refresh("'.$this->Url->build(null, true).'", 10000); </script>' ; // mise à jour des données du body
+	}
+?>
 </body>
 </html>

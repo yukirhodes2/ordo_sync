@@ -128,19 +128,29 @@ class DepartureTrainsController extends AppController
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
 			
+			
 			$data = $this->request->getData();
+			
+			$data['landy_departure']['hour'] = intval(($data['paris_nord_departure']['hour']*60 + $data['paris_nord_departure']['minute'] - $data['docking_time'] - $data['descent_duration'])/60);
+			$data['landy_departure']['minute'] = ($data['paris_nord_departure']['hour']*60 + $data['paris_nord_departure']['minute'] - $data['docking_time'] - $data['descent_duration'])%60;
+			
 			$data['descent_duration'] = minToSec(intval($data['descent_duration']));
 			$data['docking_time'] = minToSec(intval($data['docking_time']));
 			$data['rendition_duration'] = minToSec(intval($data['rendition_duration']));
 			$data['alerte1'] = minToSec(intval($data['alerte1']));
 			$data['alerte2'] = minToSec(intval($data['alerte2']));
 			
+			
+			
+			
+			
             $departureTrain = $this->DepartureTrains->patchEntity($departureTrain, $data);
 			$theoricDeparture = $this->DepartureTrains->TheoricDepartures->patchEntity($theoricDeparture, $data);
 			
+
+			
             if ($this->DepartureTrains->save($departureTrain) && $this->DepartureTrains->TheoricDepartures->save($theoricDeparture)) {
                 $this->Flash->success(__('Modifié'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Problème lors de la modification.'));

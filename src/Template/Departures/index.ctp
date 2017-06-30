@@ -55,10 +55,11 @@
 				<!-- osmose -->
 				<?php 
 				if ( isOsmose($departure) ){
-						echo '<script>color(".osmose", "green");</script>';
+						echo '<script>$(".osmose").addClass("green");</script>';
 					}
 					else {
-						echo '<script>color(".osmose", "red");</script>';
+						echo '<script>$(".osmose").addClass("red");</script>';
+						// debug($departure);
 					}  
 				if (isset($departure->landy_departure)){
 					echo h($this->Time->format($departure->osmose, "HH:mm"));

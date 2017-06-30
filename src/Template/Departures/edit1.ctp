@@ -32,13 +32,8 @@
             echo $this->Form->control('comment_geops', ['label' => 'Observations', 'type' => 'textarea']);
             echo $this->Form->control('formed', ['label' => ' Formé']);
 			
+			echo $this->Form->control('restit', ['label' => 'Rendu de voie', 'empty' => true]);
 			
-			if (isOsmose($departure)){
-				echo $this->Form->control('restit', ['label' => 'Rendu de voie', 'empty' => true]);
-			}
-			else{
-				echo "Le rendu de voie ne peut être entré qu'après la libération de toutes les rames.";
-			}
 			echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('restit')"]);
 			echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('restit')"]);
             echo '<br/><hr>';
