@@ -42,7 +42,7 @@
                 <td><?= $departure->has('train_set1') ? $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set1->id]) : '' ?></td>
                 <td><?= $departure->has('train_set2') ? $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set2->id]) : '' ?></td>
                 <td><?= $departure->has('train_set3') ? $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set3->id]) : '' ?></td>
-                <td class="ld_theorique"><?= h(date('H:m', strtotime($departure->departure_train->theoric_departures['0']->paris_nord_departure)+$departure->departure_train->theoric_departures['0']->descent_duration)) ?></td>
+                <td class="ld_theorique"><?= h($this->Time->format($departure->departure_train->theoric_departures['0']->landy_departure, "HH:mm")) ?></td>
                 <td class="ld_reel"><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
                 <td <?= highlightClass("Freinage", $departure) ?> > </td>
                 <td><?= h($this->Time->format($departure->refouleur_arrival, "HH:mm")) ?></td>

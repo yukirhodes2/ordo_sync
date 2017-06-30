@@ -97,7 +97,7 @@ var landy_calc = function(event){
 	var docktime = parseInt($("#docking-time").val());
 	var dd = parseInt($("#descent-duration").val());
 		$.ajax({
-			url : 'http://ordo/departure-trains/landyDeparture',
+			url : 'landyDeparture',
 			type : 'POST',
 			data : {
 				heure: heure,
@@ -110,12 +110,32 @@ var landy_calc = function(event){
 				$('#landy_calc').html(code_html);
 			},
 			error : function(resultat, statut, error){
-				
+				$.ajax({
+					url : '../landyDeparture',
+					type : 'POST',
+					data : {
+						heure: heure,
+						minute: minute,
+						docktime: docktime,
+						dd: dd
+					},
+					dataType : 'html',
+					success : function(code_html, statut){
+						$('#landy_calc').html(code_html);
+					},
+					error : function(resultat, statut, error){
+						
+					},
+					complete: function(code_html, resultat, statut){
+						
+					}
+				})
 			},
 			complete: function(code_html, resultat, statut){
 				
 			}
 		})
+		
 }
 
 function refresh(target_url, interval){

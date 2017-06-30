@@ -339,7 +339,7 @@ function highlightClass($condition, $entity){
 	switch($condition){
 		case "Commande CRML":	case "CommandeCRML":	case "commandecrml":	case "COMMANDECRML":
 			// si toutes les libérations de rame sont faites, si la restit est faite et le freinage a été réalisé
-			if ( isset($entity->restit, $entity->brake_controls['0']->realisation_time) && isOsmose($departure) ){
+			if ( isset($entity->restit, $entity->brake_controls['0']->realisation_time) && isOsmose($entity) ){
 				return 'class="green"';
 			}
 			if ( isset($entity->restit, $entity->brake_controls['0']->present_id) && ($entity->brake_controls['0']->present_id == 2 ||  $entity->brake_controls['0']->present_id == 3)){

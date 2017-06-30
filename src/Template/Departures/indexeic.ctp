@@ -69,5 +69,5 @@
 		</div>
     <?= $this->Form->end();?>
 	
-	<?php echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
+	<?php if (isset($departure)) echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
 </div>

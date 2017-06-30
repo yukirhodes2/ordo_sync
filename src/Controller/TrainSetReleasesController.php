@@ -114,6 +114,10 @@ class TrainSetReleasesController extends AppController
 			
 			$data['active'] = true;
 			
+			if ( $data['status2_id'] === '1' ){ // ajouter auto heure courante
+				$data['heure'] = date('Y-m-d H:i:s');
+			}
+			
             $trainSetRelease = $this->TrainSetReleases->patchEntity($trainSetRelease, $data);
             if ($this->TrainSetReleases->save($trainSetRelease)) {
                 $this->Flash->success(__('La libération de rame est ajoutée.'));

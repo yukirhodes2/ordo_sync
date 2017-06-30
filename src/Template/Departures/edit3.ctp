@@ -37,7 +37,7 @@
 			
 			echo $this->Form->control('radio_number', ['label' => 'Numéro de radio']);
 			
-			if ( isset($departure->osmose, $departure->restit, $departure->brake_controls['0']->realisation_time) ){
+			if ( isset(isOsmose($departure), $departure->restit, $departure->brake_controls['0']->realisation_time) ){
 				echo $this->Form->control('information', ['label' => 'Information au CRML', 'empty' => true]);
 				echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('information')"]);
 				echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('information')"]);

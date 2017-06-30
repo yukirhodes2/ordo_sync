@@ -40,12 +40,12 @@
                 <td><?= $departure->has('train_set1') ? $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set1->id]) : '' ?></td>
                 <td><?= $departure->has('train_set2') ? $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set2->id]) : '' ?></td>
                 <td><?= $departure->has('train_set3') ? $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSets', 'action' => 'view', $departure->train_set3->id]) : '' ?></td>
-                <td><?= h($this->Time->format($departure->departure_train->theoric_departures['0']->paris_nord_departure, "HH:mm")) ?></td>
-                <td><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
+                <td class="ld_theorique"><?= h($this->Time->format($departure->departure_train->theoric_departures['0']->landy_departure, "HH:mm")) ?></td>
+                <td class="ld_reel"><?= h($this->Time->format($departure->landy_departure, "HH:mm")) ?></td>
 				<?php if ($departure->formed === true){ ?>
-					<td class="green"> Oui </td>
+					<td class="green"> </td>
 				<?php }else{ ?>
-					<td class="red"> Non </td>
+					<td class="red"> </td>
 				<?php } ?>
                 <td <?php
 					if ( !empty($departure->brake_controls) ){
