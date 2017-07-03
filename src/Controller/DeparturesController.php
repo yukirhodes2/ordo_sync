@@ -49,34 +49,21 @@ class DeparturesController extends AppController
 			
 		elseif ($id_role === parent::GEOPS){
 			
+		$query = $this->Departures->find()->where(['OR' => ['landy_departure >=' => date('Y-m-d H:i:s', time()-3600), 'landy_departure IS' => null]]);
+		// $query = $this->Departures->find()->where(['Departures.id' => 11]);
+		
         $this->paginate = [
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
 			'limit' => 15,
 			'order' => ['id' => 'desc']
         ];
 		
-        $departures = $this->paginate($this->Departures);
+        $departures = $this->paginate($query);
+        // $departures = $this->paginate($this->Departures);
+		
+		
 		
 		$this->loadAlerts();
-		
-		if($this->request->is('post')){
-			if($this->request->getData()){
-				$data = $this->request->getData();
-				if (isset($data['date'])){
-					$departures = $this->Departures
-												->find('all')
-												->where([
-													'Departures.landy_departure <' => date('Y-m-d', (strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day'])+86400)),
-													'Departures.landy_departure >=' => date('Y-m-d', strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day']))
-												])
-												->contain(['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']])
-												->limit(5);
-				}
-			}
-			else {
-                $this->Flash->error('Il y a eu un problème lors de la recherche. Si cette erreur persiste, contactez un administrateur au plus vite.');
-            }
-		}
 		
 		
         $this->set(compact('departures', 'trainSets'));
@@ -460,6 +447,56 @@ class DeparturesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+	
+	public function records(){
+		$id_role = $this->Auth->user("role_id");
+		
+		if ($id_role === parent::RLP)
+			return $this->redirect(['action' => 'indexrlp']);
+	
+		elseif ($id_role === parent::CPT)
+			return $this->redirect(['action' => 'indexcpt']);
+			
+		elseif ($id_role === parent::GEOPS){
+			
+        $this->paginate = [
+            'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
+			'limit' => 15,
+			'order' => ['id' => 'desc']
+        ];
+		
+        $departures = $this->paginate($this->Departures);
+		
+		$this->loadAlerts();
+		
+		if($this->request->is('post')){
+			if($this->request->getData()){
+				$data = $this->request->getData();
+				if (isset($data['date'])){
+					$departures = $this->Departures
+												->find('all')
+												->where([
+													'Departures.landy_departure <' => date('Y-m-d', (strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day'])+86400)),
+													'Departures.landy_departure >=' => date('Y-m-d', strtotime($data['date']['year'].'-'.$data['date']['month'].'-'.$data['date']['day']))
+												])
+												->contain(['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']])
+												->limit(5);
+				}
+			}
+			else {
+                $this->Flash->error('Il y a eu un problème lors de la recherche. Si cette erreur persiste, contactez un administrateur au plus vite.');
+            }
+		}
+		
+		
+        $this->set(compact('departures', 'trainSets'));
+        $this->set('_serialize', ['departures']);
+
+		}
+		
+		else // if ($id_role === parent::EIC) || other
+			return $this->redirect(['action' => 'indexeic']);
+	}
 	
 	public function desactivateReleases($departure, $id){
 		$trainSetReleases = array();
