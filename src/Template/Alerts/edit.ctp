@@ -14,8 +14,8 @@
     <fieldset>
         <legend><?= __('Editer alerte') ?></legend>
         <?php
-            echo $this->Form->control('libelle');
-            echo $this->Form->control('first_timer');
+            echo $alert->libelle;
+            echo $this->Form->control('first_timer', ['label' => 'Minuteur']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Valider')) ?>

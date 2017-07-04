@@ -22,31 +22,35 @@
         <?php	
 			echo ' Train n°'.$departure->departure_train->numero .' prévu sur voie '.$departure->way->numero.'<br/>';
 			
-            echo $this->Form->control('annoucement', ['label' => 'Annonce CRML ou refouleur', 'empty' => true]);
-			echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('annoucement')"]);
-			echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('annoucement')"]);
-            echo '<br/>';
+           
 			
             echo $this->Form->control('comment_eic', ['label' => 'Observations', 'type' => 'textarea']);
 			
-            echo $this->Form->control('postep_departure', ['label' => 'Départ Poste P', 'empty' => true]);
-			echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('postep_departure')"]);
-			echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('postep_departure')"]);
-            echo '<br/>';
-			
-            echo $this->Form->control('passagecarre_departure', ['label' => 'Départ Passage Carré', 'empty' => true]);
-			echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('passagecarre_departure')"]);
-			echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('passagecarre_departure')"]);
-            echo '<br/>';
-			
-			if (isOsmose($departure)){
+            
+			if ( isOsmose($departure) && isset($departure->restit, $departure->brake_id) && $departure->formed === true){
+				echo $this->Form->control('annoucement', ['label' => 'Annonce CRML ou refouleur', 'empty' => true]);
+				echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('annoucement')"]);
+				echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('annoucement')"]);
+				echo '<br/>';
+				echo $this->Form->control('postep_departure', ['label' => 'Départ Poste P', 'empty' => true]);
+				echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('postep_departure')"]);
+				echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('postep_departure')"]);
+				echo '<br/>';
+				
+				echo $this->Form->control('passagecarre_departure', ['label' => 'Départ Passage Carré', 'empty' => true]);
+				echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('passagecarre_departure')"]);
+				echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('passagecarre_departure')"]);
+				echo '<br/>';
 				echo $this->Form->control('landy_departure', ['label' => 'Départ réel Landy', 'empty' => true]);
-				// echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('landy_departure')"]);
 				echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('landy_departure')"]);
 				echo '<br/>';
 			}
 			else{
-				echo 'Le départ du Landy est en attente de la libération de toutes les rames.';
+				echo 'En attente des opérations suivantes : ';
+				if (!isOsmose($departure)){ echo 'libération des rames | ';}
+				if ($departure->formed === false){ echo 'formation du train | ';}
+				if (!isset($departure->brake_id)){ echo 'freinage | ';}
+				if (!isset($departure->restit)){ echo 'restitution de voie | ';}
 			}
             
         ?>

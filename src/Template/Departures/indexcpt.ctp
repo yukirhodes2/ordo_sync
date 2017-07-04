@@ -65,5 +65,5 @@
         </tbody>
     </table>
     <?php include('paginator.php'); ?>
-	<?php if (isset($departure)) echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
+	<?php if (isset($departure)) echo '<script>alert_daemon('.$alerts[2].','.$departure->departure_train.', 1, "departures");</script>'; ?>
 </div>

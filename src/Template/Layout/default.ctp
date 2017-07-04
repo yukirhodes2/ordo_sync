@@ -133,7 +133,7 @@ $title = 'Ordonnancement';
                   <p class="mega-navigation-title">Arrivées</p>
                   <ul class="mega-navigation-list">
                     <li class="mega-navigation-item">
-					  <?= $this->Html->link('Consultation arrivées', ['controller' => 'Arrivals', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+					  <?= $this->Html->link(__('Consultation arrivées'), ['controller' => 'Arrivals', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     </li>
              
                   </ul>
@@ -142,7 +142,7 @@ $title = 'Ordonnancement';
                   <p class="mega-navigation-title">Départs</p>
                   <ul class="mega-navigation-list">
                     <li class="mega-navigation-item">
-					  <?= $this->Html->link('Consultation départs', ['controller' => 'Departures', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+					  <?= $this->Html->link(__('Consultation départs'), ['controller' => 'Departures', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     </li>
                    
                   </ul>
@@ -152,7 +152,7 @@ $title = 'Ordonnancement';
                   <p class="mega-navigation-title">Libérations de rame</p>
                   <ul class="mega-navigation-list">
 					<li class="mega-navigation-item">
-                      <?= $this->Html->link('Consulter libérations', ['controller' => 'TrainSetReleases', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('Consulter libérations'), ['controller' => 'TrainSetReleases', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     </li>
                   </ul>
                 </div><!-- /mega-navigation-col -->
@@ -168,11 +168,11 @@ $title = 'Ordonnancement';
                   <p class="mega-navigation-title">Trains</p>
                   <ul class="mega-navigation-list">
                     <li class="mega-navigation-item">
-                      <?= $this->Html->link('Trains à l\'arrivée', ['controller' => 'ArrivalTrains', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('Trains à l\'arrivée'), ['controller' => 'ArrivalTrains', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                   
                     </li>
 					<li class="mega-navigation-item">
-                      <?= $this->Html->link('Trains au départ', ['controller' => 'DepartureTrains', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('Trains au départ'), ['controller' => 'DepartureTrains', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                   
                     </li>
                   </ul>
@@ -181,7 +181,7 @@ $title = 'Ordonnancement';
                   <p class="mega-navigation-title">Rames</p>
                   <ul class="mega-navigation-list">
                     <li class="mega-navigation-item">
-                      <?= $this->Html->link('Liste des rames', ['controller' => 'TrainSets', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('Liste des rames'), ['controller' => 'TrainSets', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     </li>
                   </ul>
                 </div><!-- /mega-navigation-col -->
@@ -200,18 +200,22 @@ $title = 'Ordonnancement';
                       <a href="/alerts" class="mega-navigation-link">Alertes</a>
                     </li> -->
                     <li class="mega-navigation-item">
-                      <?= $this->Html->link('Types de frein', ['controller' => 'Brakes', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('Types de frein'), ['controller' => 'Brakes', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     </li>
                     <li class="mega-navigation-item">
-                      <?= $this->Html->link('Types de retard', ['controller' => 'Delays', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('Types de retard'), ['controller' => 'Delays', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     
                     </li>
 					<li class="mega-navigation-item">
-                      <?= $this->Html->link('Voies', ['controller' => 'Ways', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('Voies'), ['controller' => 'Ways', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     
                     </li>
 					<li class="mega-navigation-item">
-                      <?= $this->Html->link('MAL', ['controller' => 'Lavages', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('MAL'), ['controller' => 'Lavages', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                    
+                    </li>
+					<li class="mega-navigation-item">
+                      <?= $this->Html->link(__('Alertes'), ['controller' => 'Alerts', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     
                     </li>
                   </ul>
@@ -221,15 +225,15 @@ $title = 'Ordonnancement';
                   <p class="mega-navigation-title">Etatique</p>
                   <ul class="mega-navigation-list">
 					<li class="mega-navigation-item">
-                      <?= $this->Html->link('Statuts', ['controller' => 'Status', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('Statuts'), ['controller' => 'Status', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     
                     </li>
 					<li class="mega-navigation-item">
-                      <?= $this->Html->link('Libérations de produit', ['controller' => 'Releases', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('Libérations de produit'), ['controller' => 'Releases', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     
                     </li>
 					<li class="mega-navigation-item">
-                      <?= $this->Html->link('RD/RF', ['controller' => 'Rdrfs', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
+                      <?= $this->Html->link(__('RD/RF'), ['controller' => 'Rdrfs', 'action' => 'index'], ['class' => 'mega-navigation-link']); ?>
                     
                     </li>
                   </ul>
@@ -239,7 +243,7 @@ $title = 'Ordonnancement';
             </div><!-- /mega-navigation -->
           </li>
           <li class="navigation-list-item sncf-color-purple"><!-- @TOPROD: see 1.1 Colors for the others CSS class -->
-			<?= $this->Html->link('Gestion des comptes', ['controller' => 'Users', 'action' => 'index'], ['class' => 'navigation-list-link item-4']); ?>
+			<?= $this->Html->link(__('Gestion des comptes'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'navigation-list-link item-4']); ?>
                     
           </li>
 		  

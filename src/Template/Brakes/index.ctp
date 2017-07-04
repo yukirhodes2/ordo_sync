@@ -24,9 +24,11 @@
             <tr>
                 <td><?= h($brake->type) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('Voir'), ['action' => 'view', $brake->id]) ?>
-                    <?= $this->Html->link(__('Editer'), ['action' => 'edit', $brake->id]) ?>
-                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $brake->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $brake->id)]) ?>
+                    <?= $this->Html->link($this->Html->image('view.png', ['alt' => __('Voir'), 'class' => 'icon']), ['action' => 'view', $brake->id], ['escape' => false, 'title' => 'Plus de détails']) ?>
+                    <?= $this->Html->link($this->Html->image('edit.png', ['alt' => __('Editer'), 'class' => 'icon']), ['action' => 'edit', $brake->id], ['escape' => false, 'title' => 'Modifier']) ?>
+					<?php if ($brake->id !== 3){ ?>
+						<?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $brake->id], ['confirm' => __('Voulez-vous vraiment supprimer cette donnée # {0}?', $brake->id)]) ?>
+					<?php } ?>
                 </td>
             </tr>
             <?php endforeach; ?>

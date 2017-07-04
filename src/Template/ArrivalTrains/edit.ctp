@@ -18,7 +18,7 @@
 <div class="arrivalTrains form large-9 medium-8 columns content">
     <?= $this->Form->create($arrivalTrain) ?>
     <fieldset>
-        <legend><?= __('Editer train type départ') ?></legend>
+        <legend><?= __('Editer train type arrivée') ?></legend>
         <?php
             echo $this->Form->control('numero');
         ?>
