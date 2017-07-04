@@ -69,7 +69,7 @@
         </tr>
 		<tr>
             <th scope="row" class="rlp" ><?= __('Osmose') ?></th>
-            <td><?= showDefine($departure->osmose) ?></td>
+            <td><?= isset($osmose) ? $osmose : showDefine($departure->osmose) ?></td>
         </tr>
         <tr>
             <th scope="row" class="rlp" ><?= __('Rendu voie') ?></th>

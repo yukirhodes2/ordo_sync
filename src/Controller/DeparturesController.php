@@ -15,7 +15,12 @@ class DeparturesController extends AppController
 {
 	public function isAuthorized($user)
 	{
-		return ! ( $this->request->action === 'delete' && $user['role_id'] !== parent::GEOPS && $user['role_id'] !== parent::ADMIN );
+		// sens de lecture : répertorier toutes les actions sensibles et les rôles qui peuvent utiliser
+		return ! (
+		($this->request->action === 'delete'
+			&& $user['role_id'] !== parent::GEOPS && $user['role_id'] !== parent::ADMIN)
+		|| ($this->request->action === 'add'
+			&& $user['role_id'] !== parent::RLP && $user['role_id'] !== parent::GEOPS && $user['role_id'] !== parent::ADMIN));
 	}
 	
 	public function beforeFilter(Event $event)
@@ -47,10 +52,9 @@ class DeparturesController extends AppController
 		elseif ($id_role === parent::CPT)
 			return $this->redirect(['action' => 'indexcpt']);
 			
-		elseif ($id_role === parent::GEOPS){
+		elseif ($id_role === parent::GEOPS || $id_role === parent::ADMIN){
 			
 		$query = $this->Departures->find()->where(['OR' => ['landy_departure >=' => date('Y-m-d H:i:s', time()-3600), 'landy_departure IS' => null]]);
-		// $query = $this->Departures->find()->where(['Departures.id' => 11]);
 		
         $this->paginate = [
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
@@ -81,15 +85,18 @@ class DeparturesController extends AppController
 		if ($id_role !== 3)
 			return $this->redirect(['action' => 'index']);
 		
+		$query = $this->Departures->find()->where(['OR' => ['landy_departure >=' => date('Y-m-d H:i:s', time()-3600), 'landy_departure IS' => null]]);
+		
         $this->paginate = [
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-			'limit' => 10,
+			'limit' => 15,
 			'order' => ['id' => 'desc']
         ];
 		
 		$this->loadAlerts();
 		
-        $departures = $this->paginate($this->Departures);
+		$departures = $this->paginate($query);
+        // $departures = $this->paginate($this->Departures);
 		$trainSets = $this->Departures->TrainSet1s->find('all')->toArray();
         $this->set(compact('departures', 'trainSets'));
         $this->set('_serialize', ['departures']);
@@ -101,13 +108,16 @@ class DeparturesController extends AppController
 		if ($id_role !== 5 && isset($id_role))
 			return $this->redirect(['action' => 'index']);
 		
+		$query = $this->Departures->find()->where(['OR' => ['landy_departure >=' => date('Y-m-d H:i:s', time()-3600), 'landy_departure IS' => null]]);
+		
         $this->paginate = [
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-			'limit' => 10,
+			'limit' => 15,
 			'order' => ['id' => 'desc']
 		];
 		
-        $departures = $this->paginate($this->Departures);
+		$departures = $this->paginate($query);
+        // $departures = $this->paginate($this->Departures);
 		
 		$this->loadAlerts();
 		
@@ -141,13 +151,18 @@ class DeparturesController extends AppController
 		if ($id_role !== 4)
 			return $this->redirect(['action' => 'index']);
 		
+		$query = $this->Departures->find()->where(['OR' => ['landy_departure >=' => date('Y-m-d H:i:s', time()-3600), 'landy_departure IS' => null]]);
+		
 		$this->loadAlerts();
 		
         $this->paginate = [
             'contain' => ['DepartureTrains' => ['TheoricDepartures'], 'Brakes', 'Ways', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']],
-			'limit' => 10,
+			'limit' => 15,
+			'order' => ['id' => 'desc']
 		];
-        $departures = $this->paginate($this->Departures);
+		
+		$departures = $this->paginate($query);
+        // $departures = $this->paginate($this->Departures);
 		$trainSets = $this->Departures->TrainSet1s->find('all')->toArray();
         $this->set(compact('departures', 'trainSets'));
         $this->set('_serialize', ['departures']);
@@ -165,7 +180,9 @@ class DeparturesController extends AppController
         $departure = $this->Departures->get($id, [
             'contain' => ['Ways', 'DepartureTrains', 'Brakes', 'TrainSet1s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'BrakeControls' => ['Presents']]
         ]);
-        $this->set('departure', $departure);
+		
+		$osmose = max($this->getTrainReleases($departure))->heure;
+        $this->set(compact('departure', 'osmose'));
         $this->set('_serialize', ['departure']);
     }
 
@@ -233,7 +250,7 @@ class DeparturesController extends AppController
 	    $departure = null;
 		$brakeControl = null;
 		$departure = $this->Departures->get($id, [
-				'contain' => ['BrakeControls' => ['Presents'], 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases']]
+				'contain' => ['BrakeControls' => ['Presents'], 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases']]
 			]);
 			
 		if (!empty($departure->brake_controls)){
@@ -289,7 +306,7 @@ class DeparturesController extends AppController
 		$departure = null;
 		$brakeControl = null;
 		$departure = $this->Departures->get($id, [
-				'contain' => ['BrakeControls' => ['Presents'], 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases']]
+				'contain' => ['BrakeControls' => ['Presents'], 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases']]
 			]);
 			
 		if (!empty($departure->brake_controls)){
@@ -404,8 +421,8 @@ class DeparturesController extends AppController
 			return $this->redirect(['action' => 'edit', $id]);
 		
          $departure = $this->Departures->get($id, [
-            'contain' => ['Ways', 'DepartureTrains', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases']]
-        ]);
+            'contain' => ['Ways', 'DepartureTrains', 'TrainSet1s' => ['TrainSetReleases'], 'TrainSet2s' => ['TrainSetReleases'], 'TrainSet3s' => ['TrainSetReleases'], 'Locs' => ['TrainSetReleases']
+		]]);
 	
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
@@ -499,8 +516,29 @@ class DeparturesController extends AppController
 	}
 	
 	public function desactivateReleases($departure, $id){
-		$trainSetReleases = array();
 		
+		$trainSetReleases = $this->getTrainReleases($departure);
+		foreach($trainSetReleases as $tsr){
+			$tsr = $this->Departures->TrainSet1s->TrainSetReleases->patchEntity($tsr, ['active' => false]);
+            if (!$this->Departures->TrainSet1s->TrainSetReleases->save($tsr)) {
+				$this->Flash->error(__('Il y a eu un problème lors de la mise à jour des libérations de rame. Veuillez contacter un administrateur au plus vite si le problème persiste.'));
+				break;
+            }
+		}
+		
+		$foo = $this->Departures->get($id, [
+            'contain' => []
+        ]);
+		
+		$max = max($trainSetReleases);
+            $foo = $this->Departures->patchEntity($foo, ['osmose' => $max->heure]);
+            if (!$this->Departures->save($foo)) {
+                $this->Flash->error(__('Il y a eu une erreur pendant la modification du départ. Contactez un administrateur si le problème persiste.'));
+            }
+	}
+	
+	public function getTrainReleases($departure){
+		$trainSetReleases = array();
 		if( isset($departure->loc) ){
 			$trainSetReleases[0] = $this->Departures->Locs->TrainSetReleases->get($departure->loc->train_set_releases[count($departure->loc->train_set_releases)-1]->id, [
 				'contain' => []
@@ -525,22 +563,6 @@ class DeparturesController extends AppController
 			]);
 		}
 		
-		foreach($trainSetReleases as $tsr){
-			$tsr = $this->Departures->TrainSet1s->TrainSetReleases->patchEntity($tsr, ['active' => false]);
-            if (!$this->Departures->TrainSet1s->TrainSetReleases->save($tsr)) {
-				$this->Flash->error(__('Il y a eu un problème lors de la mise à jour des libérations de rame. Veuillez contacter un administrateur au plus vite si le problème persiste.'));
-				break;
-            }
-		}
-		
-		$foo = $this->Departures->get($id, [
-            'contain' => []
-        ]);
-		
-		$max = max($trainSetReleases);
-            $foo = $this->Departures->patchEntity($foo, ['osmose' => $max->heure]);
-            if (!$this->Departures->save($foo)) {
-                $this->Flash->error(__('Il y a eu une erreur pendant la modification du départ. Contactez un administrateur si le problème persiste.'));
-            }
+		return $trainSetReleases;
 	}
 }

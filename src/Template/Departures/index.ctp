@@ -12,6 +12,10 @@
 </nav>
 <div class="departures index large-9 medium-8 columns content">
     <h3><?= __('Départs') ?></h3>
+	<div id="delays">
+		<span class="header"> Aucun retard pour l'instant. </span>
+		<ul></ul>
+	</div>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -57,10 +61,9 @@
 				if ( isOsmose($departure) ){
 						echo '<script>$(".osmose").addClass("green");</script>';
 					}
-					else {
-						echo '<script>$(".osmose").addClass("red");</script>';
-						// debug($departure);
-					}  
+				else {
+					echo '<script>$(".osmose").addClass("red");</script>';
+				}  
 				if (isset($departure->landy_departure)){
 					echo h($this->Time->format($departure->osmose, "HH:mm"));
 				}

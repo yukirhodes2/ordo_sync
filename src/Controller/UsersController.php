@@ -123,7 +123,7 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
-		if ($user->role_id !== parent::ADMIN){
+		if ($user->role_id !== parent::ADMIN) {
 			if ($this->Users->delete($user)) {
 				$this->Flash->success(__('L\' utilisateur est supprimé.'));
 			}
@@ -140,7 +140,10 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+				if (isset($_GET['redirect'])) {
+					return $this->redirect($_GET['redirect']);
+				}
+				return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error(__('Identifiant ou mot de passe incorrect.'));
         }

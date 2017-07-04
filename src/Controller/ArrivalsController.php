@@ -15,7 +15,12 @@ class ArrivalsController extends AppController
 {
 	public function isAuthorized($user)
 	{
-		return ! ( $this->request->action === 'edit' && $user['role_id'] !== parent::EIC && $user['role_id'] !== parent::RLP && $user['role_id'] !== parent::ADMIN );
+		// sens de lecture : répertorier toutes les actions sensibles et les rôles qui peuvent utiliser
+		return ! (
+		($this->request->action === 'edit'
+			&& $user['role_id'] !== parent::EIC && $user['role_id'] !== parent::RLP && $user['role_id'] !== parent::ADMIN)
+		|| ($this->request->action === 'add'
+			&& $user['role_id'] !== parent::EIC && $user['role_id'] !== parent::ADMIN));
 	}
 	
     /**

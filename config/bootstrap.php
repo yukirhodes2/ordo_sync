@@ -373,8 +373,3 @@ function highlightClass($condition, $entity){
 			return null;
 	}
 }
-
-function camelToUnderscore($string, $us = "-") {
-    return strtolower(preg_replace(
-        '/(?<=\d)(?=[A-Za-z])|(?<=[A-Za-z])(?=\d)|(?<=[a-z])(?=[A-Z])/', $us, $string));
-}

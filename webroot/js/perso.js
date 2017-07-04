@@ -72,7 +72,9 @@ function alert_daemon(def, entity, type){
 				
 				if ( ld_theorique_minutes - now <= duree1 || ($(this).children(".restit").is(':empty') && ld_theorique_minutes - rend - now  <= duree2) ){
 					if( ld_theorique_minutes - now <= 0 || ld_theorique_minutes - rend - now  <= 0){
-						$(this).children(".train").addClass("blink-red");						
+						$(this).children(".train").addClass("blink-red");
+						$('#delays span').text('La préparation de ces trains est en retard :');
+						$('#delays ul').append($('<li>N°'+$(this).children(".train").text()+' départ Landy prévu à '+ $(this).children(".ld_theorique").text() + '</li>'));
 					}
 					else{
 						$(this).children(".train").addClass("blink-orange");

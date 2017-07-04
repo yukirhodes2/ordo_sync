@@ -11,6 +11,10 @@
 </nav>
 <div class="departures index large-9 medium-8 columns content">
     <h3><?= __('Départs') ?></h3>
+	<div id="delays">
+		<span class="header"> Aucun retard pour l'instant. </span>
+		<ul></ul>
+	</div>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -49,25 +53,12 @@
 				
 				<?= $this->Html->link($this->Html->image('view.png', ['alt' => 'Voir', 'class' => 'icon']), ['action' => 'view', $departure->id], ['escape' => false, 'title' => 'Plus de détails']) ?>
 				<?= $this->Html->link($this->Html->image('edit.png', ['alt' => 'Editer', 'class' => 'icon']), ['action' => 'edit', $departure->id], ['escape' => false, 'title' => 'Modifier']) ?>
-				<?= $this->Form->postLink($this->Html->image('delete.png', ['alt' => 'Supprimer', 'class' => 'icon']), ['action' => 'delete', $departure->id], ['escape' => false, 'title' => 'Supprimer', 'confirm' => __('Voulez-vous vraiment supprimer ce départ ?')]) ?>
-                </td>
+				</td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
     <?php include "paginator.php"; ?>
-
-	
-	<?= $this->form->create(null);?>
-		<fieldset class="departures find columns large-3">
-			<legend> Rechercher sur un autre jour</legend>
-				<?php echo $this->Form->date('date');?>
-		</fieldset>
-		
-		<div class="departures find columns large-5">
-			<?= $this->Form->button('Rechercher', ['type' => 'submit']) ?>
-		</div>
-    <?= $this->Form->end();?>
 	
 	<?php if (isset($departure)) echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1);</script>'; ?>
 </div>
