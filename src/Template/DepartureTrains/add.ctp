@@ -38,3 +38,4 @@
     <?= $this->Form->button(__('Valider')) ?>
     <?= $this->Form->end() ?>
 </div>
+<?= $this->Html->script('calc'); ?>

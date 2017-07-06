@@ -268,6 +268,10 @@ table.vertical-table th{
 	background-color: orange;
 }
 
+.green a, .red a, .orange a{
+	color: white;
+}
+
 .error-message, .error{
 	color: rgb(213,43,30);
 	background: -moz-linear-gradient(top, rgba(150,150,150,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
@@ -334,3 +338,4 @@ div.datetime select:nth-child(4){
 #delays{
 	margin-bottom: 10px;
 }
+

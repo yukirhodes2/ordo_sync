@@ -36,8 +36,9 @@ class ArrivalsController extends AppController
 		if ($id_role === 3) // RLP
 			return $this->redirect(['action' => 'index2', $id]);
 			
+		$this->loadAlerts();
         $this->paginate = [
-            'contain' => ['Ways', 'ArrivalTrains', 'TrainSets', 'Lavages'],
+            'contain' => ['Ways', 'ArrivalTrains' => ['TheoricArrivals'], 'TrainSets', 'Lavages'],
 			'limit' => 15,
 			'order' => ['landy_arrival' => 'desc']
         ];
@@ -208,20 +209,30 @@ class ArrivalsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
-			$ts_announcement = $data['announcement_time']['hour']*3600+$data['announcement_time']['minute']*60;
-			$ts_landy_arrival = $data['landy_arrival']['hour']*3600+$data['landy_arrival']['minute']*60;
-			if ( isset($data['announcement_time']) ){
-				if ($ts_announcement >= $ts_landy_arrival || (empty($data['announcement_time']['hour']) && empty($data['announcement_time']['minute']))){
-					$arrival = $this->Arrivals->patchEntity($arrival, $data);
-					if ($this->Arrivals->save($arrival)) {
-						$this->Flash->success(__('L\'arrivée est modifiée.'));
-
-						return $this->redirect(['action' => 'index']);
+			$ok = false;
+			if (!isset($data['landy_arrival'])){
+				$ok = true;
+			}
+			else{
+				$ts_announcement = $data['announcement_time']['hour']*3600+$data['announcement_time']['minute']*60;
+				$ts_landy_arrival = $data['landy_arrival']['hour']*3600+$data['landy_arrival']['minute']*60;
+				if ( isset($data['announcement_time']) ){
+					if ($ts_announcement >= $ts_landy_arrival || (empty($data['announcement_time']['hour']) && empty($data['announcement_time']['minute']))){
+						$ok = true;
 					}
-					$this->Flash->error(__('L\'arrivée n\'a pas été modifiée. Réessayez.'));
 				}
 			}
-            $this->Flash->error(__('L\'heure d\'annonce est antérieure à l\'heure d\'arrivée au Landy. Vérifiez votre saisie ?'));
+			
+			if ($ok){
+				$arrival = $this->Arrivals->patchEntity($arrival, $data);
+					if ($this->Arrivals->save($arrival)) {
+						$this->Flash->success(__('L\'arrivée est modifiée.'));
+						return $this->redirect(['action' => 'index']);
+					}
+			}
+			else{
+				$this->Flash->error(__('L\'heure d\'annonce est antérieure à l\'heure d\'arrivée au Landy. Vérifiez votre saisie ?'));
+			}
         }
         $ways = $this->Arrivals->Ways->find('list', ['limit' => 200]);
         $arrival_trains = $this->Arrivals->ArrivalTrains->find('list', ['limit' => 200]);

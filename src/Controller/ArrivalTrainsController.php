@@ -69,6 +69,8 @@ class ArrivalTrainsController extends AppController
 			$result = null;
             if ($result = $this->ArrivalTrains->save($arrivalTrain)) {
 				$data['train_id'] = $result->id; // on récupère l'id du nouveau arrival_train pour associer les théoriques
+				$data['landy_arrival']['hour'] = ($data['paris_nord_arrival']['hour']*60 + $data['paris_nord_arrival']['minute'] + $data['ascent_time'])/60;
+			$data['landy_arrival']['minute'] = ($data['paris_nord_arrival']['hour']*60 + $data['paris_nord_arrival']['minute'] + $data['ascent_time'])%60;
 				$data['ascent_time'] = minToSec(intval($data['ascent_time']));
 				$theoricArrival = $this->ArrivalTrains->TheoricArrivals->patchEntity($theoricArrival, $data);
 				if ($this->ArrivalTrains->TheoricArrivals->save($theoricArrival)){
@@ -76,10 +78,10 @@ class ArrivalTrainsController extends AppController
                 return $this->redirect(['action' => 'index']);
 				}
             }
-			
+			debug($theoricArrival);
             $this->Flash->error(__('Le train n\'a pas été ajouté. Réessayez.'));
         }
-        $this->set(compact('arrivalTrain', 'theoricDeparture', 'theoricArrival'));
+        $this->set(compact('arrivalTrain', 'theoricArrival'));
         $this->set('_serialize', ['arrivalTrain']);
     }
 
@@ -104,6 +106,10 @@ class ArrivalTrainsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
 			
 			$data = $this->request->getData();
+			
+			$data['landy_arrival']['hour'] = ($data['paris_nord_arrival']['hour']*60 + $data['paris_nord_arrival']['minute'] + $data['ascent_time'])/60;
+			$data['landy_arrival']['minute'] = ($data['paris_nord_arrival']['hour']*60 + $data['paris_nord_arrival']['minute'] + $data['ascent_time'])%60;
+				
 			$data['ascent_time'] = minToSec(intval($data['ascent_time']));
             $arrivalTrain = $this->ArrivalTrains->patchEntity($arrivalTrain, $data);
 			$theoricArrival = $this->ArrivalTrains->TheoricArrivals->patchEntity($theoricArrival, $data);
@@ -114,6 +120,7 @@ class ArrivalTrainsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Le train n\'a pas été modifié. Réessayez.'));
+			// debug($theoricArrival);
         }
         $this->set(compact('arrivalTrain', 'theoricArrival'));
         $this->set('_serialize', ['arrivalTrain']);
@@ -141,5 +148,20 @@ class ArrivalTrainsController extends AppController
 	
 	public function trainNumber(){
 		parent::number($this->ArrivalTrains);
+	}
+	
+	public function landyArrival(){
+		if ( isset($_POST['heure']) ){
+			$heure = $_POST['heure'];
+			$this->set(compact('heure'));
+		}
+		if ( isset($_POST['minute']) ){
+			$minute = $_POST['minute'];
+			$this->set(compact('minute'));
+		}
+		if ( isset($_POST['at']) ){
+			$at = $_POST['at'];
+			$this->set(compact('at'));
+		}
 	}
 }

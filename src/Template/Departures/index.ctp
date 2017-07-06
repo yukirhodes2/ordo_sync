@@ -37,7 +37,7 @@
         </thead>
         <tbody>
 		
-            <?php foreach ($departures as $departure): ?>
+            <?php foreach ($departures as $departure): // debug($departure);?>
             <tr>
 			<?php // debug($departure); ?>
                 <td><?= $departure->has('way') ? $this->Html->link($departure->way->numero, ['controller' => 'Ways', 'action' => 'view', $departure->way->id]) : '' ?></td>
@@ -55,18 +55,84 @@
 					<td class="red"> </td>
 				<?php } ?>
                 <td <?= highlightClass("Freinage", $departure) ?> > <?= $departure->has('brake') ? $this->Html->link($departure->brake->type, ['controller' => 'Brakes', 'action' => 'view', $departure->brake->id]) : '' ?></td>
-                <td class="osmose" >
+                
 				<!-- osmose -->
 				<?php 
 				if ( isOsmose($departure) ){
-						echo '<script>$(".osmose").addClass("green");</script>';
-					}
+					echo '<td class="osmose green" >';
+				}
 				else {
-					echo '<script>$(".osmose").addClass("red");</script>';
+					echo '<td class="osmose red" >';
 				}  
+				
+				// shortcut-releases
+				if (!empty($departure->loc)){
+					if (empty($departure->loc->train_set_releases)){
+						echo $this->Html->link($departure->loc->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->loc->id]).' ';
+					}
+					else{
+						if (isset($departure->loc->train_set_releases[count($departure->loc->train_set_releases)-1]->heure)){
+							if ($departure->loc->train_set_releases[count($departure->loc->train_set_releases)-1]->active === false){
+							 echo $this->Html->link($departure->loc->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->loc->id]).' ';
+							}
+						}
+						else{
+							echo $this->Html->link($departure->loc->numero, ['controller' => 'TrainSetReleases', 'action' => 'edit', $departure->loc->train_set_releases[count($departure->loc->train_set_releases)-1]->id]).' ';
+						}
+					}
+				}
+				if (!empty($departure->train_set1)){
+					if (empty($departure->train_set1->train_set_releases)){
+						echo $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set1->id]).' ';
+					}
+					else{
+						if (isset($departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->heure)){
+							if ($departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->active === false){
+							 echo $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set1->id]).' ';
+							}
+						}
+						else{
+							echo $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSetReleases', 'action' => 'edit', $departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->id]).' ';
+						}
+					}
+				}
+				if (!empty($departure->train_set2)){
+					if (empty($departure->train_set2->train_set_releases)){
+						echo $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set2->id]).' ';
+					}
+					else{
+						if (isset($departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->heure)){
+							if ($departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->active === false){
+							 echo $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set2->id]).' ';
+							}
+						}
+						else{
+							echo $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSetReleases', 'action' => 'edit', $departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->id]).' ';
+						}
+					}
+				}
+				if (!empty($departure->train_set3)){
+					if (empty($departure->train_set3->train_set_releases)){
+						echo $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set3->id]).' ';
+					}
+					else{
+						if (isset($departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->heure)){
+							if ($departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->active === false){
+							 echo $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set3->id]).' ';
+							}
+						}
+						else{
+							echo $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSetReleases', 'action' => 'edit', $departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->id]).' ';
+						}
+					}
+				}
+				// end shortcut
+				
+				
 				if (isset($departure->landy_departure)){
 					echo h($this->Time->format($departure->osmose, "HH:mm"));
 				}
+				
 				// else if (!empty($liberations)){
 					// echo h($this->Time->format(max($liberations), "HH:mm"));
 				// }  
@@ -91,6 +157,5 @@
         </tbody>
     </table>
 	<?php include "paginator.php"; ?>
-	
-	<?php if (isset($departure)) echo '<script>alert_daemon('.$alerts[1].','.$departure->departure_train.', 1, "departures");</script>'; ?>
+	<?php if (isset($departure)) echo '<script>alert_daemon(['.$alerts[0]->first_timer.','.$alerts[0]->second_timer.'],'.$departure->departure_train.', 1, "departures");</script>'; ?>
 </div>

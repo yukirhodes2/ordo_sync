@@ -14,7 +14,13 @@
     <fieldset>
         <legend><?= __('Nouvelle libération de rame') ?><?php if (isset($train_set)){echo ' '.$train_set['numero'];} ?></legend>
        <?php
-			echo $this->Form->control('train_set_id', ['options' => $trainSets, 'label' => 'Rame']);
+			if (isset($train_set)){
+				echo $this->Form->control('train_set_id', ['options' => $trainSets, 'label' => 'Rame', 'value' => $train_set['id'], 'disabled' => true]);
+			}
+			else{
+				echo $this->Form->control('train_set_id', ['options' => $trainSets, 'label' => 'Rame']);
+			}
+			
             echo $this->Form->control('release1_id', ['label' => 'Libération arrivée', 'options' => $releases, 'empty' => true]);
 			echo $this->Form->control('status1_id', ['label' => 'Statut arrivée', 'options' => $status, 'empty' => true]);
 			

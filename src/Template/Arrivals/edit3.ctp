@@ -28,7 +28,7 @@
             echo $this->Form->control('train_set2_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 2']);	
             echo $this->Form->control('train_set3_id', ['options' => $trainSets, 'empty' => true, 'label' => 'Rame 3']);
 			
-            echo $this->Form->control('landy_arrival', ['label' => 'Arrivée Landy']);  
+            echo $this->Form->control('landy_arrival', ['label' => 'Arrivée Landy', 'empty' => true]);  
 			echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('landy_arrival')"]);
 			echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('landy_arrival')"]);
             echo '<br/>';

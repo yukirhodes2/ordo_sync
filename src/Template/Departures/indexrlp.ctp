@@ -58,6 +58,68 @@
 				else {
 					echo '<script>$(".osmose").addClass("red");</script>';
 				}    ?>
+				<?php
+					if (!empty($departure->loc)){
+					if (empty($departure->loc->train_set_releases)){
+						echo $this->Html->link($departure->loc->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->loc->id]).' ';
+					}
+					else{
+						if (isset($departure->loc->train_set_releases[count($departure->loc->train_set_releases)-1]->heure)){
+							if ($departure->loc->train_set_releases[count($departure->loc->train_set_releases)-1]->active === false){
+							 echo $this->Html->link($departure->loc->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->loc->id]).' ';
+							}
+						}
+						else{
+							echo $this->Html->link($departure->loc->numero, ['controller' => 'TrainSetReleases', 'action' => 'edit', $departure->loc->train_set_releases[count($departure->loc->train_set_releases)-1]->id]).' ';
+						}
+					}
+				}
+				if (!empty($departure->train_set1)){
+					if (empty($departure->train_set1->train_set_releases)){
+						echo $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set1->id]).' ';
+					}
+					else{
+						if (isset($departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->heure)){
+							if ($departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->active === false){
+							 echo $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set1->id]).' ';
+							}
+						}
+						else{
+							echo $this->Html->link($departure->train_set1->numero, ['controller' => 'TrainSetReleases', 'action' => 'edit', $departure->train_set1->train_set_releases[count($departure->train_set1->train_set_releases)-1]->id]).' ';
+						}
+					}
+				}
+				if (!empty($departure->train_set2)){
+					if (empty($departure->train_set2->train_set_releases)){
+						echo $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set2->id]).' ';
+					}
+					else{
+						if (isset($departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->heure)){
+							if ($departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->active === false){
+							 echo $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set2->id]).' ';
+							}
+						}
+						else{
+							echo $this->Html->link($departure->train_set2->numero, ['controller' => 'TrainSetReleases', 'action' => 'edit', $departure->train_set2->train_set_releases[count($departure->train_set2->train_set_releases)-1]->id]).' ';
+						}
+					}
+				}
+				if (!empty($departure->train_set3)){
+					if (empty($departure->train_set3->train_set_releases)){
+						echo $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set3->id]).' ';
+					}
+					else{
+						if (isset($departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->heure)){
+							if ($departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->active === false){
+							 echo $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSetReleases', 'action' => 'add', $departure->train_set3->id]).' ';
+							}
+						}
+						else{
+							echo $this->Html->link($departure->train_set3->numero, ['controller' => 'TrainSetReleases', 'action' => 'edit', $departure->train_set3->train_set_releases[count($departure->train_set3->train_set_releases)-1]->id]).' ';
+						}
+					}
+				}
+				?>
 				</td>
                 <td class="restit" ><?= $departure->restit !== null ? '<script>$(".restit").addClass("green");</script>' : '<script>$(".restit").addClass("red");</script>' ?></td>
                 <td class="actions">
@@ -71,5 +133,5 @@
         </tbody>
     </table>
     <?php include('paginator.php'); ?>
-	<?php if (isset($departure)) echo '<script>alert_daemon('.$alerts[3].','.$departure->departure_train.', 1, "departures");</script>'; ?>
+	<?php if (isset($departure)) echo '<script>alert_daemon(['.$alerts[2]->first_timer.','.$alerts[2]->second_timer.'],'.$departure->departure_train.', 1, "departures");</script>'; ?>
 </div>

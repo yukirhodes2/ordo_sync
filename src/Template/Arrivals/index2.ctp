@@ -11,6 +11,10 @@
 </nav>
 <div class="arrivals index large-9 medium-8 columns content">
     <h3><?= __('Arrivées') ?></h3>
+	<div id="delays">
+	<span class="header"> Aucun retard pour l'instant. </span>
+	<ul></ul>
+	</div>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -36,6 +40,7 @@
                 <td><?= $arrival->train_set1_id != null ? $trainSets[($arrival->train_set1_id)-1]['numero'] : '' ?></td>
                 <td><?= $arrival->has('train_set') ? $arrival->train_set->numero : '' ?></td>
                 <td><?= $arrival->train_set2_id != null ? $trainSets[($arrival->train_set2_id)-1]['numero'] : '' ?></td>
+				<td class="la_theorique" hidden ><?= h($this->Time->format($arrival->arrival_train->theoric_arrivals['0']->landy_arrival, "HH:mm")) ?></td>
                 <td><?= $this->Time->format($arrival->landy_arrival, "HH:mm"); ?></td>
 				<td><?= $this->Time->format($arrival->announcement_time, "HH:mm"); ?></td>
                 <?= $arrival->protection_time != null ? '<td class="green">'.$this->Time->format($arrival->protection_time, "HH:mm").'</td>' : '<td class="red"></td>' ?>
@@ -52,4 +57,5 @@
         </tbody>
     </table>
     <?php include "paginator.php"; ?>
+	<?php if (isset($arrival)) echo '<script>alert_daemon(['.$alerts[2]->first_timer.','.$alerts[2]->second_timer.'],'.$arrival->arrival_train.', 1, "arrivals");</script>'; ?>
 </div>

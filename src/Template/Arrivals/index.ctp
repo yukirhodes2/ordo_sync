@@ -11,6 +11,10 @@
 </nav>
 <div class="arrivals index large-9 medium-8 columns content">
     <h3><?= __('Arrivées') ?></h3>
+	<div id="delays">
+	<span class="header"> Aucun retard pour l'instant. </span>
+	<ul></ul>
+	</div>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -32,12 +36,13 @@
             <tr>
                 <td><?= $arrival->has('way') ? $this->Html->link($arrival->way->numero, ['controller' => 'Ways', 'action' => 'view', $arrival->way->id]) : '' ?></td>
 				<td><?= $arrival->push_pool ?></td>
-                <td><?= $arrival->has('arrival_train') ? $this->Html->link($arrival->arrival_train->numero, ['controller' => 'ArrivalTrains', 'action' => 'view', $arrival->arrival_train->id]) : '' ?></td>
+                <td class="train"><?= $arrival->has('arrival_train') ? $this->Html->link($arrival->arrival_train->numero, ['controller' => 'ArrivalTrains', 'action' => 'view', $arrival->arrival_train->id]) : '' ?></td>
 				<td><?= $arrival->has('loc') ? $this->Html->link($arrival->loc->numero, ['controller' => 'TrainSets', 'action' => 'view', $arrival->loc->id]) : '' ?></td>
                 <td><?= $arrival->train_set1_id != null ? $trainSets[($arrival->train_set1_id)-1]['numero'] : '' ?></td>
                 <td><?= $arrival->train_set2_id != null ? $trainSets[($arrival->train_set2_id)-1]['numero'] : '' ?></td>
                 <td><?= $arrival->has('train_set') ? $arrival->train_set->numero : '' ?></td>
-                <td><?= h($this->Time->format($arrival->landy_arrival, "HH:mm")) ?></td>
+                <td class="la_reel" ><?= h($this->Time->format($arrival->landy_arrival, "HH:mm")) ?></td>
+                <td class="la_theorique" hidden ><?= h($this->Time->format($arrival->arrival_train->theoric_arrivals['0']->landy_arrival, "HH:mm")) ?></td>
                 <td><?= $arrival->has('lavage') ? $this->Html->link($arrival->lavage->libelle, ['controller' => 'Lavages', 'action' => 'view', $arrival->lavage->id]) : '' ?></td>
 				<td><?= $arrival->announcement_time != null ? $this->Time->format($arrival->announcement_time, "HH:mm") : '' ?></td>
                 <td class="actions">
@@ -51,5 +56,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+	<?php if (isset($arrival)) echo '<script>alert_daemon(['.$alerts[3]->first_timer.','.$alerts[3]->second_timer.'],'.$arrival->arrival_train.', 1, "arrivals");</script>'; ?>
 	<?php include "paginator.php"; ?>
+	
 </div>

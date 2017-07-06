@@ -40,11 +40,12 @@ class TrainSetReleasesController extends AppController
 	 
     public function index()
     {
+		$query = $this->TrainSetReleases->find()->where(['OR' => ['heure >=' => date('Y-m-d H:i:s', time()-3600), 'active' => true]]);
         $this->paginate = [
             'contain' => ['Releases1', 'Releases2', 'Status1', 'Status2', 'TrainSets'],
 			'order' => ['id' => 'desc'],
         ];
-        $trainSetReleases = $this->paginate($this->TrainSetReleases);
+        $trainSetReleases = $this->paginate($query);
 		$releases = TableRegistry::get('releases');
 		$status = TableRegistry::get('status');
 		if($this->request->is('post')){
@@ -103,8 +104,10 @@ class TrainSetReleasesController extends AppController
     public function add($id = null)
     {
         $trainSetRelease = $this->TrainSetReleases->newEntity();
+		$trainSet = null;
 		if (isset($id)){
-			$this->set('train_set', $this->TrainSetReleases->TrainSets->get($id));
+			$trainSet = $this->TrainSetReleases->TrainSets->get($id);
+			$this->set('train_set', $trainSet);
 		}
         if ($this->request->is('post')) {
 			$data = $this->request->getData();
@@ -121,7 +124,9 @@ class TrainSetReleasesController extends AppController
             $trainSetRelease = $this->TrainSetReleases->patchEntity($trainSetRelease, $data);
             if ($this->TrainSetReleases->save($trainSetRelease)) {
                 $this->Flash->success(__('La libération de rame est ajoutée.'));
-
+				if (isset($trainSet)) {
+					return $this->redirect(['controller' => 'Departures', 'action' => 'index']);
+				}
                 return $this->redirect(['action' => 'index']);
             }
 			debug($trainSetRelease);

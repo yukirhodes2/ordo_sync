@@ -342,9 +342,9 @@ function highlightClass($condition, $entity){
 			if ( isset($entity->restit, $entity->brake_controls['0']->realisation_time) && isOsmose($entity) ){
 				return 'class="green"';
 			}
-			if ( isset($entity->restit, $entity->brake_controls['0']->present_id) && ($entity->brake_controls['0']->present_id == 2 ||  $entity->brake_controls['0']->present_id == 3)){
-				return 'class="orange"';
-			}
+			// if ( isset($entity->restit, $entity->brake_controls['0']->present_id) && ($entity->brake_controls['0']->present_id == 2 ||  $entity->brake_controls['0']->present_id == 3)){
+				// return 'class="orange"';
+			// }
 			return 'class="red"';
 			break;
 		
@@ -373,3 +373,4 @@ function highlightClass($condition, $entity){
 			return null;
 	}
 }
+

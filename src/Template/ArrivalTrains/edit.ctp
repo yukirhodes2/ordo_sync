@@ -7,7 +7,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
-                __('Delete'),
+                __('Supprimer'),
                 ['action' => 'delete', $arrivalTrain->id],
                 ['confirm' => __('Voulez-vous vraiment supprimer ce train ?', $arrivalTrain->id)]
             )
@@ -24,11 +24,12 @@
         ?>
 		<?= $this->Form->create($theoricArrival) ?>
 		<?php
-			echo $this->Form->control('paris_nord_arrival', ['label' => 'Arrivée PNO']);
-			echo $this->Form->control('landy_arrival', ['label' => 'Arrivée Landy']);
-			echo $this->Form->control('ascent_time', ['label' => 'Temps de montée (en minutes)']);
+			echo $this->Form->control('paris_nord_arrival', ['label' => __('Arrivée PNO')]);
+			echo '<label class="landy_calc">'.__('Arrivée Landy').'</label> <span id="landy_calc">--:--</span>';
+			echo $this->Form->control('ascent_time', ['label' => __('Temps de montée (en minutes)')]);
 		?>
     </fieldset>
     <?= $this->Form->button(__('Valider')) ?>
     <?= $this->Form->end() ?>
 </div>
+<?= $this->Html->script('calc'); ?>

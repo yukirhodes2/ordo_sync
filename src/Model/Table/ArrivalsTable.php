@@ -80,12 +80,12 @@ class ArrivalsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->dateTime('paris_nord_arrival');
+            ->dateTime('paris_nord_arrival')
+			->allowEmpty('landy_arrival');
 
         $validator
             ->dateTime('landy_arrival')
-            ->requirePresence('landy_arrival', 'create')
-            ->notEmpty('landy_arrival');
+            ->allowEmpty('landy_arrival');
 
         $validator
             ->allowEmpty('comment_eic');

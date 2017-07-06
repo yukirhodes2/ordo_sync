@@ -12,10 +12,12 @@
 <div class="alerts form large-9 medium-8 columns content">
     <?= $this->Form->create($alert) ?>
     <fieldset>
-        <legend><?= __('Editer alerte') ?></legend>
+        <legend><?= __('Editer alerte '.$alert->libelle) ?></legend>
+		
         <?php
-            echo $alert->libelle;
-            echo $this->Form->control('first_timer', ['label' => 'Minuteur']);
+			echo '<p> Les minuteurs sont exprimés en <span class="sncf-color-plum">minutes</span>. </p>';
+            echo $this->Form->control('first_timer', ['label' => 'Minuteur départ/arrivée']);
+            echo $this->Form->control('second_timer', ['label' => 'Minuteur rendu']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Valider')) ?>

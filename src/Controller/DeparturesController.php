@@ -29,14 +29,6 @@ class DeparturesController extends AppController
 		$this->Auth->allow('indexeic');
     }
 	
-	public function loadAlerts(){
-		$alerts = TableRegistry::get('Alerts');
-		$alerts = $alerts->find('list');
-		$alerts->execute();
-		$alerts = $alerts->toArray();
-		$this->set(compact('alerts'));
-	}
-	
     /**
      * Index method
      *
@@ -65,7 +57,7 @@ class DeparturesController extends AppController
         $departures = $this->paginate($query);
         // $departures = $this->paginate($this->Departures);
 		
-		
+		// debug($query);
 		
 		$this->loadAlerts();
 		

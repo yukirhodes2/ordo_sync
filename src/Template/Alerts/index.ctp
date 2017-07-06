@@ -15,7 +15,8 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('libelle') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('first_timer', 'Minuteur') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('first_timer', 'Minuteur départ/arrivée') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('second_timer', 'Minuteur rendu') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -25,6 +26,7 @@
                 <td><?= $this->Number->format($alert->id) ?></td>
                 <td><?= h($alert->libelle) ?></td>
                 <td><?= $this->Number->format($alert->first_timer) ?></td>
+                <td><?= $this->Number->format($alert->second_timer) ?></td>
                 <td class="actions">
                      <?= $this->Html->link($this->Html->image('edit.png', ['alt' => __('Editer'), 'class' => 'icon']), ['action' => 'edit', $alert->id], ['escape' => false, 'title' => 'Modifier']) ?>
                 </td>

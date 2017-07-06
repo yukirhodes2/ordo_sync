@@ -18,6 +18,7 @@ use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\Core\Configure;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 
 /**
  * Application Controller
@@ -115,6 +116,14 @@ class AppController extends Controller
 			$matches = $matches->toArray();
 			$this->set(compact('matches'));
 		}
+	}
+	
+	public function loadAlerts(){
+		$alerts = TableRegistry::get('Alerts');
+		$alerts = $alerts->find();
+		$alerts->execute();
+		$alerts = $alerts->toArray();
+		$this->set(compact('alerts'));
 	}
 
 }

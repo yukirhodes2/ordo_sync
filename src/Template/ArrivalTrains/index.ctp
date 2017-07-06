@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($arrivalTrains as $arrivalTrain): ?>
+            <?php foreach ($arrivalTrains as $arrivalTrain): // debug($arrivalTrain); ?>
             <tr>
                 <td><?= h($arrivalTrain->numero) ?></td>
 				<td><?= h($this->Time->format($arrivalTrain->theoric_arrivals['0']->paris_nord_arrival, "HH:mm")) ?></td>

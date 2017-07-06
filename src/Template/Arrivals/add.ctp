@@ -13,12 +13,12 @@
     <?= $this->Form->create($arrival) ?>
     <fieldset>
         <legend><?= __('Ajouter une arrivée') ?></legend>
-		<p> Vérifiez <span class="sncf-color-plum"> attentivement </span> la date et l'heure de votre arrivée. </p>
+		<p> Vérifiez <span class="sncf-color-plum"> attentivement </span> la date et l'heure réelle de votre arrivée. </p>
         <?php
 		
 			$id_role = $this->request->session()->read('Auth.User.role_id');
 		
-			echo $this->Form->control('landy_arrival', ['required' => true, 'label' => 'Arrivée au Landy', 'value'=>date('Y-m-d')]);
+			echo $this->Form->control('landy_arrival', ['required' => true, 'label' => 'Arrivée au Landy', 'empty' => true]);
 			echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('landy_arrival')"]);
 			echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('landy_arrival')"]);
             echo '<br/>';

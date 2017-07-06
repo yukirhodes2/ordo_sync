@@ -1,8 +1,8 @@
 function emptyTime($arg){
 
-	//$('[name="'+$arg+'[year]"').val('');
-	//$('[name="'+$arg+'[month]"').val('');
-	//$('[name="'+$arg+'[day]"').val('');
+	$('[name="'+$arg+'[year]"').val('');
+	$('[name="'+$arg+'[month]"').val('');
+	$('[name="'+$arg+'[day]"').val('');
 	$('[name="'+$arg+'[hour]"').val('');
 	$('[name="'+$arg+'[minute]"').val('');
 }
@@ -49,14 +49,15 @@ function color(entity, col){
 }
 
 function alert_daemon(def, entity, type, controller){
+	console.log("alert_daemon");
 	var duree1, duree2, theorique_parts, theorique_minutes;
 	var now = new Date();
 	now = (+now.getHours()*60) + (+now.getMinutes());
 	
-	if(entity.alerte1 == 0){	duree1 = def;	}
+	if(entity.alerte1 == 0 || entity.alerte1 == null){	duree1 = def[0];	}
 	else		{	duree1 = entity.alerte1/60;}
 	
-	if(entity.alerte2 == 0){	duree2 = def;	}
+	if(entity.alerte2 == 0 || entity.alerte1 == null){	duree2 = def[1];	}
 	else		{	duree2 = entity.alerte2/60;}
 	
 	if (controller === "departures") {
@@ -103,60 +104,35 @@ function alert_daemon(def, entity, type, controller){
 	else if (controller === "arrivals") {
 		switch(type){
 			case 1:
-			
+			$('tr').each(function(){
+				
+				if ( $(this).children(".la_reel").is(':empty') ){
+					
+					theorique_parts = $(this).children(".la_theorique").text().split(":");
+					theorique_minutes = ((+theorique_parts[0]*60) + (+theorique_parts[1]));
+					
+					// console.log(theorique_minutes);
+					// console.log(now);
+					// console.log(duree1);
+					
+					if ( theorique_minutes - now <= duree1 ){
+						if( theorique_minutes - now <= 0 ){
+							$(this).children(".train").addClass("blink-red");
+							$('#delays span').text('La remontée de ces trains est en retard :');
+							$('#delays ul').append($('<li>N°'+$(this).children(".train").text()+' arrivée Landy prévue à '+ $(this).children(".la_theorique").text() + '</li>'));
+						}
+						else{
+							$(this).children(".train").addClass("blink-orange");
+						}
+					}
+				}
+			});
 		}
 	}
 	
 	// setTimeout( function(){
 			// alert_daemon();
 		// }, 60000);
-}
-
-var landy_calc = function(event){
-	var heure = parseInt($("[name='paris_nord_departure\[hour\]'] option:selected").text());
-	var minute = parseInt($("[name='paris_nord_departure\[minute\]'] option:selected").text());
-	var docktime = parseInt($("#docking-time").val());
-	var dd = parseInt($("#descent-duration").val());
-		$.ajax({
-			url : 'landyDeparture',
-			type : 'POST',
-			data : {
-				heure: heure,
-				minute: minute,
-				docktime: docktime,
-				dd: dd
-			},
-			dataType : 'html',
-			success : function(code_html, statut){
-				$('#landy_calc').html(code_html);
-			},
-			error : function(resultat, statut, error){
-				$.ajax({
-					url : '../landyDeparture',
-					type : 'POST',
-					data : {
-						heure: heure,
-						minute: minute,
-						docktime: docktime,
-						dd: dd
-					},
-					dataType : 'html',
-					success : function(code_html, statut){
-						$('#landy_calc').html(code_html);
-					},
-					error : function(resultat, statut, error){
-						
-					},
-					complete: function(code_html, resultat, statut){
-						
-					}
-				})
-			},
-			complete: function(code_html, resultat, statut){
-				
-			}
-		})
-		
 }
 
 function refresh(target_url, interval){
@@ -250,13 +226,31 @@ $(document).ready(function()
 			
 	})
 	
-	$("button").click(landy_calc);
-	$("select").change(landy_calc);
-	$("#docking-time, #descent-duration").keyup(landy_calc);
-	
+	val = $("#brake-id option:selected").val();
+	// console.log(val);
+	if (val == 3){
+		$("#present-id select").val("4");
+		$("#present-id").prop('disabled', true);
+	}
+	else{
+		$("#present-id").prop('disabled', false);
+	}
+		
+	$("#brake-id").change(function(event){
+		
+		val = $("#brake-id option:selected").val();
+		// console.log(val);
+		if (val == 3){
+			$('#present-id option[value="4"]').prop("selected", true);
+			$("#present-id").prop('disabled', true);
+			currentTime("realisation_time");
+		}
+		else{
+			$("#present-id").prop('disabled', false);
+			emptyTime("realisation_time");
+		}
+	});
 
-	
-	
 })
 
 

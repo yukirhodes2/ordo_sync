@@ -22,18 +22,13 @@
 		<fieldset>
 			<legend><?= __('Arrivée théorique') ?></legend>
 			<?php
-				echo $this->Form->control('paris_nord_arrival', ['label' => 'Arrivée PNO', 'empty' => true]);
-					echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('paris_nord_arrival')"]);
-					echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('paris_nord_arrival')"]);
-					echo '<br/>';
-				echo $this->Form->control('landy_arrival', ['label' => 'Arrivée Landy', 'empty' => true]);
-					echo $this->Form->button($this->Html->image('clear.png', ['alt' => 'Effacer', 'class' => 'icon']), ['title' => 'Effacer', 'type' => 'button', 'onclick' => "emptyTime('landy_arrival')"]);
-					echo $this->Form->button($this->Html->image('datetime.png', ['alt' => 'Maintenant', 'class' => 'icon']), ['title' => 'Remplir avec l\'heure actuelle', 'type' => 'button', 'onclick' => "currentTime('landy_arrival')"]);
-					echo '<br/>';
-				echo $this->Form->control('ascent_time', ['label' => 'Temps de montée']);
+				echo $this->Form->control('paris_nord_arrival', ['label' => __('Arrivée PNO'), 'empty' => true]);
+				echo '<label class="landy_calc">'.__('Arrivée Landy').'</label> <span id="landy_calc">--:--</span>';
+				echo $this->Form->control('ascent_time', ['label' => __('Temps de montée (en minutes)')]);
 			?>
 		</fieldset>
     </fieldset>
     <?= $this->Form->button(__('Envoyer')) ?>
     <?= $this->Form->end() ?>
 </div>
+<?= $this->Html->script('calc'); ?>
