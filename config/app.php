@@ -1,4 +1,5 @@
 <?php
+
 return [
     /**
      * Debug Level:
@@ -235,7 +236,7 @@ return [
             'password' => '',
             'database' => 'cake_ordo',
             'encoding' => 'utf8',
-            'timezone' => 'UTC',
+            'timezone' => '+2:00',
             'flags' => [],
             'cacheMetadata' => true,
             'log' => false,

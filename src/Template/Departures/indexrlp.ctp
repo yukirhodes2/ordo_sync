@@ -49,15 +49,14 @@
 				<?php }else{ ?>
 					<td class="red"> </td>
 				<?php } ?>
-                <td class="osmose" >
 				<!-- osmose -->
 				<?php 
 				if ( isOsmose($departure) ){
-						echo '<script>$(".osmose").addClass("green");</script>';
-					}
+					echo '<td class="osmose green" >';
+				}
 				else {
-					echo '<script>$(".osmose").addClass("red");</script>';
-				}    ?>
+					echo '<td class="osmose red" >';
+				}  ?>
 				<?php
 					if (!empty($departure->loc)){
 					if (empty($departure->loc->train_set_releases)){

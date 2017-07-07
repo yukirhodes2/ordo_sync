@@ -26,7 +26,7 @@
                 <th scope="col"><?= $this->Paginator->sort('train_set1_id', 'Rame 1') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('train_set2_id', 'Rame 2') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('train_set3_id', 'Rame 3') ?></th>
-                <th scope="col">Dép. théorique Landy</th>
+                <th scope="col"> Dép. théorique Landy </th>
                 <th scope="col"><?= $this->Paginator->sort('landy_departure', 'Dép. réel Landy') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('formed', 'Formé') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('brake_id', 'Freinage') ?></th>

@@ -24,12 +24,12 @@ use Cake\Error\Debugger;
 	<div> </div>
 	<div class="three-quarters">
 		<div class="sncf-color-blue sg-text">
-			<h1>Application en phase de test <br><span>Avril-Juillet 2017</span></h1>
+			<h1>Application en phase de test <br><span>Avril-Août 2017</span></h1>
 			<div class="content-intro">
 			  <p>Cette application a pour objectif de remplacer le fichier d'échange pour l'arrivée/départ des trains et leurs opérations.</p>
 			</div>
 			<div class="content-text">
-			  <p>Vous êtes actuellement dans une version <span class="sncf-color-plum">bac à sable</span>. Elle ne reflète pas la qualité finale de l'application et est sujette à de nombreuses modifications.</p>
+			  <p>Vous êtes actuellement dans une version <span class="sncf-color-plum">bêta</span>. Quelques modifications sont encores nécessaires mais vous pouvez déjà l'utiliser pour vous familiariser avec.</p>
 			</div>
 		</div>
 	</div>

@@ -62,7 +62,7 @@ class DeparturesController extends AppController
 		$this->loadAlerts();
 		
 		
-        $this->set(compact('departures', 'trainSets'));
+        $this->set(compact('departures'));
         $this->set('_serialize', ['departures']);
 
 		}
@@ -329,7 +329,7 @@ class DeparturesController extends AppController
 					$brakeControl = $this->Departures->BrakeControls->patchEntity($brakeControl, $data);
 					
 					if ($this->Departures->BrakeControls->save($brakeControl)) {
-						$this->Flash->success(__("Le départ est modifié.")); // attention l'attribut s'appelle paris nord mais c'est bien l'heure de départ du landy
+						$this->Flash->success(__("Le départ est modifié."));
 						return $this->redirect(['action' => 'index']);
 					}
 				}

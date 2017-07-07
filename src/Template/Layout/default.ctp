@@ -348,7 +348,7 @@ $title = 'Ordonnancement';
 </footer> <!-- /.footer -->
 <?php
 	if ( preg_match('#^index#', $this->request->action) === 1 || preg_match('#^view#', $this->request->action) === 1){
-		echo '<script> refresh("'.$this->Url->build(null, true).'", 30000); </script>' ; // mise à jour des données du body
+		echo '<script> refresh("'.$_SERVER['REQUEST_URI'].'", 30000); </script>' ; // mise à jour des données du body
 	}
 ?>
 </body>

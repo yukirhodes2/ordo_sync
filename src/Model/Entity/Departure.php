@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\Time;
 
 /**
  * Departure Entity
@@ -41,7 +42,6 @@ use Cake\ORM\Entity;
  */
 class Departure extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -55,4 +55,11 @@ class Departure extends Entity
         '*' => true,
         'id' => false
     ];
+	
+	protected $_virtual = ['heure_restit'];
+	
+	protected function _getHeureRestit() {
+		$heure_restit = date("H:i", $this->departure_train->theoric_departures[0]->paris_nord_departure->i18nFormat(Time::UNIX_TIMESTAMP_FORMAT)%(3600*24) - $this->departure_train->theoric_departures[0]->rendition_duration);
+		return $heure_restit;
+	}
 }
