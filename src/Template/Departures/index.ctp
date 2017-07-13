@@ -138,12 +138,7 @@
 				// }  
 				?>
 				</td>
-                <td class="restit" <?php if ( isset($departure->restit) ){
-					echo 'class="green"';
-				}
-				else {
-					echo 'class="red"';
-				}  ?> ><?= h($this->Time->format($departure->restit, "HH:mm")) ?></td>
+                <?= $departure->restit !== null ? '<td class="restit green" >' : '<td class="restit red" >' ?><?= h($this->Time->format($departure->restit, "HH:mm")) ?></td>
 				
                 <td class="actions">
 				<?= $departure->comment_eic != null || $departure->comment_rlp != null || $departure->comment_cpt != null || $departure->comment_geops != null? $this->Html->link($this->Html->image('eye.png', ['alt' => 'Observations', 'class' => 'icon']), ['action' => 'view_obs', $departure->id], ['target' => '_blank', 'escape' => false, 'title' => 'Observations']) : '' ?>
